@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Stopwatch</title>
+</head>
+<body>
+<div style="margin:0px auto;max-width:61%">
+    <div id="div_clock" style="font-size:400%">
+    </div>
+    <div>
+        <p>
+            Space: Go or pause.
+        <p>
+            R: Reset.
+        <p>
+            &copy; 2015 <a href="https://www.anliting.com/anliting">An-Li Ting</a>
+    </div>
+</div>
+<script>
+!function(){
+var
+    isRunning,
+    startTime,
+    stopTime
+isRunning=false
+addEventListener('keydown',function(e){
+    if(e.keyCode===32){ // space
+        if(!isRunning){
+            if(!startTime)
+                startTime=new Date
+            else
+                startTime=new Date(
+                    (new Date)-(stopTime-startTime)
+                )
+            isRunning=true
+            return
+        }
+        isRunning=false
+        stopTime=new Date
+    }
+    if(e.keyCode===82){ // r
+        isRunning=false
+        startTime=undefined
+    }
+})
+updateClock()
+function updateClock(){
+    setTimeout(updateClock,32)
+    if(!startTime){
+        document.getElementById('div_clock').textContent=
+            '00:00:00.000'
+        return
+    }
+    if(!isRunning){
+        return
+    }
+    document.getElementById('div_clock').textContent=
+        msToString((new Date)-startTime)
+}
+function msToString(t){
+    var
+        output
+    output=paddingZerosTo(t%1000,3)
+    t=Math.floor(t/1000)
+    output=paddingZerosTo(t%60,2)+'.'+output
+    t=Math.floor(t/60)
+    output=paddingZerosTo(t%60,2)+':'+output
+    t=Math.floor(t/60)
+    output=paddingZerosTo(t%24,2)+':'+output
+    t=Math.floor(t/24)
+    return output
+    function paddingZerosTo(m,n){
+        m=m.toString()
+        while(m.length<n)
+            m='0'+m
+        return m
+    }
+}
+}()
+</script>
+</body>
+</html>
