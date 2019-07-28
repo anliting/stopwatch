@@ -65,10 +65,8 @@ Stopwatch.prototype._pause=function(now){
     this._setClock(now)
 }
 Stopwatch.prototype._reset=function(){
-    if(this._isRunning){
-        cancelAnimationFrame(this._requestId)
-        this._isRunning=0
-    }
+    if(this._isRunning)
+        this._pause()
     this._startTime=undefined
     this._node.div_clock.textContent=msToString(0)
 }
