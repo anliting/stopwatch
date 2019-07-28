@@ -6,7 +6,7 @@ doe.head(doe.style(`
         height:100%;
     }
     body{
-        height:100%;
+        height:calc(100% - 16px);
     }
     a{
         color:blue;
