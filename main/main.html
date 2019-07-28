@@ -23,6 +23,7 @@ function msToString(t){
     }
 }
 function Stopwatch(){
+    let stopwatch=this
     this._node={}
     this.ui=doe.div(
         {className:'stopwatch'},
@@ -31,8 +32,14 @@ function Stopwatch(){
                 {className:'clock'},
                 msToString(0),
             ),
-            doe.p('Space: Start or pause.'),
-            doe.p('R: Reset.'),
+            this._node.startOrPauseButton=
+                doe.button('Start (space)',{className:'button',onclick(){
+                    let now=performance.now()
+                    stopwatch[stopwatch._isRunning?'_pause':'_start'](now)
+                }}),
+            doe.button('Reset (R)',{className:'button',onclick(){
+                stopwatch._reset()
+            }}),
             doe.h2('Characteristics'),
             doe.p('Network is not needed once the webpage is loaded.'),
             doe.p(
@@ -62,6 +69,7 @@ Stopwatch.prototype._setClock=function(now){
         msToString(~~(now-this._startTime))
 }
 Stopwatch.prototype._start=function(now){
+    this._node.startOrPauseButton.textContent='Pause (space)'
     if(!this._startTime)
         this._startTime=now
     else
@@ -74,25 +82,35 @@ Stopwatch.prototype._start=function(now){
     this._requestId=requestAnimationFrame(frame)
 }
 Stopwatch.prototype._pause=function(now){
+    this._node.startOrPauseButton.textContent='Start (space)'
     cancelAnimationFrame(this._requestId)
     this._isRunning=0
     this._stopTime=now
     this._setClock(now)
 }
 Stopwatch.prototype._reset=function(){
-        if(this._isRunning){
-            cancelAnimationFrame(this._requestId)
-            this._isRunning=0
-        }
-        this._startTime=undefined
-        this._node.div_clock.textContent=msToString(0)
+    if(this._isRunning){
+        cancelAnimationFrame(this._requestId)
+        this._isRunning=0
+    }
+    this._startTime=undefined
+    this._node.div_clock.textContent=msToString(0)
+}
+let map={
+    ' ':function(e,now){
+        this[this._isRunning?'_pause':'_start'](now)
+    },
+    r(e,now){
+        this._reset()
+    },
 }
 Stopwatch.prototype.onKeyDown=function(e){
     let now=performance.now()
-    if(e.keyCode===32) // space
-        return this[this._isRunning?'_pause':'_start'](now)
-    if(e.keyCode===82) // r
-        return this._reset()
+    if(!(e.key in map))
+        return
+    e.preventDefault()
+    e.stopPropagation()
+    map[e.key].call(this,e,now)
 }
 Stopwatch.style=`
     a{
@@ -108,12 +126,30 @@ Stopwatch.style=`
         text-align:justify;
     }
     .stopwatch>*>.clock{
-        font-size:24px;
+        text-align:center;
         font-family:monospace;
+        margin:16px 0;
+    }
+    .stopwatch>*>.button{
+        height:32px;
+    }
+    @media(min-width:320px) and (max-width:639px){
+        .stopwatch>*>.clock{
+            font-size:24px;
+        }
+        .stopwatch>*>.button{
+            width:100%;
+        }
+        .stopwatch>*>.button+.button{
+            margin-top:8px;
+        }
     }
     @media(min-width:640px){
         .stopwatch>*>.clock{
             font-size:48px;
+        }
+        .stopwatch>*>.button{
+            width:50%;
         }
     }
 `
