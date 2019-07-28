@@ -1,78 +1,10 @@
 <!doctype html>
 <meta charset=utf-8>
+<meta name=viewport content='width=device-width,initial-scale=1'>
 <title>Stopwatch</title>
 <body>
 <script type=module>
 import doe from'../lib/doe/main/doe.mjs'
-let div_clock
-doe.head(doe.style(`
-    .stopwatch{
-        text-align:center;
-    }
-    .stopwatch>*{
-        display:inline-block;
-        text-align:left;
-    }
-    .stopwatch>*>.clock{
-        font-size:64px;
-    }
-`))
-doe.body(
-    doe.div(
-        {className:'stopwatch'},
-        doe.div(
-            div_clock=doe.div(
-                {className:'clock'},
-            ),
-            doe.p('Space: Start or pause.'),
-            doe.p('R: Reset.'),
-        )
-    )
-)
-let
-    isRunning,
-    startTime,
-    stopTime,
-    requestId
-onkeydown=e=>{
-    if(e.keyCode===32){ // space
-        if(!isRunning){
-            if(!startTime)
-                startTime=performance.now()
-            else
-                startTime=performance.now()-(stopTime-startTime)
-            isRunning=1
-            let frame=a=>{
-                updateClock()
-                requestId=requestAnimationFrame(frame)
-            }
-            requestId=requestAnimationFrame(frame)
-            return
-        }
-        cancelAnimationFrame(requestId)
-        isRunning=0
-        stopTime=performance.now()
-        div_clock.textContent=
-            msToString(~~(performance.now()-startTime))
-    }
-    if(e.keyCode===82){ // r
-        if(isRunning){
-            cancelAnimationFrame(requestId)
-            isRunning=0
-        }
-        startTime=undefined
-        div_clock.textContent=msToString(0)
-    }
-}
-div_clock.textContent=msToString(0)
-function updateClock(){
-    if(!startTime)
-        return div_clock.textContent=msToString(0)
-    if(!isRunning)
-        return
-    div_clock.textContent=
-        msToString(~~(performance.now()-startTime))
-}
 function msToString(t){
     let output=paddingZerosTo(t%1000,3)
     t=~~(t/1000)
@@ -90,4 +22,103 @@ function msToString(t){
         return m
     }
 }
+function Stopwatch(){
+    this._node={}
+    this.ui=doe.div(
+        {className:'stopwatch'},
+        doe.div(
+            this._node.div_clock=doe.div(
+                {className:'clock'},
+                msToString(0),
+            ),
+            doe.p('Space: Start or pause.'),
+            doe.p('R: Reset.'),
+            doe.h2('Characteristics'),
+            doe.p('Network is not needed once the webpage is loaded.'),
+            doe.p(
+                doe.a(
+                    {href:'https://www.w3.org/TR/hr-time-2/'},
+                    'High resolution time',
+                ),
+                ' of events are taken as arguments. For those who do not know about ',
+                doe.a(
+                    {href:'https://www.w3.org/TR/hr-time-2/'},
+                    'high resolution time',
+                ),
+                ': It is monotonically increasing and not subject to system clock adjustments or system clock skew. More specifically, it is not subject to',
+            ),
+            doe.ul(
+                doe.li('putting the tab into background, or'),
+                doe.li('minimizing the browser.'),
+            ),
+            doe.p('When the clock is not ticking, and usually, when browser is minimized, no computing resources other than memory are consumed. If the clock is ticking, and the browser is freshing the display, it is refreshed at the display refresh rate (typically 60fps).'),
+            doe.p('Monospace font is used to render the clock if the system is providing it.'),
+            doe.p('All viewport width larger than 320px are supported.'),
+        )
+    )
+}
+Stopwatch.prototype._setClock=function(now){
+    this._node.div_clock.textContent=
+        msToString(~~(now-this._startTime))
+}
+Stopwatch.prototype._start=function(now){
+    if(!this._startTime)
+        this._startTime=now
+    else
+        this._startTime=now-(this._stopTime-this._startTime)
+    this._isRunning=1
+    let frame=now=>{
+        this._setClock(now)
+        this._requestId=requestAnimationFrame(frame)
+    }
+    this._requestId=requestAnimationFrame(frame)
+}
+Stopwatch.prototype._pause=function(now){
+    cancelAnimationFrame(this._requestId)
+    this._isRunning=0
+    this._stopTime=now
+    this._setClock(now)
+}
+Stopwatch.prototype._reset=function(){
+        if(this._isRunning){
+            cancelAnimationFrame(this._requestId)
+            this._isRunning=0
+        }
+        this._startTime=undefined
+        this._node.div_clock.textContent=msToString(0)
+}
+Stopwatch.prototype.onKeyDown=function(e){
+    let now=performance.now()
+    if(e.keyCode===32) // space
+        return this[this._isRunning?'_pause':'_start'](now)
+    if(e.keyCode===82) // r
+        return this._reset()
+}
+Stopwatch.style=`
+    a{
+        color:blue;
+    }
+    .stopwatch{
+        text-align:center;
+    }
+    .stopwatch>*{
+        display:inline-block;
+        width:600px;
+        max-width:100%;
+        text-align:justify;
+    }
+    .stopwatch>*>.clock{
+        font-size:24px;
+        font-family:monospace;
+    }
+    @media(min-width:640px){
+        .stopwatch>*>.clock{
+            font-size:48px;
+        }
+    }
+`
+let stopwatch=new Stopwatch
+doe.head(doe.style(Stopwatch.style))
+doe.body(stopwatch.ui)
+onkeydown=stopwatch.onKeyDown.bind(stopwatch)
 </script>
