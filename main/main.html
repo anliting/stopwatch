@@ -1,25 +1,39 @@
 <!doctype html>
-<html>
-<head>
 <meta charset=utf-8>
 <title>Stopwatch</title>
-</head>
 <body>
-<div style="margin:0px auto;max-width:61%">
-    <div id="div_clock" style="font-size:400%">
-    </div>
-    <div>
-        <p>
-            Space: Go or pause.
-        <p>
-            R: Reset.
-    </div>
-</div>
 <script type=module>
+import doe from'../lib/doe/main/doe.mjs'
+let div_clock
+doe.head(doe.style(`
+    .stopwatch{
+        text-align:center;
+    }
+    .stopwatch>*{
+        display:inline-block;
+        text-align:left;
+    }
+    .stopwatch>*>.clock{
+        font-size:64px;
+    }
+`))
+doe.body(
+    doe.div(
+        {className:'stopwatch'},
+        doe.div(
+            div_clock=doe.div(
+                {className:'clock'},
+            ),
+            doe.p('Space: Start or pause.'),
+            doe.p('R: Reset.'),
+        )
+    )
+)
 let
-    isRunning=0,
+    isRunning,
     startTime,
-    stopTime
+    stopTime,
+    requestId
 onkeydown=e=>{
     if(e.keyCode===32){ // space
         if(!isRunning){
@@ -28,27 +42,35 @@ onkeydown=e=>{
             else
                 startTime=performance.now()-(stopTime-startTime)
             isRunning=1
+            let frame=a=>{
+                updateClock()
+                requestId=requestAnimationFrame(frame)
+            }
+            requestId=requestAnimationFrame(frame)
             return
         }
-        isRunning=false
+        cancelAnimationFrame(requestId)
+        isRunning=0
         stopTime=performance.now()
+        div_clock.textContent=
+            msToString(~~(performance.now()-startTime))
     }
     if(e.keyCode===82){ // r
-        isRunning=false
+        if(isRunning){
+            cancelAnimationFrame(requestId)
+            isRunning=0
+        }
         startTime=undefined
+        div_clock.textContent=msToString(0)
     }
 }
-updateClock()
+div_clock.textContent=msToString(0)
 function updateClock(){
-    setTimeout(updateClock,32)
-    if(!startTime){
-        document.getElementById('div_clock').textContent=
-            '00:00:00.000'
-        return
-    }
+    if(!startTime)
+        return div_clock.textContent=msToString(0)
     if(!isRunning)
         return
-    document.getElementById('div_clock').textContent=
+    div_clock.textContent=
         msToString(~~(performance.now()-startTime))
 }
 function msToString(t){
@@ -69,5 +91,3 @@ function msToString(t){
     }
 }
 </script>
-</body>
-</html>
