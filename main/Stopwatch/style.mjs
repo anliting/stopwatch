@@ -1,40 +1,32 @@
 export default`
-    a{
-        color:blue;
-    }
     .stopwatch{
-        text-align:center;
-    }
-    .stopwatch>*{
-        display:inline-block;
-        width:600px;
-        max-width:100%;
+        max-width:600px;
         text-align:justify;
     }
-    .stopwatch>*>.clock{
+    .stopwatch>.clock{
         text-align:center;
         font-family:monospace;
         margin:16px 0;
     }
-    .stopwatch>*>.button{
+    .stopwatch>.button{
         height:32px;
     }
     @media(min-width:320px) and (max-width:639px){
-        .stopwatch>*>.clock{
+        .stopwatch>.clock{
             font-size:10vw;
         }
-        .stopwatch>*>.button{
+        .stopwatch>.button{
             width:100%;
         }
-        .stopwatch>*>.button+.button{
+        .stopwatch>.button+.button{
             margin-top:8px;
         }
     }
     @media(min-width:640px){
-        .stopwatch>*>.clock{
+        .stopwatch>.clock{
             font-size:64px;
         }
-        .stopwatch>*>.button{
+        .stopwatch>.button{
             width:50%;
         }
     }

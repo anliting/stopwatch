@@ -86,42 +86,34 @@ function characteristics(){
 }
 
 var style = `
-    a{
-        color:blue;
-    }
     .stopwatch{
-        text-align:center;
-    }
-    .stopwatch>*{
-        display:inline-block;
-        width:600px;
-        max-width:100%;
+        max-width:600px;
         text-align:justify;
     }
-    .stopwatch>*>.clock{
+    .stopwatch>.clock{
         text-align:center;
         font-family:monospace;
         margin:16px 0;
     }
-    .stopwatch>*>.button{
+    .stopwatch>.button{
         height:32px;
     }
     @media(min-width:320px) and (max-width:639px){
-        .stopwatch>*>.clock{
+        .stopwatch>.clock{
             font-size:10vw;
         }
-        .stopwatch>*>.button{
+        .stopwatch>.button{
             width:100%;
         }
-        .stopwatch>*>.button+.button{
+        .stopwatch>.button+.button{
             margin-top:8px;
         }
     }
     @media(min-width:640px){
-        .stopwatch>*>.clock{
+        .stopwatch>.clock{
             font-size:64px;
         }
-        .stopwatch>*>.button{
+        .stopwatch>.button{
             width:50%;
         }
     }
@@ -149,22 +141,20 @@ function Stopwatch(){
     this._node={};
     this.ui=doe$1.div(
         {className:'stopwatch'},
-        doe$1.div(
-            this._node.clock=doe$1.div(
-                {className:'clock'},
-                msToString(0),
-            ),
-            this._node.startOrPauseButton=
-                doe$1.button('Start (space)',{className:'button',onclick(e){
-                    stopwatch[stopwatch._isRunning?'_pause':'_start'](
-                        e.timeStamp
-                    );
-                }}),
-            doe$1.button('Reset (R)',{className:'button',onclick(){
-                stopwatch._reset();
+        this._node.clock=doe$1.div(
+            {className:'clock'},
+            msToString(0),
+        ),
+        this._node.startOrPauseButton=
+            doe$1.button('Start (space)',{className:'button',onclick(e){
+                stopwatch[stopwatch._isRunning?'_pause':'_start'](
+                    e.timeStamp
+                );
             }}),
-            characteristics(),
-        )
+        doe$1.button('Reset (R)',{className:'button',onclick(){
+            stopwatch._reset();
+        }}),
+        characteristics(),
     );
 }
 Stopwatch.prototype._pause=function(now){

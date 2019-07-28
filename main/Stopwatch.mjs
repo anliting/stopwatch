@@ -23,22 +23,20 @@ function Stopwatch(){
     this._node={}
     this.ui=doe.div(
         {className:'stopwatch'},
-        doe.div(
-            this._node.clock=doe.div(
-                {className:'clock'},
-                msToString(0),
-            ),
-            this._node.startOrPauseButton=
-                doe.button('Start (space)',{className:'button',onclick(e){
-                    stopwatch[stopwatch._isRunning?'_pause':'_start'](
-                        e.timeStamp
-                    )
-                }}),
-            doe.button('Reset (R)',{className:'button',onclick(){
-                stopwatch._reset()
+        this._node.clock=doe.div(
+            {className:'clock'},
+            msToString(0),
+        ),
+        this._node.startOrPauseButton=
+            doe.button('Start (space)',{className:'button',onclick(e){
+                stopwatch[stopwatch._isRunning?'_pause':'_start'](
+                    e.timeStamp
+                )
             }}),
-            characteristics(),
-        )
+        doe.button('Reset (R)',{className:'button',onclick(){
+            stopwatch._reset()
+        }}),
+        characteristics(),
     )
 }
 Stopwatch.prototype._pause=function(now){
