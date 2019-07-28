@@ -21,7 +21,7 @@ export default`
     }
     @media(min-width:320px) and (max-width:639px){
         .stopwatch>*>.clock{
-            font-size:24px;
+            font-size:10vw;
         }
         .stopwatch>*>.button{
             width:100%;
@@ -32,7 +32,7 @@ export default`
     }
     @media(min-width:640px){
         .stopwatch>*>.clock{
-            font-size:48px;
+            font-size:64px;
         }
         .stopwatch>*>.button{
             width:50%;
