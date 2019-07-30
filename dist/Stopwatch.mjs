@@ -59,35 +59,8 @@ var doe$1 = new Proxy(doe,{
     }
 });
 
-function characteristics(){
-    return [
-        doe$1.h2('Characteristics'),
-        doe$1.p('Network is not needed once the webpage is loaded.'),
-        doe$1.p(
-            doe$1.a(
-                {href:'https://www.w3.org/TR/hr-time-2/'},
-                'High resolution time',
-            ),
-            ' of events are taken as arguments. For those who do not know about ',
-            doe$1.a(
-                {href:'https://www.w3.org/TR/hr-time-2/'},
-                'high resolution time',
-            ),
-            ': It is monotonically increasing and not subject to system clock adjustments or system clock skew. More specifically, it is not subject to',
-        ),
-        doe$1.ul(
-            doe$1.li('putting the tab into background, or'),
-            doe$1.li('minimizing the browser.'),
-        ),
-        doe$1.p('When the clock is not ticking, and usually, when browser is minimized, no computing resources other than memory are consumed. If the clock is ticking, and the browser is freshing the display, it is refreshed at the display refresh rate (typically 60fps).'),
-        doe$1.p('Monospace font is used to render the clock if the system is providing it.'),
-        doe$1.p('All viewport width larger than 320px are supported.'),
-    ]
-}
-
 var style = `
     .stopwatch{
-        max-width:600px;
         text-align:justify;
     }
     .stopwatch>.clock{
@@ -97,6 +70,10 @@ var style = `
     }
     .stopwatch>.button{
         height:32px;
+    }
+    .stopwatch>.readme{
+        margin-top:24px;
+        display:block;
     }
     @media(min-width:320px) and (max-width:639px){
         .stopwatch>.clock{
@@ -146,19 +123,22 @@ function Stopwatch(){
             msToString(0),
         ),
         this._node.startOrPauseButton=
-            doe$1.button('Start (space)',{className:'button',onclick(e){
+            doe$1.button('Start (space)',{className:'button',onmousedown(e){
                 stopwatch[stopwatch._isRunning?'_pause':'_start'](
                     e.timeStamp
                 );
             }}),
-        doe$1.button('Reset (R)',{className:'button',onclick(){
+        doe$1.button('Reset (R)',{className:'button',onmousedown(){
             stopwatch._reset();
         }}),
-        characteristics(),
+        doe$1.a({
+            className:'readme',
+            href:'https://anliting.com/stopwatch'
+        },'Readme'),
     );
 }
 Stopwatch.prototype._pause=function(now){
-    this._node.startOrPauseButton.textContent='Start (space)';
+    this._node.startOrPauseButton.textContent='Resume (space)';
     cancelAnimationFrame(this._requestId);
     this._isRunning=0;
     this._stopTime=now;
@@ -169,6 +149,7 @@ Stopwatch.prototype._reset=function(){
         this._pause();
     this._startTime=undefined;
     this._node.clock.textContent=msToString(0);
+    this._node.startOrPauseButton.textContent='Start (space)';
 };
 Stopwatch.prototype._setClock=function(now){
     this._node.clock.textContent=

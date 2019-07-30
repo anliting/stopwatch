@@ -24,6 +24,8 @@ doe.head(doe.style(`
     }
     body>.a>*>*{
         display:inline-block;
+        width:100%;
+        max-width:600px;
     }
     ${Stopwatch.style}
 `))

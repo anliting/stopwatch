@@ -1,5 +1,4 @@
 import doe from             '../lib/doe/main/doe.mjs'
-import characteristics from './Stopwatch/characteristics.mjs'
 import style from           './Stopwatch/style.mjs'
 function msToString(t){
     let output=paddingZerosTo(t%1000,3)
@@ -28,19 +27,22 @@ function Stopwatch(){
             msToString(0),
         ),
         this._node.startOrPauseButton=
-            doe.button('Start (space)',{className:'button',onclick(e){
+            doe.button('Start (space)',{className:'button',onmousedown(e){
                 stopwatch[stopwatch._isRunning?'_pause':'_start'](
                     e.timeStamp
                 )
             }}),
-        doe.button('Reset (R)',{className:'button',onclick(){
+        doe.button('Reset (R)',{className:'button',onmousedown(){
             stopwatch._reset()
         }}),
-        characteristics(),
+        doe.a({
+            className:'readme',
+            href:'https://anliting.com/stopwatch'
+        },'Readme'),
     )
 }
 Stopwatch.prototype._pause=function(now){
-    this._node.startOrPauseButton.textContent='Start (space)'
+    this._node.startOrPauseButton.textContent='Resume (space)'
     cancelAnimationFrame(this._requestId)
     this._isRunning=0
     this._stopTime=now
@@ -51,6 +53,7 @@ Stopwatch.prototype._reset=function(){
         this._pause()
     this._startTime=undefined
     this._node.clock.textContent=msToString(0)
+    this._node.startOrPauseButton.textContent='Start (space)'
 }
 Stopwatch.prototype._setClock=function(now){
     this._node.clock.textContent=

@@ -1,6 +1,5 @@
 export default`
     .stopwatch{
-        max-width:600px;
         text-align:justify;
     }
     .stopwatch>.clock{
@@ -10,6 +9,10 @@ export default`
     }
     .stopwatch>.button{
         height:32px;
+    }
+    .stopwatch>.readme{
+        margin-top:24px;
+        display:block;
     }
     @media(min-width:320px) and (max-width:639px){
         .stopwatch>.clock{
