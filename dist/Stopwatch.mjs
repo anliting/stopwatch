@@ -114,23 +114,34 @@ function msToString(t){
     }
 }
 function Stopwatch(){
-    let stopwatch=this;
     this._node={};
+    let
+        startPauseResume=e=>{
+            e.preventDefault();
+            e.stopPropagation();
+            this[this._isRunning?'_pause':'_start'](e.timeStamp);
+        },
+        reset=e=>{
+            e.preventDefault();
+            e.stopPropagation();
+            this._reset();
+        };
     this.ui=doe$1.div(
         {className:'stopwatch'},
         this._node.clock=doe$1.div(
             {className:'clock'},
             msToString(0),
         ),
-        this._node.startOrPauseButton=
-            doe$1.button('Start (space)',{className:'button',onmousedown(e){
-                stopwatch[stopwatch._isRunning?'_pause':'_start'](
-                    e.timeStamp
-                );
-            }}),
-        doe$1.button('Reset (R)',{className:'button',onmousedown(){
-            stopwatch._reset();
-        }}),
+        this._node.startOrPauseButton=doe$1.button({
+            className:'button',
+            onmousedown:startPauseResume,
+            ontouchstart:startPauseResume,
+        },'Start (space)'),
+        doe$1.button({
+            className:'button',
+            onmousedown:reset,
+            ontouchstart:reset,
+        },'Reset (R)'),
         doe$1.a({
             className:'readme',
             href:'https://anliting.com/stopwatch'
