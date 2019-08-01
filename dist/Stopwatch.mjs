@@ -69,7 +69,8 @@ var style = `
         margin:16px 0;
     }
     .stopwatch>.button{
-        height:32px;
+        font-size:32px;
+        height:64px;
     }
     .stopwatch>.readme{
         margin-top:24px;
