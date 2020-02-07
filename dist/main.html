@@ -76,10 +76,6 @@ var style = `
         font-size:32px;
         height:64px;
     }
-    .stopwatch>.readme{
-        margin-top:24px;
-        display:block;
-    }
     @media(min-width:320px) and (max-width:639px){
         .stopwatch>.clock{
             font-size:10vw;
@@ -147,10 +143,6 @@ function Stopwatch(){
             onmousedown:reset,
             ontouchstart:reset,
         },'Reset (R)'),
-        doe$1.a({
-            className:'readme',
-            href:'https://anliting.com/stopwatch'
-        },'Readme'),
     );
 }
 Stopwatch.prototype._pause=function(now){
@@ -227,13 +219,36 @@ doe$1.head(doe$1.style(`
         display:inline-block;
         width:100%;
         max-width:600px;
+        text-align:left;
+    }
+    body>.a>*>*>.bottom{
+        margin-top:24px;
+    }
+    body>.a>*>*>.bottom>.a{
+        float:left;
+    }
+    body>.a>*>*>.bottom>.b{
+        float:right;
     }
     ${Stopwatch.style}
 `));
 doe$1.body(doe$1.div(
     {className:'a'},
     doe$1.div(
-        stopwatch.ui
+        doe$1.div(
+            stopwatch.ui,
+            doe$1.div(
+                {className:'bottom',},
+                doe$1.a({
+                    href:'https://anliting.com/stopwatch',
+                    className:'a',
+                },'Readme'),
+                doe$1.a({
+                    href:'https://anliting.com/',
+                    className:'b',
+                },'An-Li Ting'),
+            ),
+        )
     )
 ));
 onkeydown=stopwatch.onKeyDown.bind(stopwatch);

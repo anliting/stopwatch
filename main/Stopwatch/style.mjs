@@ -11,10 +11,6 @@ export default`
         font-size:32px;
         height:64px;
     }
-    .stopwatch>.readme{
-        margin-top:24px;
-        display:block;
-    }
     @media(min-width:320px) and (max-width:639px){
         .stopwatch>.clock{
             font-size:10vw;

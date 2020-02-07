@@ -72,10 +72,6 @@ var style = `
         font-size:32px;
         height:64px;
     }
-    .stopwatch>.readme{
-        margin-top:24px;
-        display:block;
-    }
     @media(min-width:320px) and (max-width:639px){
         .stopwatch>.clock{
             font-size:10vw;
@@ -143,10 +139,6 @@ function Stopwatch(){
             onmousedown:reset,
             ontouchstart:reset,
         },'Reset (R)'),
-        doe$1.a({
-            className:'readme',
-            href:'https://anliting.com/stopwatch'
-        },'Readme'),
     );
 }
 Stopwatch.prototype._pause=function(now){

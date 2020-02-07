@@ -46,10 +46,6 @@ function Stopwatch(){
             onmousedown:reset,
             ontouchstart:reset,
         },'Reset (R)'),
-        doe.a({
-            className:'readme',
-            href:'https://anliting.com/stopwatch'
-        },'Readme'),
     )
 }
 Stopwatch.prototype._pause=function(now){

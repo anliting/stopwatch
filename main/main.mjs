@@ -26,13 +26,36 @@ doe.head(doe.style(`
         display:inline-block;
         width:100%;
         max-width:600px;
+        text-align:left;
+    }
+    body>.a>*>*>.bottom{
+        margin-top:24px;
+    }
+    body>.a>*>*>.bottom>.a{
+        float:left;
+    }
+    body>.a>*>*>.bottom>.b{
+        float:right;
     }
     ${Stopwatch.style}
 `))
 doe.body(doe.div(
     {className:'a'},
     doe.div(
-        stopwatch.ui
+        doe.div(
+            stopwatch.ui,
+            doe.div(
+                {className:'bottom',},
+                doe.a({
+                    href:'https://anliting.com/stopwatch',
+                    className:'a',
+                },'Readme'),
+                doe.a({
+                    href:'https://anliting.com/',
+                    className:'b',
+                },'An-Li Ting'),
+            ),
+        )
     )
 ))
 onkeydown=stopwatch.onKeyDown.bind(stopwatch)
