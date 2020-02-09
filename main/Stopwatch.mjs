@@ -88,7 +88,7 @@ let map={
     },
 }
 Stopwatch.prototype.onKeyDown=function(e){
-    if(!(e.key in map))
+    if(!(e.key in map&&!e.repeat))
         return
     e.preventDefault()
     e.stopPropagation()
