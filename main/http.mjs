@@ -1,9 +1,9 @@
 import http2 from   'http2'
 import fs from      'fs'
-import url from     'url'
+import urlModule from     'url'
 import path from    'path'
 import rollup from  'rollup'
-let mainDir=path.dirname((new url.URL(import.meta.url)).pathname)
+let mainDir=path.dirname((new urlModule.URL(import.meta.url)).pathname)
 async function link(input,file){
     let bundle=await rollup.rollup({
         input,
@@ -26,7 +26,8 @@ async function calcRootContent(){
 let rootContentPromise=calcRootContent()
 let server=http2.createServer().on('stream',async(stream,header)=>{
     stream.on('error',()=>{stream.close()})
-    if(header[':method']=='GET'&&header[':path']=='/'){
+    let url=new urlModule.URL(header[':path'],'http://a')
+    if(header[':method']=='GET'&&url.pathname=='/'){
         let content=await rootContentPromise
         if(stream.closed)
             return
