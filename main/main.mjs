@@ -6,15 +6,24 @@ doe.head(doe.style(`
         height:100%;
     }
     body{
+        background-color:#888;
+        font-family:sans-serif;
+        font-size:16px;
+        line-height:1.2;
         height:calc(100% - 16px);
     }
     a{
-        color:blue;
+        color:unset;
+        text-decoration:unset;
     }
     body>.a{
         height:100%;
         width:100%;
         display:table;
+        color:white;
+        text-shadow:
+            0 0 .05em rgba(0,0,0,.4),
+            .05em .05em .05em rgba(0,0,0,.2);
     }
     body>.a>*{
         display:table-cell;
@@ -53,7 +62,7 @@ doe.body(doe.div(
                 doe.a({
                     href:'https://anliting.com/',
                     className:'b',
-                },'An-Li Ting'),
+                },'An-Li Ting 2020-04-25'),
             ),
         )
     )
