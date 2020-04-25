@@ -36,16 +36,19 @@ function Stopwatch(){
             {className:'clock'},
             msToString(0),
         ),
-        this._node.startOrPauseButton=doe.button({
-            className:'button',
-            onmousedown:startPauseResume,
-            ontouchstart:startPauseResume,
-        },'Start (space)'),
-        doe.button({
-            className:'button',
-            onmousedown:reset,
-            ontouchstart:reset,
-        },'Reset (R)'),
+        doe.div(
+            {className:'control'},
+            this._node.startOrPauseButton=doe.button({
+                className:'button a',
+                onmousedown:startPauseResume,
+                ontouchstart:startPauseResume,
+            },'Start (space)'),
+            doe.button({
+                className:'button b',
+                onmousedown:reset,
+                ontouchstart:reset,
+            },'Reset (R)'),
+        ),
     )
 }
 Stopwatch.prototype._pause=function(now){

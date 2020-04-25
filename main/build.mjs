@@ -10,6 +10,9 @@ async function link(input,file){
     })).output[0].code
 }
 ;(async()=>{
+/*
+    Distros are disabled to raise maintainability.
+*/
     return
     let license=await fs.promises.readFile('license','utf8')
     fs.promises.writeFile(
@@ -18,11 +21,6 @@ async function link(input,file){
             await link(`main/Stopwatch.mjs`)
         }`
     )
-/*
-    distributable html are disabled as there is currently no code that is
-    independent with service worker 2020-04-25
-*/
-    return
     fs.promises.writeFile(
         'dist/main.html',
         `<!--${license}-->${

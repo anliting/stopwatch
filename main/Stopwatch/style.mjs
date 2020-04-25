@@ -7,18 +7,25 @@ export default`
         font-family:monospace;
         margin:16px 0;
     }
-    .stopwatch>.button{
+    .stopwatch>.control>.button{
+        padding:0;
+        border:none;
+        background-color:#404040;
         font-size:32px;
         height:64px;
+        color:white;
+        text-shadow:
+            0 0 .05em rgba(0,0,0,.4),
+            .05em .05em .05em rgba(0,0,0,.2);
     }
     @media(min-width:320px) and (max-width:639px){
         .stopwatch>.clock{
             font-size:10vw;
         }
-        .stopwatch>.button{
+        .stopwatch>.control>.button{
             width:100%;
         }
-        .stopwatch>.button+.button{
+        .stopwatch>.control>.button+.button{
             margin-top:8px;
         }
     }
@@ -26,8 +33,20 @@ export default`
         .stopwatch>.clock{
             font-size:64px;
         }
-        .stopwatch>.button{
-            width:50%;
+        .stopwatch>.control{
+            position:relative;
+            width:100%;
+            height:64px;
+        }
+        .stopwatch>.control>.button{
+            position:absolute;
+            width:48%;
+        }
+        .stopwatch>.control>.button.a{
+            left:1%;
+        }
+        .stopwatch>.control>.button.b{
+            right:1%;
         }
     }
 `

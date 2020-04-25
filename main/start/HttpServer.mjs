@@ -46,7 +46,7 @@ function HttpServer(mainDir,test,tls){
                 return
             stream.respond({
                 ':status':200,
-                type:'text/html;charset=utf-8'
+                'content-type':'text/html;charset=utf-8'
             })
             stream.end(content)
         }else{

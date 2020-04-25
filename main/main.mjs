@@ -6,7 +6,7 @@ doe.head(doe.style(`
         height:100%;
     }
     body{
-        background-color:#888;
+        background-color:#808080;
         font-family:sans-serif;
         font-size:16px;
         line-height:1.2;
