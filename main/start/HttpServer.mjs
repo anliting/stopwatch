@@ -49,12 +49,34 @@ function HttpServer(mainDir,test,tls){
                 'content-type':'text/html;charset=utf-8'
             })
             stream.end(content)
-        }else{
-            stream.respond({
-                ':status':400,
-            })
-            stream.end()
+            return
         }
+        if(header[':method']=='GET'&&url.pathname=='/%23sw'){
+            stream.respond({
+                ':status':200,
+                'content-type':'application/javascript'
+            })
+            stream.end(`
+addEventListener('install',e=>{
+    e.waitUntil(
+        (async()=>{
+            let cache=await caches.open('test')
+            await cache.addAll(['/'])
+        })()
+    )
+})
+addEventListener('fetch',e=>{
+    e.respondWith((async()=>
+        (await caches.match(e.request))||fetch(e.request)
+    )())
+})
+            `)
+            return
+        }
+        stream.respond({
+            ':status':400,
+        })
+        stream.end()
     })
 }
 HttpServer.prototype.setSecureContext=function(secureContext){
