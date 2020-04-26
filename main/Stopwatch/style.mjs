@@ -6,7 +6,6 @@ export default`
         text-align:center;
         font-family:monospace;
         margin:16px 0;
-        text-shadow:none;
     }
     .stopwatch>.control>.button{
         background-color:#404040;
