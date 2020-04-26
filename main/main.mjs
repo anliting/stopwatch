@@ -62,12 +62,10 @@ doe.body(doe.div(
                 doe.a({
                     href:'https://anliting.com/',
                     className:'b',
-                },'An-Li Ting 2020-04-25'),
+                },'An-Li Ting 2020-04-26'),
             ),
         )
     )
 ))
 onkeydown=stopwatch.onKeyDown.bind(stopwatch)
-;(async()=>{
-    await navigator.serviceWorker.register('/%23sw')
-})()
+navigator.serviceWorker.register('/%23sw')
