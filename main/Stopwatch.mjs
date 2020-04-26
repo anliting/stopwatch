@@ -38,16 +38,22 @@ function Stopwatch(){
         ),
         doe.div(
             {className:'control'},
-            this._node.startOrPauseButton=doe.button({
-                className:'button a',
-                onmousedown:startPauseResume,
-                ontouchstart:startPauseResume,
-            },'Start (space)'),
-            doe.button({
-                className:'button b',
-                onmousedown:reset,
-                ontouchstart:reset,
-            },'Reset (R)'),
+            doe.div(
+                {
+                    className:'button a',
+                    onmousedown:startPauseResume,
+                    ontouchstart:startPauseResume,
+                },
+                this._node.startOrPauseButton=doe.div('Start (space)')
+            ),
+            doe.div(
+                {
+                    className:'button b',
+                    onmousedown:reset,
+                    ontouchstart:reset,
+                },
+                doe.div('Reset (R)')
+            ),
         ),
     )
 }

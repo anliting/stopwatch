@@ -57,18 +57,18 @@ function HttpServer(mainDir,test,tls){
                 'content-type':'application/javascript'
             })
             stream.end(`
+let version='20200426'
 addEventListener('install',e=>{
-    e.waitUntil(
-        (async()=>{
-            let cache=await caches.open('test')
-            await cache.addAll(['/'])
-        })()
-    )
+    e.waitUntil((async()=>{
+        let cache=await caches.open(version)
+        await cache.addAll(['/'])
+    })())
 })
 addEventListener('fetch',e=>{
-    e.respondWith((async()=>
-        (await caches.match(e.request))||fetch(e.request)
-    )())
+    e.respondWith((async()=>{
+        let cache=await caches.open(version)
+        return(await cache.match(e.request))||fetch(e.request)
+    })())
 })
             `)
             return

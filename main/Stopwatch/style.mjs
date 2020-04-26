@@ -6,10 +6,9 @@ export default`
         text-align:center;
         font-family:monospace;
         margin:16px 0;
+        text-shadow:none;
     }
     .stopwatch>.control>.button{
-        padding:0;
-        border:none;
         background-color:#404040;
         font-size:32px;
         height:64px;
@@ -17,6 +16,13 @@ export default`
         text-shadow:
             0 0 .05em rgba(0,0,0,.4),
             .05em .05em .05em rgba(0,0,0,.2);
+        display:table;
+        user-select:none;
+        text-align:center;
+    }
+    .stopwatch>.control>.button>*{
+        display:table-cell;
+        vertical-align:middle;
     }
     @media(min-width:320px) and (max-width:639px){
         .stopwatch>.clock{
