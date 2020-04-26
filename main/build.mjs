@@ -1,7 +1,7 @@
 import fs from'fs'
-import rollup from'rollup'
+import{rollup}from'rollup'
 async function link(input,file){
-    let bundle=await rollup.rollup({
+    let bundle=await rollup({
         input,
     })
     return(await bundle.generate({
