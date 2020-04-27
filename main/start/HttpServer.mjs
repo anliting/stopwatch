@@ -11,13 +11,16 @@ async function link(input,file){
         format:'es',
     })).output[0].code
 }
+function calcSw(mainDir){
+    return fs.promises.readFile(`${mainDir}/start/sw.js`)
+}
 async function calcRootContent(mainDir){
     return(
-        await fs.promises.readFile(`${mainDir}/main.html`,'utf8')
+        await fs.promises.readFile(`${mainDir}/start/main.html`,'utf8')
     ).replace(
         '<script type=module src=main.mjs></script>',
         `<script type=module>${
-            await link(`${mainDir}/main.mjs`)
+            await link(`${mainDir}/start/main.mjs`)
         }</script>`
     )
 }
@@ -26,6 +29,7 @@ function HttpServer(mainDir,test,tls){
     this._test=test
     this._session=new Set
     this._rootContentPromise=calcRootContent(mainDir)
+    this._swPromise=calcSw(mainDir)
     this._server=(tls?
         http2.createSecureServer().on('secureConnection',socket=>{
             socket.on('error',()=>{})
@@ -56,22 +60,7 @@ function HttpServer(mainDir,test,tls){
                 ':status':200,
                 'content-type':'application/javascript'
             })
-            stream.end(`
-let version='20200427.0'
-addEventListener('install',e=>{
-    e.waitUntil((async()=>{
-        let cache=await caches.open(version)
-        await cache.addAll(['/'])
-    })())
-})
-addEventListener('fetch',e=>{
-    e.respondWith((async()=>{
-        let cache=await caches.open(version)
-        return(await cache.match(e.request))||fetch(e.request)
-    })())
-})
-            `)
-            return
+            return stream.end(await this._swPromise)
         }
         stream.respond({
             ':status':400,

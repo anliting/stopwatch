@@ -1,4 +1,4 @@
-import doe from         '../lib/doe/main/doe.mjs'
+import doe from         '../../lib/doe/main/doe.mjs'
 import Stopwatch from   './Stopwatch.mjs'
 let stopwatch=new Stopwatch
 doe.head(doe.style(`
