@@ -8,7 +8,7 @@ addEventListener('install',e=>{
 addEventListener('fetch',e=>{
     e.respondWith((async()=>{
         try{
-            return fetch(e.request)
+            return await fetch(e.request)
         }catch(e){
             let cache=await caches.open(version)
             return cache.match(e.request)
