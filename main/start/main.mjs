@@ -59,11 +59,11 @@ doe.body(doe.div(
                     href:'https://anliting.com/stopwatch',
                     className:'a',
                 },'Readme'),
-                doe.a({
-                    href:'https://anliting.com/',
-                    className:'b',
-                },'An-Li Ting'),
-                ' 2020-04-27',
+                doe.span(
+                    {className:'b'},
+                    doe.a({href:'https://anliting.com/'},'An-Li Ting'),
+                    ' 2020-04-27-2',
+                ),
             ),
         )
     )
