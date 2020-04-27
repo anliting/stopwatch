@@ -68,4 +68,6 @@ doe.body(doe.div(
     )
 ))
 onkeydown=stopwatch.onKeyDown.bind(stopwatch)
-navigator.serviceWorker.register('/%23sw')
+;(async()=>{
+    await navigator.serviceWorker.register('/%23sw')
+})()
