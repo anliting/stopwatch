@@ -57,7 +57,7 @@ function HttpServer(mainDir,test,tls){
                 'content-type':'application/javascript'
             })
             stream.end(`
-let version='20200427'
+let version='20200427.0'
 addEventListener('install',e=>{
     e.waitUntil((async()=>{
         let cache=await caches.open(version)
