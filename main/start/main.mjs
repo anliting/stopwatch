@@ -62,7 +62,7 @@ doe.body(doe.div(
                 doe.span(
                     {className:'b'},
                     doe.a({href:'https://anliting.com/'},'An-Li Ting'),
-                    ' 2020-04-27-2',
+                    ' 2020-04-27',
                 ),
             ),
         )
