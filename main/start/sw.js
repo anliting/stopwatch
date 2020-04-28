@@ -1,4 +1,4 @@
-let version='20200427.2'
+let version='20200428'
 addEventListener('install',e=>{
     e.waitUntil((async()=>{
         let cache=await caches.open(version)
@@ -7,11 +7,18 @@ addEventListener('install',e=>{
 })
 addEventListener('fetch',e=>{
     e.respondWith((async()=>{
+/*
+    cache.match after fetch error is always undefined in chrome 81.
+    believed to be a bug.
+    cache.match before fetch.
+*/
+        let
+            cache=await caches.open(version),
+            c=await cache.match(e.request)
         try{
             return await fetch(e.request)
         }catch(e){
-            let cache=await caches.open(version)
-            return cache.match(e.request)
+            return c
         }
     })())
 })

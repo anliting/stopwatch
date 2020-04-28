@@ -41,7 +41,10 @@ function Stopwatch(){
             doe.div(
                 {
                     className:'button a',
-                    onmousedown:startPauseResume,
+                    onmousedown:e=>{
+                        if(e.button==0)
+                            startPauseResume(e)
+                    },
                     ontouchstart:startPauseResume,
                 },
                 this._node.startOrPauseButton=doe.div('Start (space)')
@@ -49,7 +52,10 @@ function Stopwatch(){
             doe.div(
                 {
                     className:'button b',
-                    onmousedown:reset,
+                    onmousedown:e=>{
+                        if(e.button==0)
+                            reset(e)
+                    },
                     ontouchstart:reset,
                 },
                 doe.div('Reset (R)')
