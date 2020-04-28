@@ -15,13 +15,9 @@ export default`
         text-shadow:
             0 0 .05em rgba(0,0,0,.4),
             .05em .05em .05em rgba(0,0,0,.2);
-        display:table;
         user-select:none;
         text-align:center;
-    }
-    .stopwatch>.control>.button>*{
-        display:table-cell;
-        vertical-align:middle;
+        line-height:64px;
     }
     @media(min-width:320px) and (max-width:639px){
         .stopwatch>.clock{

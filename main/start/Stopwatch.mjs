@@ -38,7 +38,7 @@ function Stopwatch(){
         ),
         doe.div(
             {className:'control'},
-            doe.div(
+            this._node.startOrPauseButton=doe.div(
                 {
                     className:'button a',
                     onmousedown:e=>{
@@ -47,7 +47,7 @@ function Stopwatch(){
                     },
                     ontouchstart:startPauseResume,
                 },
-                this._node.startOrPauseButton=doe.div('Start (space)')
+                'Start (space)',
             ),
             doe.div(
                 {
@@ -58,7 +58,7 @@ function Stopwatch(){
                     },
                     ontouchstart:reset,
                 },
-                doe.div('Reset (R)')
+                'Reset (R)',
             ),
         ),
     )
