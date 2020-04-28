@@ -1,4 +1,4 @@
-let version='20200428'
+let version='20200428.0'
 addEventListener('install',e=>{
     e.waitUntil((async()=>{
         let cache=await caches.open(version)
