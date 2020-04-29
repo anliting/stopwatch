@@ -22,7 +22,10 @@ function Page(){
             doe.span(
                 {className:'b'},
                 doe.a({href:'https://anliting.com/'},'An-Li Ting'),
-                ' 2020-04-29',
+            ),
+            doe.span(
+                {className:'c'},
+                '2020-04-30 ETERNAL',
             ),
         ),
     )
@@ -37,7 +40,7 @@ Page.style=`
         text-shadow:
             0 0 .05em rgba(0,0,0,.4),
             .05em .05em .05em rgba(0,0,0,.2);
-        font-size:calc(12px * var(--zoom));
+        font-size:calc(16px * var(--zoom));
     }
     .page>.a{
         display:table;
@@ -57,13 +60,27 @@ Page.style=`
     .page>.bottom{
         position:absolute;
         width:100%;
+        height:calc(16px * 1.2 * var(--zoom));
         bottom:0;
     }
     .page>.bottom>.a{
-        float:left;
+        position:absolute;
+        left:0;
     }
     .page>.bottom>.b{
-        float:right;
+        position:absolute;
+        right:0;
+        bottom:calc(8px * 1.2 * var(--zoom));
+        font-size:calc(8px * var(--zoom));
+        font-family:serif;
+        font-style:italic;
+    }
+    .page>.bottom>.c{
+        position:absolute;
+        right:0;
+        bottom:0;
+        font-size:calc(8px * var(--zoom));
+        font-family:serif;
     }
     ${Stopwatch.style}
 `

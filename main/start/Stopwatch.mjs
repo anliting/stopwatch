@@ -7,8 +7,8 @@ function msToString(t){
     t=~~(t/60)
     output=paddingZerosTo(t%60,2)+':'+output
     t=~~(t/60)
-    output=paddingZerosTo(t%24,2)+':'+output
-    t=~~(t/24)
+    output=paddingZerosTo(t%100,2)+':'+output
+    t=~~(t/100)
     return output
     function paddingZerosTo(m,n){
         m=''+m

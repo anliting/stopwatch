@@ -7,18 +7,20 @@ addEventListener('install',e=>{
 })
 addEventListener('fetch',e=>{
     e.respondWith((async()=>{
-/*
-    cache.match after fetch error is always undefined in chrome 81.
-    believed to be a bug.
-    cache.match before fetch.
-*/
-        let
-            cache=await caches.open(version),
-            c=await cache.match(e.request)
+        let cache=caches.open(version),c=(async()=>{
+            cache=await cache
+            return cache.match(e.request)
+        })()
+        let res
         try{
-            return await fetch(e.request)
+            res=await fetch(e.request.clone())
         }catch(e){
             return c
         }
+        ;(async()=>{
+            cache=await cache
+            cache.put(e.request,res)
+        })()
+        return res.clone()
     })())
 })
