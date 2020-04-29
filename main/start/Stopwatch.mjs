@@ -18,6 +18,7 @@ function msToString(t){
     }
 }
 function Stopwatch(){
+    this._layout='a'
     this._node={}
     let
         startPauseResume=e=>{
@@ -31,7 +32,7 @@ function Stopwatch(){
             this._reset()
         }
     this.ui=doe.div(
-        {className:'stopwatch'},
+        {className:'stopwatch a'},
         this._node.clock=doe.div(
             {className:'clock'},
             msToString(0),
@@ -102,6 +103,10 @@ let map={
         this._reset()
     },
 }
+Object.defineProperty(Stopwatch.prototype,'layout',{set(v){
+    this.ui.classList.remove(this._layout)
+    this.ui.classList.add(this._layout=v)
+}})
 Stopwatch.prototype.onKeyDown=function(e){
     if(!(e.key in map&&!e.repeat))
         return
