@@ -1,7 +1,4 @@
 export default`
-    .stopwatch{
-        text-align:justify;
-    }
     .stopwatch>.clock{
         text-align:center;
         font-family:monospace;

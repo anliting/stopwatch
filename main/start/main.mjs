@@ -5,28 +5,17 @@ function Page(){
     this._stopwatch=stopwatch
     this.node=doe.div(
         {className:'page'},
-        doe.div(
-            {className:'a',},
-            doe.div(
-                doe.div(
-                    stopwatch.ui,
-                )
-            )
-        ),
-        doe.div(
-            {className:'bottom',},
-            doe.a({
-                href:'https://anliting.com/stopwatch',
-                className:'a',
-            },'Readme'),
-            doe.span(
-                {className:'b'},
-                doe.a({href:'https://anliting.com/'},'An-Li Ting'),
-            ),
-            doe.span(
-                {className:'c'},
-                '2020-04-30 ETERNAL',
-            ),
+        stopwatch.ui,
+        doe.a({
+            href:'https://anliting.com/stopwatch',
+            className:'bottomA',
+        },'Readme'),
+        doe.a({
+            className:'bottomB',href:'https://anliting.com/'
+        },'An-Li Ting'),
+        doe.span(
+            {className:'bottomC'},
+            '2020-04-30 ETERNAL',
         ),
     )
 }
@@ -41,33 +30,24 @@ Page.style=`
             0 0 .05em rgba(0,0,0,.4),
             .05em .05em .05em rgba(0,0,0,.2);
         font-size:calc(16px * var(--zoom));
-    }
-    .page>.a{
-        display:table;
-        width:100%;
-        height:100%;
-    }
-    .page>.a>*{
-        display:table-cell;
-        vertical-align:middle;
         text-align:center;
     }
-    .page>.a>*>*{
+    .page::after{
+        content:'';
         display:inline-block;
-        width:100%;
-        text-align:left;
+        height:100%;
+        vertical-align:middle;
     }
-    .page>.bottom{
-        position:absolute;
-        width:100%;
-        height:calc(16px * 1.2 * var(--zoom));
-        bottom:0;
+    .page>.stopwatch{
+        display:inline-block;
+        vertical-align:middle;
     }
-    .page>.bottom>.a{
+    .page>.bottomA{
         position:absolute;
         left:0;
+        bottom:0;
     }
-    .page>.bottom>.b{
+    .page>.bottomB{
         position:absolute;
         right:0;
         bottom:calc(8px * 1.2 * var(--zoom));
@@ -75,7 +55,7 @@ Page.style=`
         font-family:serif;
         font-style:italic;
     }
-    .page>.bottom>.c{
+    .page>.bottomC{
         position:absolute;
         right:0;
         bottom:0;
