@@ -1,4 +1,4 @@
-import doe from             '../../lib/doe/main/doe.mjs'
+import doe from             '../lib/doe/main/doe.mjs'
 import style from           './Stopwatch/style.mjs'
 function msToString(t){
     let output=paddingZerosTo(t%1000,3)

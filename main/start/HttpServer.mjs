@@ -1,26 +1,18 @@
 import http2 from           'http2'
 import fs from              'fs'
 import urlModule from       'url'
-import{rollup}from          'rollup'
-async function link(input,file){
-    let bundle=await rollup({
-        input,
-    })
-    return(await bundle.generate({
-        file,
-        format:'es',
-    })).output[0].code
-}
+import link from            '../link.mjs'
 function calcSw(mainDir){
     return fs.promises.readFile(`${mainDir}/start/sw.js`)
 }
 async function calcRootContent(mainDir){
+    let main=link(`${mainDir}/main.mjs`)
     return(
-        await fs.promises.readFile(`${mainDir}/start/main.html`,'utf8')
+        await fs.promises.readFile(`${mainDir}/main.html`,'utf8')
     ).replace(
         '<script type=module src=main.mjs></script>',
         `<script type=module>${
-            await link(`${mainDir}/start/main.mjs`)
+            await main
         }
         navigator.serviceWorker.register('/%23sw')
         </script>`

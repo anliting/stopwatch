@@ -1,6 +1,6 @@
-import electron from'electron'
+let electron=require('electron')
 ;(async()=>{
     await electron.app.whenReady()
     let win=new electron.BrowserWindow({autoHideMenuBar:true})
-    win.loadFile('file/index.html')
+    win.loadFile('app.html')
 })()

@@ -1,0 +1,350 @@
+<!doctype html>
+<meta name=viewport content='width=device-width,initial-scale=1'>
+<link rel=icon href=data:,>
+<title>Stopwatch</title>
+<body>
+<script type=module>function doe(n){
+    let
+        state=0,
+        p={
+            function:f=>f(n),
+            number,
+            object,
+            string,
+        };
+    transform([...arguments].slice(1));
+    return n
+    function number(n){
+        state=n;
+    }
+    function object(o){
+        if(o instanceof Array)
+            array();
+        else if(o instanceof Node)
+            n[state?'removeChild':'appendChild'](o);
+        else if(('length' in o)||o[Symbol.iterator]){
+            o=Array.from(o);
+            array();
+        }else if(state)
+            Object.entries(o).map(([a,b])=>n.setAttribute(a,b));
+        else
+            Object.assign(n,o);
+        function array(){
+            o.map(transform);
+        }
+    }
+    function string(s){
+        n.appendChild(document.createTextNode(s));
+    }
+    function transform(t){
+        for(let q;q=p[typeof t];t=q(t));
+    }
+}
+let methods={
+    html(){
+        return doe(document.documentElement,...arguments)
+    },
+    head(){
+        return doe(document.head,...arguments)
+    },
+    body(){
+        return doe(document.body,...arguments)
+    },
+};
+var doe$1 = new Proxy(doe,{
+    get:(t,p)=>methods[p]||function(){
+        return doe(document.createElement(p),...arguments)
+    }
+});
+
+var style = `
+    .stopwatch>.clock{
+        text-align:center;
+        font-family:monospace;
+        margin:calc(16px * var(--zoom)) 0;
+    }
+    .stopwatch>.control>.button{
+        background-color:#404040;
+        font-size:calc(32px * var(--zoom));
+        height:calc(64px * var(--zoom));
+        color:white;
+        text-shadow:
+            0 0 .05em rgba(0,0,0,.4),
+            .05em .05em .05em rgba(0,0,0,.2);
+        user-select:none;
+        text-align:center;
+        line-height:calc(64px * var(--zoom));
+    }
+    .stopwatch.a>.clock{
+        font-size:calc(64px * var(--zoom));
+    }
+    .stopwatch.a>.control{
+        position:relative;
+        margin:0 auto;
+        width:calc(600px * var(--zoom));
+        height:calc(64px * var(--zoom));
+    }
+    .stopwatch.a>.control>.button{
+        position:absolute;
+        width:48%;
+    }
+    .stopwatch.a>.control>.button.a{
+        left:1%;
+    }
+    .stopwatch.a>.control>.button.b{
+        right:1%;
+    }
+    .stopwatch.b>.clock{
+        font-size:calc(40px * var(--zoom));
+    }
+    .stopwatch.b>.control>.button{
+        width:calc(302px * var(--zoom));
+        margin:0 auto;
+    }
+    .stopwatch.b>.control>.button+.button{
+        margin-top:calc(8px * var(--zoom));
+    }
+`;
+
+function msToString(t){
+    let output=paddingZerosTo(t%1000,3);
+    t=~~(t/1000);
+    output=paddingZerosTo(t%60,2)+'.'+output;
+    t=~~(t/60);
+    output=paddingZerosTo(t%60,2)+':'+output;
+    t=~~(t/60);
+    output=paddingZerosTo(t%100,2)+':'+output;
+    t=~~(t/100);
+    return output
+    function paddingZerosTo(m,n){
+        m=''+m;
+        while(m.length<n)
+            m='0'+m;
+        return m
+    }
+}
+function Stopwatch(){
+    this._layout='a';
+    this._node={};
+    let
+        startPauseResume=e=>{
+            e.preventDefault();
+            e.stopPropagation();
+            this[this._isRunning?'_pause':'_start'](e.timeStamp);
+        },
+        reset=e=>{
+            e.preventDefault();
+            e.stopPropagation();
+            this._reset();
+        };
+    this.ui=doe$1.div(
+        {className:'stopwatch a'},
+        this._node.clock=doe$1.div(
+            {className:'clock'},
+            msToString(0),
+        ),
+        doe$1.div(
+            {className:'control'},
+            this._node.startOrPauseButton=doe$1.div(
+                {
+                    className:'button a',
+                    onmousedown:e=>{
+                        if(e.button==0)
+                            startPauseResume(e);
+                    },
+                    ontouchstart:startPauseResume,
+                },
+                'Start (space)',
+            ),
+            doe$1.div(
+                {
+                    className:'button b',
+                    onmousedown:e=>{
+                        if(e.button==0)
+                            reset(e);
+                    },
+                    ontouchstart:reset,
+                },
+                'Reset (R)',
+            ),
+        ),
+    );
+}
+Stopwatch.prototype._pause=function(now){
+    this._node.startOrPauseButton.textContent='Resume (space)';
+    cancelAnimationFrame(this._requestId);
+    this._isRunning=0;
+    this._stopTime=now;
+    this._setClock(now);
+};
+Stopwatch.prototype._reset=function(){
+    if(this._isRunning)
+        this._pause();
+    this._startTime=undefined;
+    this._node.clock.textContent=msToString(0);
+    this._node.startOrPauseButton.textContent='Start (space)';
+};
+Stopwatch.prototype._setClock=function(now){
+    this._node.clock.textContent=
+        msToString(~~(now-this._startTime));
+};
+Stopwatch.prototype._start=function(now){
+    this._node.startOrPauseButton.textContent='Pause (space)';
+    this._startTime=this._startTime?
+        now-(this._stopTime-this._startTime)
+    :
+        now;
+    this._isRunning=1;
+    let frame=now=>{
+        this._setClock(now);
+        this._requestId=requestAnimationFrame(frame);
+    };
+    this._requestId=requestAnimationFrame(frame);
+};
+let map={
+    ' ':function(e){
+        this[this._isRunning?'_pause':'_start'](e.timeStamp);
+    },
+    r(){
+        this._reset();
+    },
+};
+Object.defineProperty(Stopwatch.prototype,'layout',{set(v){
+    this.ui.classList.remove(this._layout);
+    this.ui.classList.add(this._layout=v);
+}});
+Stopwatch.prototype.onKeyDown=function(e){
+    if(!(e.key in map&&!e.repeat))
+        return
+    e.preventDefault();
+    e.stopPropagation();
+    map[e.key].call(this,e);
+};
+Stopwatch.style=style;
+
+function Page(){
+    let stopwatch=new Stopwatch;
+    this._stopwatch=stopwatch;
+    this.node=doe$1.div(
+        {className:'page'},
+        stopwatch.ui,
+        doe$1.a({
+            href:'https://anliting.com/stopwatch',
+            className:'bottomA',
+        },'Readme'),
+        doe$1.a({
+            className:'bottomB',href:'https://anliting.com/'
+        },'An-Li Ting'),
+        doe$1.span(
+            {className:'bottomC'},
+            '2020-04-30 ETERNAL',
+        ),
+    );
+}
+Page.style=`
+    .page{
+        position:relative;
+        margin:calc(8px *  var(--zoom));
+        width:calc(100% - 16px *  var(--zoom));
+        height:calc(100% - 16px *  var(--zoom));
+        color:white;
+        text-shadow:
+            0 0 .05em rgba(0,0,0,.4),
+            .05em .05em .05em rgba(0,0,0,.2);
+        font-size:calc(16px * var(--zoom));
+        text-align:center;
+    }
+    .page::after{
+        content:'';
+        display:inline-block;
+        height:100%;
+        vertical-align:middle;
+    }
+    .page>.stopwatch{
+        display:inline-block;
+        vertical-align:middle;
+    }
+    .page>.bottomA{
+        position:absolute;
+        left:0;
+        bottom:0;
+    }
+    .page>.bottomB{
+        position:absolute;
+        right:0;
+        bottom:calc(8px * 1.2 * var(--zoom));
+        font-size:calc(8px * var(--zoom));
+        font-family:serif;
+        font-style:italic;
+    }
+    .page>.bottomC{
+        position:absolute;
+        right:0;
+        bottom:0;
+        font-size:calc(8px * var(--zoom));
+        font-family:serif;
+    }
+    ${Stopwatch.style}
+`;
+Page.prototype.onKeyDown=function(e){
+    this._stopwatch.onKeyDown(e);
+};
+Object.defineProperty(Page.prototype,'size',{set(v){
+/*
+    width: 8+600+8=616
+    height: 16*1.2+24+64*1.2+16+64+24+16*1.2=243.2
+    r: 243.2/616
+    width: 320
+    height: 16*1.2+24+40*1.2+16+64+8+64+24+16*1.2=286.4
+    r: 286.4/320
+*/
+    this._size=v;
+    let
+        bodyRatio=this._size[1]/this._size[0],
+        hold=r=>r<bodyRatio?r/bodyRatio:bodyRatio/r,
+        layout,
+        zoom;
+    if(hold(286.4/320)<=hold(243.2/616)){
+        layout='a';
+        zoom=243.2/616<bodyRatio?this._size[0]/616:this._size[1]/243.2;
+    }else {
+        layout='b';
+        zoom=286.4/320<bodyRatio?this._size[0]/320:this._size[1]/286.4;
+    }
+    this._stopwatch.layout=layout;
+    this.node.style.setProperty('--zoom',zoom);
+}});
+let page=new Page;
+doe$1.head(doe$1.style(`
+    html{
+        height:100%;
+    }
+    body{
+        margin:0;
+        overflow:hidden;
+        background-color:#808080;
+        font-family:sans-serif;
+        font-size:16px;
+        line-height:1.2;
+        height:100%;
+    }
+    a{
+        color:unset;
+        text-decoration:unset;
+    }
+    ${Page.style}
+`));
+doe$1.body(page.node);
+onkeydown=page.onKeyDown.bind(page);
+let size;
+{
+    let bcr=document.body.getBoundingClientRect();
+    size=page.size=[bcr.width,bcr.height];
+}
+onresize=e=>{
+    let bcr=document.body.getBoundingClientRect();
+    if(size[0]!=bcr.width||size[1]!=bcr.height)
+        size=page.size=[bcr.width,bcr.height];
+};
+
+        </script>
