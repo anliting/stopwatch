@@ -1,5 +1,7 @@
 {
     "dependencies":{
+        "electron":"",
+        "esm":"",
         "rollup":""
     }
 }

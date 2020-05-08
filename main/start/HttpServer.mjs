@@ -21,7 +21,9 @@ async function calcRootContent(mainDir){
         '<script type=module src=main.mjs></script>',
         `<script type=module>${
             await link(`${mainDir}/start/main.mjs`)
-        }</script>`
+        }
+        navigator.serviceWorker.register('/%23sw')
+        </script>`
     )
 }
 function HttpServer(mainDir,test,tls){

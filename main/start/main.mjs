@@ -124,6 +124,3 @@ onresize=e=>{
     if(size[0]!=bcr.width||size[1]!=bcr.height)
         size=page.size=[bcr.width,bcr.height]
 }
-;(async()=>{
-    await navigator.serviceWorker.register('/%23sw')
-})()
