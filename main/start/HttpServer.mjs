@@ -11,11 +11,10 @@ async function calcRootContent(mainDir){
         await fs.promises.readFile(`${mainDir}/main.html`,'utf8')
     ).replace(
         '<script type=module src=main.mjs></script>',
-        `<script type=module>${
-            await main
-        }
-        navigator.serviceWorker.register('/%23sw')
-        </script>`
+        `<script type=module>${await main}
+navigator.serviceWorker.register('/%23sw')
+</script>
+`
     )
 }
 function HttpServer(mainDir,test,tls){

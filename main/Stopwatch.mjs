@@ -31,15 +31,16 @@ function Stopwatch(){
             e.stopPropagation()
             this._reset()
         }
-    this.ui=doe.div(
+    let{div}=doe
+    this.ui=div(
         {className:'stopwatch a'},
-        this._node.clock=doe.div(
+        this._node.clock=div(
             {className:'clock'},
             msToString(0),
         ),
-        doe.div(
+        div(
             {className:'control'},
-            this._node.startOrPauseButton=doe.div(
+            this._node.startOrPauseButton=div(
                 {
                     className:'button a',
                     onmousedown:e=>{
@@ -50,7 +51,7 @@ function Stopwatch(){
                 },
                 'Start (space)',
             ),
-            doe.div(
+            div(
                 {
                     className:'button b',
                     onmousedown:e=>{

@@ -9,13 +9,16 @@ function Page(){
         doe.a({
             href:'https://anliting.com/stopwatch',
             className:'bottomA',
+            onclick:e=>this.onHrefClick(e),
         },'Readme'),
         doe.a({
-            className:'bottomB',href:'https://anliting.com/'
+            className:'bottomB',
+            href:'https://anliting.com/',
+            onclick:e=>this.onHrefClick(e),
         },'An-Li Ting'),
         doe.span(
             {className:'bottomC'},
-            '2020-04-30 ETERNAL',
+            '2020-05-09 ETERNAL',
         ),
     )
 }
@@ -64,6 +67,8 @@ Page.style=`
     }
     ${Stopwatch.style}
 `
+Page.prototype.onHrefClick=function(){
+}
 Page.prototype.onKeyDown=function(e){
     this._stopwatch.onKeyDown(e)
 }

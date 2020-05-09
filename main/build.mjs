@@ -6,10 +6,14 @@ async function calcRootContent(){
         await fs.promises.readFile(`main.html`,'utf8')
     ).replace(
         '<script type=module src=main.mjs></script>',
-        `<script type=module>${
-            await main
-        }
-        </script>`
+        `<script type=module>${await main}
+let eletron=require('electron')
+page.onHrefClick=e=>{
+    e.preventDefault()
+    eletron.shell.openExternal(e.target.href)
+}
+</script>
+`
     )
 }
 ;(async()=>{
