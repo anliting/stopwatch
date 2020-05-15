@@ -19,7 +19,7 @@ function Page(){
         },'An-Li Ting'),
         span(
             {className:'bottomC'},
-            '2020-05-09 ETERNAL',
+            '2020-05-15 ETERNAL',
         ),
     )
 }
