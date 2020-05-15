@@ -137,15 +137,16 @@ function Stopwatch(){
             e.stopPropagation();
             this._reset();
         };
-    this.ui=doe$1.div(
+    let{div}=doe$1;
+    this.ui=div(
         {className:'stopwatch a'},
-        this._node.clock=doe$1.div(
+        this._node.clock=div(
             {className:'clock'},
             msToString(0),
         ),
-        doe$1.div(
+        div(
             {className:'control'},
-            this._node.startOrPauseButton=doe$1.div(
+            this._node.startOrPauseButton=div(
                 {
                     className:'button a',
                     onmousedown:e=>{
@@ -156,7 +157,7 @@ function Stopwatch(){
                 },
                 'Start (space)',
             ),
-            doe$1.div(
+            div(
                 {
                     className:'button b',
                     onmousedown:e=>{
@@ -214,7 +215,7 @@ Object.defineProperty(Stopwatch.prototype,'layout',{set(v){
     this.ui.classList.add(this._layout=v);
 }});
 Stopwatch.prototype.onKeyDown=function(e){
-    if(!(e.key in map&&!e.repeat))
+    if(!(!e.altKey&&!e.ctrlKey&&!e.shiftKey&&!e.repeat&&e.key in map))
         return
     e.preventDefault();
     e.stopPropagation();
@@ -222,23 +223,24 @@ Stopwatch.prototype.onKeyDown=function(e){
 };
 Stopwatch.style=style;
 
+let{a,div,span}=doe$1;
 function Page(){
     let stopwatch=new Stopwatch;
     this._stopwatch=stopwatch;
-    this.node=doe$1.div(
+    this.node=div(
         {className:'page'},
         stopwatch.ui,
-        doe$1.a({
+        a({
             href:'https://anliting.com/stopwatch',
             className:'bottomA',
             onclick:e=>this.onHrefClick(e),
         },'Readme'),
-        doe$1.a({
+        a({
             className:'bottomB',
             href:'https://anliting.com/',
             onclick:e=>this.onHrefClick(e),
         },'An-Li Ting'),
-        doe$1.span(
+        span(
             {className:'bottomC'},
             '2020-05-09 ETERNAL',
         ),
@@ -355,7 +357,6 @@ onresize=e=>{
 let eletron=require('electron')
 page.onHrefClick=e=>{
     e.preventDefault()
-alert('meow')
     eletron.shell.openExternal(e.target.href)
 }
 </script>

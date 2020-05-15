@@ -1,22 +1,23 @@
 import doe from         '../lib/doe/main/doe.mjs'
 import Stopwatch from   './Stopwatch.mjs'
+let{a,div,span}=doe
 function Page(){
     let stopwatch=new Stopwatch
     this._stopwatch=stopwatch
-    this.node=doe.div(
+    this.node=div(
         {className:'page'},
         stopwatch.ui,
-        doe.a({
+        a({
             href:'https://anliting.com/stopwatch',
             className:'bottomA',
             onclick:e=>this.onHrefClick(e),
         },'Readme'),
-        doe.a({
+        a({
             className:'bottomB',
             href:'https://anliting.com/',
             onclick:e=>this.onHrefClick(e),
         },'An-Li Ting'),
-        doe.span(
+        span(
             {className:'bottomC'},
             '2020-05-09 ETERNAL',
         ),

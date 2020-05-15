@@ -109,7 +109,7 @@ Object.defineProperty(Stopwatch.prototype,'layout',{set(v){
     this.ui.classList.add(this._layout=v)
 }})
 Stopwatch.prototype.onKeyDown=function(e){
-    if(!(e.key in map&&!e.repeat))
+    if(!(!e.altKey&&!e.ctrlKey&&!e.shiftKey&&!e.repeat&&e.key in map))
         return
     e.preventDefault()
     e.stopPropagation()
