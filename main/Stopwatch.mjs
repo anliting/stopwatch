@@ -18,7 +18,7 @@ function msToString(t){
     }
 }
 function Stopwatch(){
-    this._layout='a'
+    this._layout={composition:'a',zoom:1}
     this._node={}
     let
         startPauseResume=e=>{
@@ -90,9 +90,12 @@ Stopwatch.prototype._start=function(now){
     :
         now
     this._isRunning=1
+    let dpr
     let frame=now=>{
-        this._setClock(now)
         this._requestId=requestAnimationFrame(frame)
+        if(dpr!=devicePixelRatio)
+            dpr=devicePixelRatio
+        this._setClock(now)
     }
     this._requestId=requestAnimationFrame(frame)
 }
