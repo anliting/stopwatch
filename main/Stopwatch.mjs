@@ -105,8 +105,8 @@ let map={
     },
 }
 Object.defineProperty(Stopwatch.prototype,'layout',{set(v){
-    this.ui.classList.remove(this._layout)
-    this.ui.classList.add(this._layout=v)
+    this.ui.classList.remove(this._layout.composition)
+    this.ui.classList.add((this._layout=v).composition)
 }})
 Stopwatch.prototype.onKeyDown=function(e){
     if(!(!e.altKey&&!e.ctrlKey&&!e.shiftKey&&!e.repeat&&e.key in map))
