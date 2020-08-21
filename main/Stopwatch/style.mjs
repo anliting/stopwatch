@@ -1,9 +1,4 @@
 export default`
-    .stopwatch>.clock{
-        text-align:center;
-        font-family:monospace;
-        margin:calc(16px * var(--zoom)) 0;
-    }
     .stopwatch>.control>.button{
         background-color:#404040;
         font-size:calc(32px * var(--zoom));
@@ -15,9 +10,6 @@ export default`
         user-select:none;
         text-align:center;
         line-height:calc(64px * var(--zoom));
-    }
-    .stopwatch.a>.clock{
-        font-size:calc(64px * var(--zoom));
     }
     .stopwatch.a>.control{
         position:relative;
@@ -34,9 +26,6 @@ export default`
     }
     .stopwatch.a>.control>.button.b{
         right:1%;
-    }
-    .stopwatch.b>.clock{
-        font-size:calc(40px * var(--zoom));
     }
     .stopwatch.b>.control>.button{
         width:calc(302px * var(--zoom));

@@ -1,22 +1,6 @@
 import doe from             '../lib/doe/main/doe.mjs'
 import style from           './Stopwatch/style.mjs'
-function msToString(t){
-    let output=paddingZerosTo(t%1000,3)
-    t=~~(t/1000)
-    output=paddingZerosTo(t%60,2)+'.'+output
-    t=~~(t/60)
-    output=paddingZerosTo(t%60,2)+':'+output
-    t=~~(t/60)
-    output=paddingZerosTo(t%100,2)+':'+output
-    t=~~(t/100)
-    return output
-    function paddingZerosTo(m,n){
-        m=''+m
-        while(m.length<n)
-            m='0'+m
-        return m
-    }
-}
+import Clock from           './Stopwatch/Clock.mjs'
 function Stopwatch(){
     this._layout={composition:'a',zoom:1}
     this._node={}
@@ -31,13 +15,11 @@ function Stopwatch(){
             e.stopPropagation()
             this._reset()
         }
+    this._clock=new Clock
     let{div}=doe
     this.ui=div(
         {className:'stopwatch a'},
-        this._node.clock=div(
-            {className:'clock'},
-            msToString(0),
-        ),
+        this._clock.ui,
         div(
             {className:'control'},
             this._node.startOrPauseButton=div(
@@ -76,12 +58,11 @@ Stopwatch.prototype._reset=function(){
     if(this._isRunning)
         this._pause()
     this._startTime=undefined
-    this._node.clock.textContent=msToString(0)
+    this._clock.time=0
     this._node.startOrPauseButton.textContent='Start (space)'
 }
 Stopwatch.prototype._setClock=function(now){
-    this._node.clock.textContent=
-        msToString(~~(now-this._startTime))
+    this._clock.time=~~(now-this._startTime)
 }
 Stopwatch.prototype._start=function(now){
     this._node.startOrPauseButton.textContent='Pause (space)'
@@ -118,5 +99,5 @@ Stopwatch.prototype.onKeyDown=function(e){
     e.stopPropagation()
     map[e.key].call(this,e)
 }
-Stopwatch.style=style
+Stopwatch.style=style+Clock.style
 export default Stopwatch

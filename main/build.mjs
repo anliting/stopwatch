@@ -21,7 +21,6 @@ page.onHrefClick=e=>{
         'app.html',
         await calcRootContent()
     )
-    
 /*
     Distros are disabled to raise maintainability.
 */
