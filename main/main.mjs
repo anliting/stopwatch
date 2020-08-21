@@ -86,17 +86,16 @@ Object.defineProperty(Page.prototype,'size',{set(v){
     let
         bodyRatio=this._size[1]/this._size[0],
         hold=r=>r<bodyRatio?r/bodyRatio:bodyRatio/r,
-        layout,
+        layout={},
         zoom
-    if(hold(286.4/320)<=hold(243.2/616)){
-        layout='a'
-        zoom=243.2/616<bodyRatio?this._size[0]/616:this._size[1]/243.2
-    }else{
-        layout='b'
-        zoom=286.4/320<bodyRatio?this._size[0]/320:this._size[1]/286.4
+    this._stopwatch.layout=layout=hold(286.4/320)<=hold(243.2/616)?{
+        composition:'a',
+        zoom:243.2/616<bodyRatio?this._size[0]/616:this._size[1]/243.2,
+    }:{
+        composition:'b',
+        zoom:286.4/320<bodyRatio?this._size[0]/320:this._size[1]/286.4,
     }
-    this._stopwatch.layout=layout
-    this.node.style.setProperty('--zoom',zoom)
+    this.node.style.setProperty('--zoom',layout.zoom)
 }})
 let page=new Page
 doe.head(doe.style(`
