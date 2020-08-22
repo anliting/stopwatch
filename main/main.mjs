@@ -17,10 +17,6 @@ function Page(){
             href:'https://anliting.com/',
             onclick:e=>this.onHrefClick(e),
         },'An-Li Ting'),
-        span(
-            {className:'bottomC'},
-            '2020-05-15 ETERNAL',
-        ),
     )
 }
 Page.style=`
@@ -54,17 +50,10 @@ Page.style=`
     .page>.bottomB{
         position:absolute;
         right:0;
-        bottom:calc(8px * 1.2 * var(--zoom));
-        font-size:calc(8px * var(--zoom));
-        font-family:serif;
-        font-style:italic;
-    }
-    .page>.bottomC{
-        position:absolute;
-        right:0;
         bottom:0;
         font-size:calc(8px * var(--zoom));
         font-family:serif;
+        font-style:italic;
     }
     ${Stopwatch.style}
 `
