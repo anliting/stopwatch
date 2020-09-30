@@ -1,12 +1,12 @@
 import http2 from           'http2'
 import fs from              'fs'
 import urlModule from       'url'
-import link from            '../link.mjs'
+import buildMjs from        '../buildMjs.mjs'
 function calcSw(mainDir){
     return fs.promises.readFile(`${mainDir}/start/sw.js`)
 }
 async function calcRootContent(mainDir){
-    let main=link(`${mainDir}/main.mjs`)
+    let main=buildMjs(`${mainDir}/main.mjs`)
     return(
         await fs.promises.readFile(`${mainDir}/main.html`,'utf8')
     ).replace(
