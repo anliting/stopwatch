@@ -1,21 +1,26 @@
 import http2 from           'http2'
 import fs from              'fs'
 import urlModule from       'url'
-import buildMjs from        '../buildMjs.mjs'
+import link from            '../link.mjs'
+import minify from          '../minify.mjs'
+import htmlMinifier from    'html-minifier'
 function calcSw(mainDir){
     return fs.promises.readFile(`${mainDir}/start/sw.js`)
 }
 async function calcRootContent(mainDir){
-    let main=buildMjs(`${mainDir}/main.mjs`)
-    return(
+    let main=(async()=>minify(`${
+        await link(`${mainDir}/main.mjs`)
+    };navigator.serviceWorker.register('/%23sw')`))()
+    return htmlMinifier.minify((
         await fs.promises.readFile(`${mainDir}/main.html`,'utf8')
     ).replace(
         '<script type=module src=main.mjs></script>',
-        `<script type=module>${await main}
-navigator.serviceWorker.register('/%23sw')
-</script>
-`
-    )
+        `<script type=module>${await main}</script>`
+    ),{
+            collapseWhitespace:true,
+            removeAttributeQuotes:true,
+            removeOptionalTags:true,
+    })
 }
 function HttpServer(mainDir,test,tls){
     this._mainDir=mainDir
