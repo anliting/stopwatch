@@ -1,21 +1,26 @@
 import fs from'fs'
-import link from'./link.mjs'
-import buildMjs from'./buildMjs.mjs'
+import link from            './link.mjs'
+import minify from          './minify.mjs'
+import htmlMinifier from    'html-minifier'
 async function calcRootContent(){
-    let main=buildMjs('main.mjs')
-    return(
-        await fs.promises.readFile(`main.html`,'utf8')
+    let main=(async()=>minify(`
+        ${await link('main.mjs')};
+        let eletron=require('electron')
+        page.onHrefClick=e=>{
+            e.preventDefault()
+            eletron.shell.openExternal(e.target.href)
+        }
+    `))()
+    return htmlMinifier.minify((
+        await fs.promises.readFile('main.html','utf8')
     ).replace(
         '<script type=module src=main.mjs></script>',
-        `<script type=module>${await main}
-let eletron=require('electron')
-page.onHrefClick=e=>{
-    e.preventDefault()
-    eletron.shell.openExternal(e.target.href)
-}
-</script>
-`
-    )
+        `<script type=module>${await main}</script>`
+    ),{
+            collapseWhitespace:true,
+            removeAttributeQuotes:true,
+            removeOptionalTags:true,
+    })
 }
 ;(async()=>{
     fs.promises.writeFile(
