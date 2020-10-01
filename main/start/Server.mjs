@@ -24,7 +24,7 @@ async function load(){
     }
     let
         httpListen=readListen('httpListen'),
-        httpListenOnUnixSocket=existFile('httpListenOnUnixSocket')
+        httpListenOnPath=existFile('httpListenOnPath')
     this._tls=await existFile('tls')
     this._httpServer=new HttpServer(
         this._mainDir,
@@ -42,7 +42,7 @@ async function load(){
                 this._httpServer.listen(httpListen)
         })(),
         (async()=>{
-            if(await httpListenOnUnixSocket)
+            if(await httpListenOnPath)
                 this._httpServer.listen(['httpServer'])
         })(),
     ])
