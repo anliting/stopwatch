@@ -1,33 +1,49 @@
 import fs from              'fs'
 import HttpServer from      './HttpServer.mjs'
 async function load(){
-    async function readListen(path){
-        return(
-            await fs.promises.readFile(path,'utf8')
-        ).split('\n')[0].split(' ')
+    async function existFile(p){
+        try{
+            await fs.promises.stat(p)
+            return 1
+        }catch(e){
+            if(!(e.code=='ENOENT'))
+                throw e
+            return 0
+        }
     }
-    let httpListen=await readListen('httpListen')
+    async function readListen(path){
+        try{
+            return(
+                await fs.promises.readFile(path,'utf8')
+            ).split('\n')[0].split(' ')
+        }catch(e){
+            if(!(e.code=='ENOENT'))
+                throw e
+            return 0
+        }
+    }
+    let
+        httpListen=readListen('httpListen'),
+        httpListenOnUnixSocket=existFile('httpListenOnUnixSocket')
+    this._tls=await existFile('tls')
+    this._httpServer=new HttpServer(
+        this._mainDir,
+        this._tls
+    )
+    if(this._tls){
+        this._interval=setInterval(async()=>{
+            this._loadTls()
+        },86400e3)
+        await this._loadTls()
+    }
     await Promise.all([
         (async()=>{
-            this._tls=1
-            try{
-                await fs.promises.stat('tls')
-            }catch(e){
-                if(!(e.code=='ENOENT'))
-                    throw e
-                this._tls=0
-            }
-            this._httpServer=new HttpServer(
-                this._mainDir,
-                this._tls
-            )
-            if(this._tls){
-                this._interval=setInterval(async()=>{
-                    this._loadTls()
-                },86400e3)
-                await this._loadTls()
-            }
-            await this._httpServer.listen(httpListen)
+            if(httpListen=await httpListen)
+                this._httpServer.listen(httpListen)
+        })(),
+        (async()=>{
+            if(await httpListenOnUnixSocket)
+                this._httpServer.listen(['httpServer'])
         })(),
     ])
 }
