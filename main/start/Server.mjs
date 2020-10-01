@@ -7,14 +7,6 @@ async function load(){
         ).split('\n')[0].split(' ')
     }
     let httpListen=await readListen('httpListen')
-    try{
-        await fs.promises.stat('test')
-        this._test=1
-    }catch(e){
-        if(!(e.code=='ENOENT'))
-            throw e
-        this._test=0
-    }
     await Promise.all([
         (async()=>{
             this._tls=1
@@ -27,7 +19,6 @@ async function load(){
             }
             this._httpServer=new HttpServer(
                 this._mainDir,
-                this._test,
                 this._tls
             )
             if(this._tls){

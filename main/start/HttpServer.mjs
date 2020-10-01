@@ -22,9 +22,8 @@ async function calcRootContent(mainDir){
             removeOptionalTags:true,
     })
 }
-function HttpServer(mainDir,test,tls){
+function HttpServer(mainDir,tls){
     this._mainDir=mainDir
-    this._test=test
     this._session=new Set
     this._rootContentPromise=calcRootContent(mainDir)
     this._swPromise=calcSw(mainDir)
