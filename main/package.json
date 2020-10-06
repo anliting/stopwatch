@@ -1,6 +1,5 @@
 {
     "dependencies":{
-        "electron":"",
         "html-minifier":"",
         "rollup":"",
         "terser":""
