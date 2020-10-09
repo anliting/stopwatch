@@ -1,7 +1,0 @@
-{
-    "dependencies":{
-        "html-minifier":"",
-        "rollup":"",
-        "terser":""
-    }
-}
