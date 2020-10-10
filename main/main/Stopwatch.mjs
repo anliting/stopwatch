@@ -1,4 +1,4 @@
-import doe from             '../lib/doe/main/doe.mjs'
+import doe from             'doe'
 import style from           './Stopwatch/style.mjs'
 import Clock from           './Stopwatch/Clock.mjs'
 function Stopwatch(){

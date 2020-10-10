@@ -1,5 +1,5 @@
 import Server from  './start/Server.mjs'
-import node from    './start/node.mjs'
+import node from    './node.mjs'
 let server
 node.onceSigintOrSigterm(()=>
     server.end()

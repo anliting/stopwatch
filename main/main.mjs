@@ -1,5 +1,5 @@
-import doe from         '../lib/doe/main/doe.mjs'
-import Stopwatch from   './Stopwatch.mjs'
+import doe from         'doe'
+import Stopwatch from   './main/Stopwatch.mjs'
 let{a,div,span}=doe
 function Page(){
     let stopwatch=new Stopwatch
