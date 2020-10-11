@@ -1,5 +1,5 @@
 import{rollup}from'rollup'
-import node from'./node.mjs'
+import node from'@anliting/node'
 let dir=node.importMetaToDir(import.meta)
 async function link(input,file){
     let bundle=await rollup({
