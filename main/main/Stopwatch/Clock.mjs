@@ -1,4 +1,4 @@
-import doe from             '../../lib/doe/main/doe.mjs'
+import doe from             'doe'
 import msToString from      './Clock/msToString.mjs'
 function Clock(){
     this._node=[...Array(12)].map((_,i)=>doe.span(
