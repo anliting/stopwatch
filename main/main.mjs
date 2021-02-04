@@ -8,7 +8,7 @@ function Page(){
         {className:'page'},
         stopwatch.ui,
         a({
-            href:'https://anliting.com/stopwatch',
+            href:'https://althea.anliting.com/stopwatch',
             className:'bottomA',
             onclick:e=>this.onHrefClick(e),
         },'Readme'),
