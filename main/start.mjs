@@ -1,7 +1,7 @@
-import node from    '@anliting/node'
+import core from    '@anliting/core'
 import Server from  './start/Server.mjs'
 let server
-node.onceSigintOrSigterm(()=>
+core.onceSigintOrSigterm(()=>
     server.end()
 )
-server=new Server(node.importMetaToDir(import.meta))
+server=new Server(core.importMetaToDir(import.meta))
