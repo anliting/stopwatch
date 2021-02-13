@@ -1,8 +1,8 @@
-let version='20200429'
+let version='20210214'
 addEventListener('install',e=>{
     e.waitUntil((async()=>{
         let cache=await caches.open(version)
-        await cache.addAll(['/'])
+        await cache.addAll(['.'])
     })())
 })
 addEventListener('fetch',e=>{
