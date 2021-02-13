@@ -1,0 +1,9 @@
+{
+    "dependencies":{
+        "electron":"",
+        "html-minifier":"",
+        "rollup":"",
+        "terser":"",
+        "@anliting/core":"anliting/core"
+    }
+}
