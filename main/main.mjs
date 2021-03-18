@@ -94,7 +94,7 @@ doe.head(doe.style(`
     body{
         margin:0;
         overflow:hidden;
-        background-color:#808080;
+        background-color:#7f7f7f;
         font-family:sans-serif;
         font-size:16px;
         line-height:1.2;

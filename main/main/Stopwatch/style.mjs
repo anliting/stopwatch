@@ -1,6 +1,6 @@
 export default`
     .stopwatch>.control>.button{
-        background-color:#404040;
+        background-color:#3f3f3f;
         font-size:calc(32px * var(--zoom));
         height:calc(64px * var(--zoom));
         color:white;
