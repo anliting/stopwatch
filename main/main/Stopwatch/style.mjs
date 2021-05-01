@@ -11,6 +11,12 @@ export default`
         text-align:center;
         line-height:calc(64px * var(--zoom));
     }
+    .stopwatch>.control>.button:hover{
+        background-color:#4f4f4f;
+    }
+    .stopwatch>.control>.button:active{
+        background-color:#2f2f2f;
+    }
     .stopwatch.a>.control{
         position:relative;
         margin:0 auto;
