@@ -6,10 +6,12 @@ function Stopwatch(){
     this._node={}
     let
         startPauseResume=e=>{
+            e.preventDefault()
             e.stopPropagation()
             this[this._isRunning?'_pause':'_start'](e.timeStamp)
         },
         reset=e=>{
+            e.preventDefault()
             e.stopPropagation()
             this._reset()
         }
