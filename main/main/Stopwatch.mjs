@@ -3,7 +3,7 @@ import style from           './Stopwatch/style.mjs'
 import Clock from           './Stopwatch/Clock.mjs'
 function createButton(){
     let ripple=doe.div({className:'ripple'})
-    function startRipple(e){
+    function setRipple(e){
         let bcr=this.getBoundingClientRect()
         ripple.style.setProperty('--d',`${
             Math.max(this.clientWidth,this.clientHeight)
