@@ -2,30 +2,18 @@ import doe from             'doe'
 import style from           './Stopwatch/style.mjs'
 import Clock from           './Stopwatch/Clock.mjs'
 function createButton(){
-    let ripple=doe.div({className:'ripple'}),node=doe.div(ripple)
+    let node=doe.div()
     return{
         node,
-        ripple(x,y){
+        effect(){
             doe(node.style,{
                 animation:'none',
             })
             node.offsetLeft
             doe(node.style,{
-                animation:'ripple 500ms linear',
+                animation:'click 500ms linear',
                 animationFillMode:'forwards',
             })
-            //doe(node.parentNode,1,node,0,node)
-            /*let bcr=node.getBoundingClientRect()
-            ripple.style.setProperty('--d',`${
-                Math.max(node.clientWidth,node.clientHeight)
-            }px`)
-            ripple.style.setProperty('--l',`${
-                x-bcr.left
-            }px`)
-            ripple.style.setProperty('--t',`${
-                y-bcr.top
-            }px`)
-            doe(node,1,ripple,0,ripple)*/
         }
     }
 }
@@ -59,13 +47,12 @@ function Stopwatch(){
                     className:'button a',
                     onmousedown:e=>{
                         if(e.button==0){
-                            startOrPauseButton.ripple(e.clientX,e.clientY)
+                            startOrPauseButton.effect()
                             startPauseResume(e)
                         }
                     },
                     ontouchstart:e=>{
-                        for(let t of e.changedTouches)
-                            startOrPauseButton.ripple(t.clientX,t.clientY)
+                        startOrPauseButton.effect()
                         startPauseResume(e)
                     },
                 },
@@ -77,13 +64,12 @@ function Stopwatch(){
                     className:'button b',
                     onmousedown:e=>{
                         if(e.button==0){
-                            resetButton.ripple(e.clientX,e.clientY)
+                            resetButton.effect()
                             reset(e)
                         }
                     },
                     ontouchstart:e=>{
-                        for(let t of e.changedTouches)
-                            resetButton.ripple(t.clientX,t.clientY)
+                        resetButton.effect()
                         reset(e)
                     },
                 },
