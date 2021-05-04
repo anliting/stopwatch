@@ -15,7 +15,7 @@ function createButton(){
             e.clientY-bcr.top
         }px`)
         doe(this,1,ripple,0,ripple)
-    })
+    }
     return doe.div(n=>{
         n.addEventListener('mousedown',setRipple)
         n.addEventListener('touchstart',setRipple)
