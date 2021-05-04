@@ -2,24 +2,23 @@ import doe from             'doe'
 import style from           './Stopwatch/style.mjs'
 import Clock from           './Stopwatch/Clock.mjs'
 function createButton(){
-    let ripple=doe.div({className:'ripple'})
-    function setRipple(e){
-        let bcr=this.getBoundingClientRect()
-        ripple.style.setProperty('--d',`${
-            Math.max(this.clientWidth,this.clientHeight)
-        }px`)
-        ripple.style.setProperty('--l',`${
-            e.clientX-bcr.left
-        }px`)
-        ripple.style.setProperty('--t',`${
-            e.clientY-bcr.top
-        }px`)
-        doe(this,1,ripple,0,ripple)
+    let ripple=doe.div({className:'ripple'}),node=doe.div(ripple)
+    return{
+        node,
+        ripple(x,y){
+            let bcr=node.getBoundingClientRect()
+            ripple.style.setProperty('--d',`${
+                Math.max(node.clientWidth,node.clientHeight)
+            }px`)
+            ripple.style.setProperty('--l',`${
+                x-bcr.left
+            }px`)
+            ripple.style.setProperty('--t',`${
+                y-bcr.top
+            }px`)
+            doe(node,1,ripple,0,ripple)
+        }
     }
-    return doe.div(n=>{
-        n.addEventListener('mousedown',setRipple)
-        n.addEventListener('touchstart',setRipple)
-    },ripple)
 }
 function Stopwatch(){
     this._layout={composition:'a',zoom:1}
@@ -36,33 +35,48 @@ function Stopwatch(){
             this._reset()
         }
     this._clock=new Clock
-    let{div}=doe
+    let
+        {div}=doe,
+        startOrPauseButton=createButton(),
+        resetButton=createButton()
     this.ui=div(
         {className:'stopwatch a'},
         this._clock.ui,
         div(
             {className:'control'},
             doe(
-                createButton(),
+                startOrPauseButton.node,
                 {
                     className:'button a',
                     onmousedown:e=>{
-                        if(e.button==0)
+                        if(e.button==0){
+                            startOrPauseButton.ripple(e.clientX,e.clientY)
                             startPauseResume(e)
+                        }
                     },
-                    ontouchstart:startPauseResume,
+                    ontouchstart:e=>{
+                        for(let t of e.changedTouches)
+                            startOrPauseButton.ripple(t.clientX,t.clientY)
+                        startPauseResume(e)
+                    },
                 },
                 this._node.startOrPauseButton=div('Start (space)'),
             ),
             doe(
-                createButton(),
+                resetButton.node,
                 {
                     className:'button b',
                     onmousedown:e=>{
-                        if(e.button==0)
+                        if(e.button==0){
+                            resetButton.ripple(e.clientX,e.clientY)
                             reset(e)
+                        }
                     },
-                    ontouchstart:reset,
+                    ontouchstart:e=>{
+                        for(let t of e.changedTouches)
+                            resetButton.ripple(t.clientX,t.clientY)
+                        reset(e)
+                    },
                 },
                 'Reset (R)',
             ),
