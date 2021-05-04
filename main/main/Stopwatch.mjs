@@ -7,10 +7,14 @@ function createButton(){
         node,
         ripple(x,y){
             doe(node.style,{
+                animation:'none',
+            })
+            node.offsetLeft
+            doe(node.style,{
                 animation:'ripple 500ms linear',
                 animationFillMode:'forwards',
             })
-            doe(node.parentNode,1,node,0,node)
+            //doe(node.parentNode,1,node,0,node)
             /*let bcr=node.getBoundingClientRect()
             ripple.style.setProperty('--d',`${
                 Math.max(node.clientWidth,node.clientHeight)
