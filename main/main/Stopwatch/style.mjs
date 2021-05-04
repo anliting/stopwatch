@@ -3,7 +3,7 @@ export default`
         position:relative;
         overflow:hidden;
     }
-    .stopwatch>.control>.button>.ripple{
+    /*.stopwatch>.control>.button>.ripple{
         opacity:.8;
         position:absolute;
         left:calc(var(--l) - var(--d) / 2);
@@ -20,7 +20,7 @@ export default`
             opacity:0;
             transform:scale(5.656);
         }
-    }
+    }*/
     .stopwatch>.control>.button{
         background-color:#3f3f3f;
         font-size:calc(32px * var(--zoom));
@@ -32,6 +32,11 @@ export default`
         user-select:none;
         text-align:center;
         line-height:calc(64px * var(--zoom));
+    }
+    @keyframes ripple{
+        from{
+            background:#2f2f2f;
+        }
     }
     .stopwatch>.control>.button:hover{
         background-color:#4f4f4f;

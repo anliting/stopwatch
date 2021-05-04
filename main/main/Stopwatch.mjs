@@ -6,7 +6,12 @@ function createButton(){
     return{
         node,
         ripple(x,y){
-            let bcr=node.getBoundingClientRect()
+            doe(node.style,{
+                animation:'ripple 500ms linear',
+                animationFillMode:'forwards',
+            })
+            doe(node.parentNode,1,node,0,node)
+            /*let bcr=node.getBoundingClientRect()
             ripple.style.setProperty('--d',`${
                 Math.max(node.clientWidth,node.clientHeight)
             }px`)
@@ -16,7 +21,7 @@ function createButton(){
             ripple.style.setProperty('--t',`${
                 y-bcr.top
             }px`)
-            doe(node,1,ripple,0,ripple)
+            doe(node,1,ripple,0,ripple)*/
         }
     }
 }
