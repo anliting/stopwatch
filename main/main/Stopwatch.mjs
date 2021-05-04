@@ -1,6 +1,22 @@
 import doe from             'doe'
 import style from           './Stopwatch/style.mjs'
 import Clock from           './Stopwatch/Clock.mjs'
+function createButton(){
+    let ripple=doe.div({className:'ripple'})
+    return doe.div(n=>{n.addEventListener('mousedown',function(e){
+        let bcr=this.getBoundingClientRect()
+        ripple.style.setProperty('--d',`${
+            Math.max(this.clientWidth,this.clientHeight)
+        }px`)
+        ripple.style.setProperty('--l',`${
+            e.clientX-bcr.left
+        }px`)
+        ripple.style.setProperty('--t',`${
+            e.clientY-bcr.top
+        }px`)
+        doe(this,1,ripple,0,ripple)
+    })},ripple)
+}
 function Stopwatch(){
     this._layout={composition:'a',zoom:1}
     this._node={}
@@ -20,7 +36,8 @@ function Stopwatch(){
         this._clock.ui,
         div(
             {className:'control'},
-            this._node.startOrPauseButton=div(
+            doe(
+                createButton(),
                 {
                     className:'button a',
                     onmousedown:e=>{
@@ -29,9 +46,10 @@ function Stopwatch(){
                     },
                     ontouchstart:startPauseResume,
                 },
-                'Start (space)',
+                this._node.startOrPauseButton=div('Start (space)'),
             ),
-            div(
+            doe(
+                createButton(),
                 {
                     className:'button b',
                     onmousedown:e=>{
