@@ -3,7 +3,7 @@ import style from           './Stopwatch/style.mjs'
 import Clock from           './Stopwatch/Clock.mjs'
 function createButton(){
     let ripple=doe.div({className:'ripple'})
-    return doe.div(n=>{n.addEventListener('mousedown',function(e){
+    function startRipple(e){
         let bcr=this.getBoundingClientRect()
         ripple.style.setProperty('--d',`${
             Math.max(this.clientWidth,this.clientHeight)
@@ -15,7 +15,11 @@ function createButton(){
             e.clientY-bcr.top
         }px`)
         doe(this,1,ripple,0,ripple)
-    })},ripple)
+    })
+    return doe.div(n=>{
+        n.addEventListener('mousedown',setRipple)
+        n.addEventListener('touchstart',setRipple)
+    },ripple)
 }
 function Stopwatch(){
     this._layout={composition:'a',zoom:1}
