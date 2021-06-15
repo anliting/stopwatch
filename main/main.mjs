@@ -99,6 +99,7 @@ doe.head(doe.style(`
         font-size:16px;
         line-height:1.2;
         height:100%;
+        touch-action:none;
     }
     a{
         color:unset;
