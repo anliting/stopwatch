@@ -108,13 +108,19 @@ doe.head(doe.style(`
 `))
 doe.body(page.node)
 onkeydown=page.onKeyDown.bind(page)
+let out
+doe.body(
+    out=div(n=>{doe(n.style,{position:'fixed',left:0,top:0})})
+)
 let size
 {
     let bcr=document.body.getBoundingClientRect()
     size=page.size=[bcr.width,bcr.height]
+    out.textContent=`${bcr.width},${bcr.height}`
 }
 onresize=e=>{
     let bcr=document.body.getBoundingClientRect()
     if(size[0]!=bcr.width||size[1]!=bcr.height)
         size=page.size=[bcr.width,bcr.height]
+    out.textContent=`${bcr.width},${bcr.height}`
 }
