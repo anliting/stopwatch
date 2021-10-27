@@ -21,7 +21,7 @@ function Page(){
 }
 Page.style=`
     .page{
-        position:relative;
+        position:absolute;
         margin:calc(8px *  var(--zoom));
         width:calc(100% - 16px *  var(--zoom));
         height:calc(100% - 16px *  var(--zoom));
@@ -93,7 +93,7 @@ doe.head(doe.style(`
     }
     body{
         margin:0;
-        overflow:hidden;
+        overflow-x:hidden;
         background-color:#7f7f7f;
         font-family:sans-serif;
         font-size:16px;
