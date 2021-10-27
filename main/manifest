@@ -1,0 +1,13 @@
+{
+  "background_color":"purple",
+  "display":"standalone",
+  "icons":[
+    {
+        "sizes":"256x256",
+        "src":"icon",
+        "type":"image/png"
+    }
+  ],
+  "name":"Stopwatch",
+  "start_url":"/"
+}

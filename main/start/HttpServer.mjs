@@ -59,6 +59,22 @@ function HttpServer(mainDir,tls){
             })
             return stream.end(await this._swPromise)
         }
+        if(header[':method']=='GET'&&url.pathname=='/icon'){
+            stream.respond({
+                ':status':200,
+                'content-type':'image/png'
+            })
+            fs.createReadStream(`${mainDir}/icon.png`).pipe(stream)
+            return
+        }
+        if(header[':method']=='GET'&&url.pathname=='/manifest'){
+            stream.respond({
+                ':status':200,
+                'content-type':'application/manifest+json'
+            })
+            fs.createReadStream(`${mainDir}/manifest`).pipe(stream)
+            return
+        }
         stream.respond({
             ':status':400,
         })
