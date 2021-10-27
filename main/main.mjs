@@ -89,7 +89,7 @@ Object.defineProperty(Page.prototype,'size',{set(v){
 let page=new Page
 doe.head(doe.style(`
     html{
-        height:100%;
+        height:100vh;
     }
     body{
         margin:0;
