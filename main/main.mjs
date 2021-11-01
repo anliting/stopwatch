@@ -6,28 +6,30 @@ function Page(){
     this._stopwatch=stopwatch
     this.node=div(
         {className:'page'},
-        stopwatch.ui,
-        /*div({
-            className:'top',
-            onclick:e=>console.log('a')
-        },div('⋮')),*/
-        a({
-            href:'https://althea.anliting.com/stopwatch',
-            className:'bottomA',
-            onclick:e=>this.onHrefClick(e),
-            target:'_blank',
-        },'Readme'),
-        a({
-            className:'bottomB',
-            href:'https://anliting.com/',
-            onclick:e=>this.onHrefClick(e),
-            target:'_blank',
-        },'An-Li Ting'),
+        div(
+            {className:'homePage'},
+            stopwatch.ui,
+            /*div({
+                className:'top',
+                onclick:e=>console.log('a')
+            },div('⋮')),*/
+            a({
+                href:'https://althea.anliting.com/stopwatch',
+                className:'bottomA',
+                onclick:e=>this.onHrefClick(e),
+                target:'_blank',
+            },'Readme'),
+            a({
+                className:'bottomB',
+                href:'https://anliting.com/',
+                onclick:e=>this.onHrefClick(e),
+                target:'_blank',
+            },'An-Li Ting'),
+        ),
     )
 }
 Page.style=`
     .page{
-        position:relative;
         margin:calc(8px *  var(--zoom));
         width:calc(100% - 16px *  var(--zoom));
         height:calc(100% - 16px *  var(--zoom));
@@ -36,19 +38,23 @@ Page.style=`
             0 0 .05em rgba(0,0,0,.4),
             .05em .05em .05em rgba(0,0,0,.2);
         font-size:calc(16px * var(--zoom));
+    }
+    .page>.homePage{
+        position:relative;
+        height:100%;
         text-align:center;
     }
-    .page::after{
+    .page>.homePage::after{
         content:'';
         display:inline-block;
         height:100%;
         vertical-align:middle;
     }
-    .page>.stopwatch{
+    .page>.homePage>.stopwatch{
         display:inline-block;
         vertical-align:middle;
     }
-    .page>.top{
+    .page>.homePage>.top{
         position:absolute;
         right:calc(-8px *  var(--zoom));
         top:calc(-8px *  var(--zoom));
@@ -58,23 +64,23 @@ Page.style=`
         height:calc(24px * 1.2 * var(--zoom));
         line-height:0;
     }
-    .page>.top::after{
+    .page>.homePage>.top::after{
         content:'';
         display:inline-block;
         height:100%;
         vertical-align:middle;
     }
-    .page>.top>*{
+    .page>.homePage>.top>*{
         display:inline-block;
         vertical-align:middle;
         line-height:1.2;
     }
-    .page>.bottomA{
+    .page>.homePage>.bottomA{
         position:absolute;
         left:0;
         bottom:0;
     }
-    .page>.bottomB{
+    .page>.homePage>.bottomB{
         position:absolute;
         right:0;
         bottom:0;
