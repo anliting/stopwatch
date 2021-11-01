@@ -30,6 +30,10 @@ function Page(){
 }
 Page.style=`
     .page{
+        height:100%;
+    }
+    .page>.homePage{
+        position:relative;
         margin:calc(8px *  var(--zoom));
         width:calc(100% - 16px *  var(--zoom));
         height:calc(100% - 16px *  var(--zoom));
@@ -38,10 +42,6 @@ Page.style=`
             0 0 .05em rgba(0,0,0,.4),
             .05em .05em .05em rgba(0,0,0,.2);
         font-size:calc(16px * var(--zoom));
-    }
-    .page>.homePage{
-        position:relative;
-        height:100%;
         text-align:center;
     }
     .page>.homePage::after{
@@ -167,13 +167,7 @@ doe.head(doe.style(`
 `))
 doe.body(page.node)
 onkeydown=page.onKeyDown.bind(page)
-let size
-{
+;(onresize=()=>{
     let bcr=document.body.getBoundingClientRect()
-    size=page.size=[bcr.width,bcr.height]
-}
-onresize=e=>{
-    let bcr=document.body.getBoundingClientRect()
-    if(size[0]!=bcr.width||size[1]!=bcr.height)
-        size=page.size=[bcr.width,bcr.height]
-}
+    page.size=[bcr.width,bcr.height]
+})()
