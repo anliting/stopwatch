@@ -44,8 +44,8 @@ HomePage.style=`
         top:calc(-8px *  var(--zoom));
         user-select:none;
         font-size:calc(24px * var(--zoom));
-        width:calc(24px * 1.2 * var(--zoom));
-        height:calc(24px * 1.2 * var(--zoom));
+        width:calc(36px * 1.2 * var(--zoom));
+        height:calc(36px * 1.2 * var(--zoom));
         line-height:0;
     }
     .homePage>.top::after{

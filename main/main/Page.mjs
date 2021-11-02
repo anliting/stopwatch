@@ -77,7 +77,7 @@ MorePage.style=`
         vertical-align:middle;
     }
     .morePage>*>*{
-        height:2em;
+        height:4em;
         text-align:left;
         user-select:none;
     }
@@ -96,7 +96,7 @@ MorePage.style=`
         padding:0 1em;
     }
     .morePage>*>.a>*{
-        font-size:calc(1px / 24 * var(--zoom));
+        font-size:calc(1px * 1.5 / 24 * var(--zoom));
     }
     .morePage>*>.b{
         display:table;
@@ -107,11 +107,12 @@ MorePage.style=`
         display:table-cell;
     }
     .morePage>*>.b>.a{
-        padding-left:1em;
+        padding-left:calc(1px / 24 * var(--zoom));
+        font-size:calc(1px * 1.5 / 24 * var(--zoom));
         text-align:left;
     }
     .morePage>*>.b>.b{
-        padding-right:1em;
+        padding-right:calc(1px / 24 * var(--zoom));
         text-align:right;
     }
 `
