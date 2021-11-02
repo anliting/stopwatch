@@ -48,6 +48,12 @@ HomePage.style=`
         height:calc(36px * 1.2 * var(--zoom));
         line-height:0;
     }
+    .homePage>.top:hover{
+        background-color:#8f8f8f;
+    }
+    .homePage>.top:active{
+        background-color:#5f5f5f;
+    }
     .homePage>.top::after{
         content:'';
         display:inline-block;
