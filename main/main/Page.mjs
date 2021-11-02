@@ -5,12 +5,47 @@ function MorePage(){
         {className:'morePage'},
         doe.div(
             doe.div(
-                {className:'a'},
+                {
+                    className:'a',
+                    onclick:e=>{
+                        this.onBack()
+                    },
+                },
                 doe.span({className:'material-icons'},'arrow_back_ios')
             ),
-            doe.div(
-                {className:'b'},
-                doe.span({className:'a material-icons'},'arrow_forward_ios')
+            doe.a(
+                {
+                    className:'b',
+                    href:'https://althea.anliting.com/stopwatch',
+                    target:'_blank',
+                },
+                doe.div(
+                    {className:'a'},
+                    'Manual',
+                ),
+                doe.div(
+                    {className:'b'},
+                    doe.span(
+                        {className:'a material-icons'},'arrow_forward_ios'
+                    )
+                ),
+            ),
+            doe.a(
+                {
+                    className:'b',
+                    href:'https://anliting.com/',
+                    target:'_blank',
+                },
+                doe.div(
+                    {className:'a'},
+                    'About',
+                ),
+                doe.div(
+                    {className:'b'},
+                    doe.span(
+                        {className:'a material-icons'},'arrow_forward_ios'
+                    )
+                ),
             ),
         )
     )
@@ -20,17 +55,18 @@ MorePage.style=`
         height:100%;
         text-align:center;
     }
+    .morePage{
+        line-height:0;
+    }
     .morePage::after{
         content:'';
         display:inline-block;
         height:100%;
         vertical-align:middle;
-        line-height:0;
     }
     .morePage>*{
         display:inline-block;
-        margin:0 1em;
-        width:22em;
+        width:24em;
         height:18em;
         color:white;
         font-size:calc(1px / 24 * var(--zoom));
@@ -43,6 +79,7 @@ MorePage.style=`
     .morePage>*>*{
         height:2em;
         text-align:left;
+        user-select:none;
     }
     .morePage>*>*::after{
         content:'';
@@ -55,10 +92,27 @@ MorePage.style=`
         display:inline-block;
         vertical-align:middle;
     }
+    .morePage>*>.a{
+        padding:0 1em;
+    }
     .morePage>*>.a>*{
         font-size:calc(1px / 24 * var(--zoom));
     }
+    .morePage>*>.b{
+        display:table;
+        width:100%;
+        cursor:default;
+    }
+    .morePage>*>.b>*{
+        display:table-cell;
+    }
     .morePage>*>.b>.a{
+        padding-left:1em;
+        text-align:left;
+    }
+    .morePage>*>.b>.b{
+        padding-right:1em;
+        text-align:right;
     }
 `
 Object.defineProperty(MorePage.prototype,'size',{set(v){
@@ -75,8 +129,6 @@ function Page(){
     this._homePage=new HomePage
     this._homePage.onMore=()=>
         setPage.call(this,this._morePage)
-    this._homePage.onHrefClick=e=>
-        this.onHrefClick(e)
     this._morePage=new MorePage
     this._morePage.onBack=()=>
         setPage.call(this,this._homePage)

@@ -13,18 +13,6 @@ function HomePage(){
             },
             doe.span({className:'material-icons'},'more_vert')
         ),
-        doe.a({
-            href:'https://althea.anliting.com/stopwatch',
-            className:'bottomA',
-            onclick:e=>this.onHrefClick(e),
-            target:'_blank',
-        },'Readme'),
-        doe.a({
-            className:'bottomB',
-            href:'https://anliting.com/',
-            onclick:e=>this.onHrefClick(e),
-            target:'_blank',
-        },'An-Li Ting'),
     )
 }
 HomePage.style=`
