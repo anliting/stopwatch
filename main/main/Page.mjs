@@ -3,28 +3,72 @@ import HomePage from    './Page/HomePage.mjs'
 function MorePage(){
     this.node=doe.div(
         {className:'morePage'},
+        doe.div(
+            doe.div(
+                {className:'a'},
+                doe.span({className:'material-icons'},'arrow_back_ios')
+            ),
+            doe.div(
+                {className:'b'},
+                doe.span({className:'a material-icons'},'arrow_forward_ios')
+            ),
+        )
     )
 }
 MorePage.style=`
     .morePage{
-        position:relative;
-        /*margin:calc(8px *  var(--zoom));
-        width:calc(100% - 16px * var(--zoom));
-        height:calc(100% - 16px * var(--zoom));*/
+        height:100%;
+        text-align:center;
+    }
+    .morePage::after{
+        content:'';
+        display:inline-block;
+        height:100%;
+        vertical-align:middle;
+        line-height:0;
+    }
+    .morePage>*{
+        display:inline-block;
+        margin:0 1em;
+        width:22em;
+        height:18em;
         color:white;
+        font-size:calc(1px / 24 * var(--zoom));
         text-shadow:
             0 0 .05em rgba(0,0,0,.4),
             .05em .05em .05em rgba(0,0,0,.2);
-        /*font-size:calc(16px * var(--zoom));*/
         text-align:center;
+        vertical-align:middle;
+    }
+    .morePage>*>*{
+        height:2em;
+        text-align:left;
+    }
+    .morePage>*>*::after{
+        content:'';
+        display:inline-block;
+        height:100%;
+        vertical-align:middle;
+        line-height:0;
+    }
+    .morePage>*>*>*{
+        display:inline-block;
+        vertical-align:middle;
+    }
+    .morePage>*>.a>*{
+        font-size:calc(1px / 24 * var(--zoom));
+    }
+    .morePage>*>.b>.a{
     }
 `
 Object.defineProperty(MorePage.prototype,'size',{set(v){
     this._size=v
+    this.node.style.setProperty('--zoom',''+Math.min(v[0],v[1]/.75))
 }})
 function setPage(page){
     doe(this.node,1,this._currentPage.node)
     this._currentPage=page
+    this._currentPage.size=this._size
     doe(this.node,this._currentPage.node)
 }
 function Page(){
@@ -47,6 +91,7 @@ Page.style=`
         height:100%;
     }
     ${HomePage.style}
+    ${MorePage.style}
 `
 Page.prototype.onHrefClick=function(){}
 Page.prototype.keyDown=function(e){

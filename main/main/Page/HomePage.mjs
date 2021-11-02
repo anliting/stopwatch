@@ -67,7 +67,6 @@ HomePage.style=`
         vertical-align:middle;
     }
     .homePage>.top>*{
-        display:inline-block;
         vertical-align:middle;
         font-size:calc(24px * var(--zoom));
     }
