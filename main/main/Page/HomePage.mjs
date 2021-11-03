@@ -11,7 +11,7 @@ function HomePage(){
                 className:'top',
                 onclick:()=>this.onMore()
             },
-            doe.span({className:'material-icons'},'more_vert')
+            doe.span({className:'material-icons'},'menu')
         ),
     )
 }

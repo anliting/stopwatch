@@ -45,7 +45,17 @@ doe.head(doe.style(`
     }
     ${Page.style}
 `))
-doe.body(page.node)
+let preloadIconDiv
+doe.body(preloadIconDiv=doe.div(
+    n=>{n.style.opacity=0},
+    doe.span({className:'material-icons'},'arrow_back_ios'),
+    doe.span({className:'material-icons'},'arrow_forward_ios'),
+    doe.span({className:'material-icons'},'menu'),
+))
+;(async()=>{
+    await document.fonts.ready
+    doe.body(1,preloadIconDiv,0,page.node)
+})()
 onkeydown=page.keyDown.bind(page)
 ;(onresize=()=>{
     let bcr=document.body.getBoundingClientRect()
