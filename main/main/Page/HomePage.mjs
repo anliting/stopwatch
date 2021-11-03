@@ -9,7 +9,7 @@ function HomePage(){
         doe.div(
             {
                 className:'top',
-                onclick:()=>this.onMore()
+                onclick:()=>this.onMenu()
             },
             doe.span({className:'material-icons'},'menu')
         ),

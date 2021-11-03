@@ -1,6 +1,6 @@
 import doe from         'doe'
 import HomePage from    './Page/HomePage.mjs'
-import MorePage from    './Page/MorePage.mjs'
+import MenuPage from    './Page/MenuPage.mjs'
 function setPage(page){
     doe(this.node,1,this._currentPage.node)
     this._currentPage=page
@@ -9,11 +9,13 @@ function setPage(page){
 }
 function Page(){
     this._homePage=new HomePage
-    this._homePage.onMore=()=>
-        setPage.call(this,this._morePage)
-    this._morePage=new MorePage
-    this._morePage.onBack=()=>
+    this._homePage.onMenu=()=>
+        setPage.call(this,this._menuPage)
+    this._menuPage=new MenuPage
+    this._menuPage.onBack=()=>
         setPage.call(this,this._homePage)
+    this._menuPage.onInstall=()=>
+        this.onInstall()
     this._currentPage=this._homePage
     this.node=doe.div(
         {className:'page'},
@@ -25,12 +27,18 @@ Page.style=`
         height:100%;
     }
     ${HomePage.style}
-    ${MorePage.style}
+    ${MenuPage.style}
 `
-Page.prototype.onHrefClick=function(){}
+Page.prototype.hideInstall=function(){
+    this._menuPage.hideInstall()
+}
 Page.prototype.keyDown=function(e){
     if(this._currentPage==this._homePage)
         this._homePage.keyDown(e)
+}
+Page.prototype.onHrefClick=function(){}
+Page.prototype.showInstall=function(){
+    this._menuPage.showInstall()
 }
 Object.defineProperty(Page.prototype,'size',{set(v){
     this._size=v

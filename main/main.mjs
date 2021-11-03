@@ -49,13 +49,26 @@ let preloadIconDiv
 doe.body(preloadIconDiv=doe.div(
     n=>{n.style.opacity=0},
     doe.span({className:'material-icons'},'arrow_back_ios'),
-    doe.span({className:'material-icons'},'arrow_forward_ios'),
     doe.span({className:'material-icons'},'menu'),
+    doe.span({className:'material-icons'},'open_in_new'),
 ))
 ;(async()=>{
     await document.fonts.ready
     doe.body(1,preloadIconDiv,0,page.node)
 })()
+let beforeinstallprompt
+if('onbeforeinstallprompt'in window)
+    onbeforeinstallprompt=e=>{
+        beforeinstallprompt=e
+        page.showInstall()
+        page.onInstall=async()=>{
+            beforeinstallprompt.prompt()
+            if((await beforeinstallprompt.userChoice).outcome=='accepted'){
+                page.hideInstall()
+                beforeinstallprompt=null
+            }
+        }
+    }
 onkeydown=page.keyDown.bind(page)
 ;(onresize=()=>{
     let bcr=document.body.getBoundingClientRect()
