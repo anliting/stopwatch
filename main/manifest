@@ -1,13 +1,14 @@
 {
-  "background_color":"#7f7f7f",
-  "display":"standalone",
-  "icons":[
-    {
-        "sizes":"256x256",
-        "src":"icon",
-        "type":"image/png"
-    }
-  ],
-  "name":"Stopwatch",
-  "start_url":"/"
+    "background_color":"#7f7f7f",
+    "display":"standalone",
+    "icons":[
+        {
+            "purpose":"maskable",
+            "sizes":"256x256",
+            "src":"icon",
+            "type":"image/png"
+        }
+    ],
+    "name":"Stopwatch",
+    "start_url":"/"
 }
