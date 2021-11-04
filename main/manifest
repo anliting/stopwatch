@@ -3,7 +3,7 @@
     "display":"standalone",
     "icons":[
         {
-            "purpose":"maskable",
+            "purpose":"any maskable",
             "sizes":"256x256",
             "src":"icon",
             "type":"image/png"

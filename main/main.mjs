@@ -48,9 +48,16 @@ doe.head(doe.style(`
 let preloadIconDiv
 doe.body(preloadIconDiv=doe.div(
     n=>{n.style.opacity=0},
-    doe.span({className:'material-icons'},'arrow_back_ios'),
-    doe.span({className:'material-icons'},'menu'),
-    doe.span({className:'material-icons'},'open_in_new'),
+    [
+        'arrow_back_ios',
+        'article',
+        'get_app',
+        'menu',
+        'open_in_new',
+        'person',
+    ].map(a=>
+        doe.span({className:'material-icons'},a),
+    )
 ))
 ;(async()=>{
     await document.fonts.ready
