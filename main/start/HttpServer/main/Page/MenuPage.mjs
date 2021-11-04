@@ -85,7 +85,7 @@ function MenuPage(){
                 ),
                 doe.div(
                     {className:'a'},
-                    'An-Li Ting',
+                    'Author: An-Li Ting',
                 ),
                 doe.div(
                     {className:'b'},

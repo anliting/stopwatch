@@ -7,7 +7,10 @@ async function link(input,file){
         plugins:[{
             name:'doe',
             resolveId:i=>i=='doe'?'doe':null,
-            load:i=>i=='doe'?link(`${dir}/../lib/doe/main/doe.mjs`):null,
+            load:i=>i=='doe'?
+                link(`${dir}/../../../lib/doe/main/doe.mjs`)
+            :
+                null,
         }],
     })
     return(await bundle.generate({

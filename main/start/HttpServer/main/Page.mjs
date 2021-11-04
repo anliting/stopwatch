@@ -36,7 +36,6 @@ Page.prototype.keyDown=function(e){
     if(this._currentPage==this._homePage)
         this._homePage.keyDown(e)
 }
-Page.prototype.onHrefClick=function(){}
 Page.prototype.showInstall=function(){
     this._menuPage.showInstall()
 }

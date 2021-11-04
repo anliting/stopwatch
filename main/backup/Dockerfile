@@ -2,7 +2,7 @@ FROM alpine
 RUN mkdir /root/env
 WORKDIR /root/env
 RUN apk add git npm
-RUN git clone --recursive https://github.com/anliting/stopwatch.git
+RUN git clone --recurse-submodules git@github.com:anliting/stopwatch.git
 RUN npm i $(cat stopwatch/main/npm-dependency)
 FROM alpine
 RUN apk add nodejs

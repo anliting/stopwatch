@@ -1,18 +1,20 @@
 import http2 from           'http2'
 import fs from              'fs'
 import urlModule from       'url'
-import link from            '../link.mjs'
-import minify from          '../minify.mjs'
+import link from            './HttpServer/link.mjs'
+import minify from          './HttpServer/minify.mjs'
 import htmlMinifier from    'html-minifier'
 function calcSw(mainDir){
-    return fs.promises.readFile(`${mainDir}/start/sw`)
+    return fs.promises.readFile(`${mainDir}/start/HttpServer/sw`)
 }
 async function calcRootContent(mainDir){
     let main=(async()=>minify(`${
-        await link(`${mainDir}/main.mjs`)
+        await link(`${mainDir}/start/HttpServer/main.mjs`)
     };navigator.serviceWorker.register('%23sw')`))()
     return htmlMinifier.minify((
-        await fs.promises.readFile(`${mainDir}/main.html`,'utf8')
+        ''+await fs.promises.readFile(
+            `${mainDir}/start/HttpServer/main.html`
+        )
     ).replace(
         '<script type=module src=main.mjs></script>',
         `<script type=module>${await main}</script>`
@@ -64,7 +66,7 @@ function HttpServer(mainDir,tls){
                 ':status':200,
                 'content-type':'image/png'
             })
-            fs.createReadStream(`${mainDir}/icon.png`).pipe(stream)
+            fs.createReadStream(`${mainDir}/start/HttpServer/icon/main.png`).pipe(stream)
             return
         }
         if(header[':method']=='GET'&&url.pathname=='/manifest'){
@@ -72,7 +74,7 @@ function HttpServer(mainDir,tls){
                 ':status':200,
                 'content-type':'application/manifest+json'
             })
-            fs.createReadStream(`${mainDir}/manifest`).pipe(stream)
+            fs.createReadStream(`${mainDir}/start/HttpServer/manifest`).pipe(stream)
             return
         }
         if(header[':method']=='GET'&&url.pathname=='/mi.ttf'){
@@ -80,7 +82,7 @@ function HttpServer(mainDir,tls){
                 ':status':200,
                 'content-type':'font/ttf'
             })
-            fs.createReadStream(`${mainDir}/mi.ttf`).pipe(stream)
+            fs.createReadStream(`${mainDir}/start/HttpServer/mi.ttf`).pipe(stream)
             return
         }
         stream.respond({
