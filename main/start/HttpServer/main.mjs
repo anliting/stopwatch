@@ -63,19 +63,18 @@ doe.body(preloadIconDiv=doe.div(
     await document.fonts.ready
     doe.body(1,preloadIconDiv,0,page.node)
 })()
-let beforeinstallprompt
-if('onbeforeinstallprompt'in window)
+if('onbeforeinstallprompt'in window){
+    let beforeinstallprompt
     onbeforeinstallprompt=e=>{
         beforeinstallprompt=e
         page.showInstall()
-        page.onInstall=async()=>{
-            beforeinstallprompt.prompt()
-            if((await beforeinstallprompt.userChoice).outcome=='accepted'){
-                page.hideInstall()
-                beforeinstallprompt=null
-            }
-        }
+        page.onInstall=()=>beforeinstallprompt.prompt()
     }
+    onappinstalled=event=>{
+        beforeinstallprompt=0
+        page.hideInstall()
+    }
+}
 onkeydown=page.keyDown.bind(page)
 ;(onresize=()=>{
     let bcr=document.body.getBoundingClientRect()
