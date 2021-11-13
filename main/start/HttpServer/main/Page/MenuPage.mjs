@@ -101,6 +101,10 @@ MenuPage.style=style
 MenuPage.prototype.hideInstall=function(){
     this._node.install.style.display='none'
 }
+MenuPage.prototype.off=function(){
+}
+MenuPage.prototype.on=function(){
+}
 MenuPage.prototype.showInstall=function(){
     this._node.install.style.display=''
 }

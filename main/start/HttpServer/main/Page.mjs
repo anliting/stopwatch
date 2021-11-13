@@ -3,20 +3,24 @@ import HomePage from    './Page/HomePage.mjs'
 import MenuPage from    './Page/MenuPage.mjs'
 function setPage(page){
     doe(this.node,1,this._currentPage.node)
+    this._currentPage.off()
     this._currentPage=page
     this._currentPage.size=this._size
+    this._currentPage.on()
     doe(this.node,this._currentPage.node)
 }
 function Page(){
     this._homePage=new HomePage
-    this._homePage.onMenu=()=>
+    this._homePage.onMenu=()=>{
         setPage.call(this,this._menuPage)
+    }
     this._menuPage=new MenuPage
     this._menuPage.onBack=()=>
         setPage.call(this,this._homePage)
     this._menuPage.onInstall=()=>
         this.onInstall()
     this._currentPage=this._homePage
+    this._homePage.on()
     this.node=doe.div(
         {className:'page'},
         this._homePage.node

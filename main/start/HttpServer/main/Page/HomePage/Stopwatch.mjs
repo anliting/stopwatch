@@ -14,7 +14,12 @@ function createButton(){
                 animation:'click 500ms linear',
                 animationFillMode:'forwards',
             })
-        }
+        },
+        off(){
+            doe(node.style,{
+                animation:'none',
+            })
+        },
     }
 }
 function Stopwatch(){
@@ -33,43 +38,43 @@ function Stopwatch(){
         }
     this._clock=new Clock
     let
-        {div}=doe,
-        startOrPauseButton=createButton(),
-        resetButton=createButton()
+        {div}=doe
+    this._node.startOrPauseButton=createButton()
+    this._node.resetButton=createButton()
     this.ui=div(
         {className:'stopwatch a'},
         this._clock.ui,
         div(
             {className:'control'},
             doe(
-                startOrPauseButton.node,
+                this._node.startOrPauseButton.node,
                 {
                     className:'button a',
                     onmousedown:e=>{
                         if(e.button==0){
-                            startOrPauseButton.effect()
+                            this._node.startOrPauseButton.effect()
                             startPauseResume(e)
                         }
                     },
                     ontouchstart:e=>{
-                        startOrPauseButton.effect()
+                        this._node.startOrPauseButton.effect()
                         startPauseResume(e)
                     },
                 },
-                this._node.startOrPauseButton=div('Start (space)'),
+                'Start (space)',
             ),
             doe(
-                resetButton.node,
+                this._node.resetButton.node,
                 {
                     className:'button b',
                     onmousedown:e=>{
                         if(e.button==0){
-                            resetButton.effect()
+                            this._node.resetButton.effect()
                             reset(e)
                         }
                     },
                     ontouchstart:e=>{
-                        resetButton.effect()
+                        this._node.resetButton.effect()
                         reset(e)
                     },
                 },
@@ -79,7 +84,7 @@ function Stopwatch(){
     )
 }
 Stopwatch.prototype._pause=function(now){
-    this._node.startOrPauseButton.textContent='Resume (space)'
+    this._node.startOrPauseButton.node.textContent='Resume (space)'
     cancelAnimationFrame(this._requestId)
     this._isRunning=0
     this._stopTime=now
@@ -90,13 +95,13 @@ Stopwatch.prototype._reset=function(){
         this._pause()
     this._startTime=undefined
     this._clock.time=0
-    this._node.startOrPauseButton.textContent='Start (space)'
+    this._node.startOrPauseButton.node.textContent='Start (space)'
 }
 Stopwatch.prototype._setClock=function(now){
     this._clock.time=~~(now-this._startTime)
 }
 Stopwatch.prototype._start=function(now){
-    this._node.startOrPauseButton.textContent='Pause (space)'
+    this._node.startOrPauseButton.node.textContent='Pause (space)'
     this._startTime=this._startTime?
         now-(this._stopTime-this._startTime)
     :
@@ -116,16 +121,22 @@ let map={
         this._reset()
     },
 }
-Object.defineProperty(Stopwatch.prototype,'layout',{set(v){
-    this.ui.classList.remove(this._layout.composition)
-    this.ui.classList.add((this._layout=v).composition)
-}})
 Stopwatch.prototype.keyDown=function(e){
     if(!(!e.altKey&&!e.ctrlKey&&!e.shiftKey&&!e.repeat&&e.key in map))
         return
     e.preventDefault()
     e.stopPropagation()
     map[e.key].call(this,e)
+}
+Object.defineProperty(Stopwatch.prototype,'layout',{set(v){
+    this.ui.classList.remove(this._layout.composition)
+    this.ui.classList.add((this._layout=v).composition)
+}})
+Stopwatch.prototype.off=function(){
+    this._node.startOrPauseButton.off()
+    this._node.resetButton.off()
+}
+Stopwatch.prototype.on=function(){
 }
 Stopwatch.style=style+Clock.style
 export default Stopwatch

@@ -82,6 +82,12 @@ HomePage.style=`
 HomePage.prototype.keyDown=function(e){
     this._stopwatch.keyDown(e)
 }
+HomePage.prototype.off=function(){
+    this._stopwatch.off()
+}
+HomePage.prototype.on=function(){
+    this._stopwatch.on()
+}
 Object.defineProperty(HomePage.prototype,'size',{set(v){
 /*
     width: 8+600+8=616
