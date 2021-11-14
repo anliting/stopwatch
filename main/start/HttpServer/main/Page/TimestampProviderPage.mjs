@@ -5,12 +5,10 @@ function TimestampProviderPage(){
     this._node={
         option:{
             ecmascriptEpoch:doe.span(
-                {className:'a material-icons'},
-                'radio_button_unchecked'
+                {className:'a material-icons'},'radio_button_unchecked'
             ),
             highResolutionTime:doe.span(
-                {className:'a material-icons'},
-                'radio_button_unchecked'
+                {className:'a material-icons'},'radio_button_unchecked'
             ),
         }
     }

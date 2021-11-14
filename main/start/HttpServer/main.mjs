@@ -50,11 +50,17 @@ doe.body(preloadIconDiv=doe.div(
     n=>{n.style.opacity=0},
     [
         'arrow_back_ios',
+        'arrow_forward_ios',
         'article',
         'get_app',
+        //'help_outline',
         'menu',
         'open_in_new',
         'person',
+        'radio_button_checked',
+        'radio_button_unchecked',
+        'schedule',
+        'settings',
     ].map(a=>
         doe.span({className:'material-icons'},a),
     )
