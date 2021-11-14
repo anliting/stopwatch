@@ -39,7 +39,7 @@ function SettingsPage(){
                 ),
                 doe.div(
                     {className:'a'},
-                    'Timestamp Provider',
+                    'Timestamp provider',
                 ),
                 doe.div(
                     {className:'b'},

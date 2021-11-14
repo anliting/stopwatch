@@ -1,7 +1,8 @@
-import doe from             'doe'
-import HomePage from        './Page/HomePage.mjs'
-import MenuPage from        './Page/MenuPage.mjs'
-import SettingsPage from    './Page/SettingsPage.mjs'
+import doe from                     'doe'
+import HomePage from                './Page/HomePage.mjs'
+import MenuPage from                './Page/MenuPage.mjs'
+import SettingsPage from            './Page/SettingsPage.mjs'
+import TimestampProviderPage from   './Page/TimestampProviderPage.mjs'
 function setPage(page){
     doe(this.node,1,this._currentPage.node)
     this._currentPage.off()
@@ -25,6 +26,11 @@ function Page(){
     this._settingsPage=new SettingsPage
     this._settingsPage.onBack=()=>
         setPage.call(this,this._menuPage)
+    this._settingsPage.onTimestampProvider=()=>
+        setPage.call(this,this._timestampProviderPage)
+    this._timestampProviderPage=new TimestampProviderPage
+    this._timestampProviderPage.onBack=()=>
+        setPage.call(this,this._settingsPage)
     this._currentPage=this._homePage
     this._homePage.on()
     this.node=doe.div(
@@ -39,6 +45,7 @@ Page.style=`
     ${HomePage.style}
     ${MenuPage.style}
     ${SettingsPage.style}
+    ${TimestampProviderPage.style}
 `
 Page.prototype.hideInstall=function(){
     this._menuPage.hideInstall()
