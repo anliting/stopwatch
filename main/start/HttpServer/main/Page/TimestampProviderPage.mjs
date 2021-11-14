@@ -19,7 +19,7 @@ function TimestampProviderPage(){
         doe.div(
             doe.div(
                 {
-                    className:'b',
+                    className:'b clickable',
                     onclick:e=>
                         this.onBack()
                 },
@@ -40,6 +40,23 @@ function TimestampProviderPage(){
             doe.div(
                 {
                     className:'b',
+                },
+                doe.div(
+                    {className:'c'},
+                ),
+                doe.div(
+                    {className:'a'},
+                    doe.div(
+                        'New settings here will only affect new timing tasks; which means ongoing timing tasks will not be affected.',
+                    ),
+                ),
+                doe.div(
+                    {className:'b'},
+                ),
+            ),
+            doe.div(
+                {
+                    className:'b clickable',
                     onclick:e=>
                         this.onSet('ecmascriptEpoch')
                 },
@@ -50,6 +67,7 @@ function TimestampProviderPage(){
                 doe.div(
                     {className:'a'},
                     'ECMAScript epoch',
+                    doe.div('It is not subject to computer suspension but system clock skew or adjustments.')
                 ),
                 doe.div(
                     {className:'b'},
@@ -63,7 +81,7 @@ function TimestampProviderPage(){
             ),
             doe.div(
                 {
-                    className:'b',
+                    className:'b clickable',
                     onclick:e=>
                         this.onSet('highResolutionTime')
                 },
@@ -74,6 +92,7 @@ function TimestampProviderPage(){
                 doe.div(
                     {className:'a'},
                     'High resolution time',
+                    doe.div('It is not subject to system clock skew or adjustments but computer suspension.')
                 ),
                 /*doe.div(
                     {className:'b'},

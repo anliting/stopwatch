@@ -47,10 +47,6 @@ export default`
         display:inline-block;
         vertical-align:middle;
     }
-    .menuPage>*>.a{
-        padding:0 1em;
-        font-size:calc(1px * 1.5 / 24 * var(--zoom));
-    }
     .menuPage>*>.b{
         display:table;
         width:100%;

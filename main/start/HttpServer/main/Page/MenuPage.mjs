@@ -31,9 +31,6 @@ function MenuPage(){
                     onclick:e=>
                         this.onSettings()
                 },
-                n=>{doe(n.style,{
-                    display:'none',
-                })},
                 doe.div(
                     {className:'c'},
                     doe.span(

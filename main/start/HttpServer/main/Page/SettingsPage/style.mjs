@@ -46,10 +46,6 @@ export default`
         display:inline-block;
         vertical-align:middle;
     }
-    .settingsPage>*>.a{
-        padding:0 1em;
-        font-size:calc(1px * 1.5 / 24 * var(--zoom));
-    }
     .settingsPage>*>.b{
         display:table;
         width:100%;

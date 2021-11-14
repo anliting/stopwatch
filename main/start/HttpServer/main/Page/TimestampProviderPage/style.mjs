@@ -27,12 +27,15 @@ export default`
     .timestampProviderPage>*>*{
         height:calc(1px * var(--zoom) * 4 / 24);
         text-align:left;
+    }
+    .timestampProviderPage>*>.clickable{
+        cursor:default;
         user-select:none;
     }
-    .timestampProviderPage>*>:hover{
+    .timestampProviderPage>*>.clickable:hover{
         background-color:#8f8f8f;
     }
-    .timestampProviderPage>*>:active{
+    .timestampProviderPage>*>.clickable:active{
         background-color:#5f5f5f;
     }
     .timestampProviderPage>*>*::after{
@@ -46,14 +49,9 @@ export default`
         display:inline-block;
         vertical-align:middle;
     }
-    .timestampProviderPage>*>.a{
-        padding:0 1em;
-        font-size:calc(1px * 1.5 / 24 * var(--zoom));
-    }
     .timestampProviderPage>*>.b{
         display:table;
         width:100%;
-        cursor:default;
     }
     .timestampProviderPage>*>.b>*{
         display:table-cell;
@@ -67,6 +65,10 @@ export default`
     .timestampProviderPage>*>.b>.a{
         font-size:calc(1px * 1.5 / 24 * var(--zoom));
         text-align:left;
+        line-height:1.2;
+    }
+    .timestampProviderPage>*>.b>.a>*{
+        font-size:calc(1px * .8 / 24 * var(--zoom));
     }
     .timestampProviderPage>*>.b>.b{
         padding-right:calc(1px / 24 * var(--zoom));
