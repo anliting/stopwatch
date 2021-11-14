@@ -25,6 +25,32 @@ function MenuPage(){
                     {className:'b'},
                 ),
             ),
+            doe.div(
+                {
+                    className:'b',
+                    onclick:e=>
+                        this.onSettings()
+                },
+                n=>{doe(n.style,{
+                    display:'none',
+                })},
+                doe.div(
+                    {className:'c'},
+                    doe.span(
+                        {className:'a material-icons'},'settings'
+                    )
+                ),
+                doe.div(
+                    {className:'a'},
+                    'Settings',
+                ),
+                doe.div(
+                    {className:'b'},
+                    doe.span(
+                        {className:'a material-icons'},'arrow_forward_ios'
+                    )
+                ),
+            ),
             this._node.install=doe.div(
                 {
                     className:'b',

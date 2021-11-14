@@ -1,6 +1,7 @@
-import doe from         'doe'
-import HomePage from    './Page/HomePage.mjs'
-import MenuPage from    './Page/MenuPage.mjs'
+import doe from             'doe'
+import HomePage from        './Page/HomePage.mjs'
+import MenuPage from        './Page/MenuPage.mjs'
+import SettingsPage from    './Page/SettingsPage.mjs'
 function setPage(page){
     doe(this.node,1,this._currentPage.node)
     this._currentPage.off()
@@ -17,8 +18,13 @@ function Page(){
     this._menuPage=new MenuPage
     this._menuPage.onBack=()=>
         setPage.call(this,this._homePage)
+    this._menuPage.onSettings=()=>
+        setPage.call(this,this._settingsPage)
     this._menuPage.onInstall=()=>
         this.onInstall()
+    this._settingsPage=new SettingsPage
+    this._settingsPage.onBack=()=>
+        setPage.call(this,this._menuPage)
     this._currentPage=this._homePage
     this._homePage.on()
     this.node=doe.div(
@@ -32,6 +38,7 @@ Page.style=`
     }
     ${HomePage.style}
     ${MenuPage.style}
+    ${SettingsPage.style}
 `
 Page.prototype.hideInstall=function(){
     this._menuPage.hideInstall()
