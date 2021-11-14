@@ -88,6 +88,9 @@ HomePage.prototype.off=function(){
 HomePage.prototype.on=function(){
     this._stopwatch.on()
 }
+HomePage.prototype.setTimestampProvider=function(v){
+    this._stopwatch.setTimestampProvider(v)
+}
 Object.defineProperty(HomePage.prototype,'size',{set(v){
 /*
     width: 8+600+8=616

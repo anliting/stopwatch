@@ -1,5 +1,6 @@
 import doe from             'doe'
 import msToString from      './Clock/msToString.mjs'
+let oneHundredHoursMs=1e3*60*60*100
 function Clock(){
     this._node=[...Array(12)].map((_,i)=>doe.span(
         n=>{doe(n.style,{
@@ -13,6 +14,7 @@ function Clock(){
     )
 }
 Object.defineProperty(Clock.prototype,'time',{set(val){
+    val=~~((val%oneHundredHoursMs+oneHundredHoursMs)%oneHundredHoursMs)
     let s=msToString(val)
     this._node.map((a,i)=>{
         if(a.textContent!=s[i])

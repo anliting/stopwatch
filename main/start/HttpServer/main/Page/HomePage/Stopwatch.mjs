@@ -23,13 +23,14 @@ function createButton(){
     }
 }
 function Stopwatch(){
+    this._timestampProvider='ecmascriptEpoch'
     this._layout={composition:'a',zoom:1}
     this._node={}
     let
         startPauseResume=e=>{
             e.preventDefault()
             e.stopPropagation()
-            this[this._isRunning?'_pause':'_start'](e.timeStamp)
+            this[this._isRunning?'_pause':'_start']()
         },
         reset=e=>{
             e.preventDefault()
@@ -83,7 +84,14 @@ function Stopwatch(){
         ),
     )
 }
-Stopwatch.prototype._pause=function(now){
+Stopwatch.prototype._now=function(){
+    return this._currentTiming.timestampProvider=='ecmascriptEpoch'?
+        new Date
+    :
+        performance.now()
+}
+Stopwatch.prototype._pause=function(){
+    let now=this._now()
     this._node.startOrPauseButton.node.textContent='Resume (space)'
     cancelAnimationFrame(this._requestId)
     this._isRunning=0
@@ -93,21 +101,28 @@ Stopwatch.prototype._pause=function(now){
 Stopwatch.prototype._reset=function(){
     if(this._isRunning)
         this._pause()
+    this._currentTiming=undefined
     this._startTime=undefined
     this._clock.time=0
     this._node.startOrPauseButton.node.textContent='Start (space)'
 }
 Stopwatch.prototype._setClock=function(now){
-    this._clock.time=~~(now-this._startTime)
+    this._clock.time=now-this._startTime
 }
-Stopwatch.prototype._start=function(now){
-    this._node.startOrPauseButton.node.textContent='Pause (space)'
+Stopwatch.prototype._start=function(){
+    if(!this._startTime)
+        this._currentTiming={
+            timestampProvider:this._timestampProvider,
+        }
+    let now=this._now()
     this._startTime=this._startTime?
         now-(this._stopTime-this._startTime)
     :
         now
+    this._node.startOrPauseButton.node.textContent='Pause (space)'
     this._isRunning=1
-    let frame=now=>{
+    let frame=()=>{
+        let now=this._now()
         this._requestId=requestAnimationFrame(frame)
         this._setClock(now)
     }
@@ -115,7 +130,7 @@ Stopwatch.prototype._start=function(now){
 }
 let map={
     ' ':function(e){
-        this[this._isRunning?'_pause':'_start'](e.timeStamp)
+        this[this._isRunning?'_pause':'_start']()
     },
     r(){
         this._reset()
@@ -137,6 +152,9 @@ Stopwatch.prototype.off=function(){
     this._node.resetButton.off()
 }
 Stopwatch.prototype.on=function(){
+}
+Stopwatch.prototype.setTimestampProvider=function(v){
+    this._timestampProvider=v
 }
 Stopwatch.style=style+Clock.style
 export default Stopwatch

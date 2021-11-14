@@ -36,6 +36,7 @@ function Page(){
         setPage.call(this,this._settingsPage)
     this._timestampProviderPage.onSet=v=>{
         settings.timestampProvider=v
+        this._homePage.setTimestampProvider(v)
         this._timestampProviderPage.set(v)
     }
     this._timestampProviderPage.set(settings.timestampProvider)
