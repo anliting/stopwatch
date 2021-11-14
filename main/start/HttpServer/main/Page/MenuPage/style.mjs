@@ -16,6 +16,7 @@ export default`
         display:inline-block;
         width:24em;
         height:18em;
+        overflow-y:auto;
         color:white;
         font-size:calc(1px / 24 * var(--zoom));
         text-shadow:
