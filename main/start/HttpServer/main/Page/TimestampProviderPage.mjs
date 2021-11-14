@@ -1,7 +1,19 @@
 import doe from         'doe'
 import style from       './TimestampProviderPage/style.mjs'
 function TimestampProviderPage(){
-    this._node={}
+    this._current='ecmascriptEpoch'
+    this._node={
+        option:{
+            ecmascriptEpoch:doe.span(
+                {className:'a material-icons'},
+                'radio_button_unchecked'
+            ),
+            highResolutionTime:doe.span(
+                {className:'a material-icons'},
+                'radio_button_unchecked'
+            ),
+        }
+    }
     this.node=doe.div(
         {className:'timestampProviderPage'},
         doe.div(
@@ -28,14 +40,12 @@ function TimestampProviderPage(){
             doe.div(
                 {
                     className:'b',
-                    onclick:e=>{}
+                    onclick:e=>
+                        this.onSet('ecmascriptEpoch')
                 },
                 doe.div(
                     {className:'c'},
-                    doe.span(
-                        {className:'a material-icons'},
-                        'radio_button_unchecked'
-                    )
+                    this._node.option.ecmascriptEpoch,
                 ),
                 doe.div(
                     {className:'a'},
@@ -54,14 +64,12 @@ function TimestampProviderPage(){
             doe.div(
                 {
                     className:'b',
-                    onclick:e=>{}
+                    onclick:e=>
+                        this.onSet('highResolutionTime')
                 },
                 doe.div(
                     {className:'c'},
-                    doe.span(
-                        {className:'a material-icons'},
-                        'radio_button_unchecked'
-                    )
+                    this._node.option.highResolutionTime,
                 ),
                 doe.div(
                     {className:'a'},
@@ -81,6 +89,11 @@ TimestampProviderPage.style=style
 TimestampProviderPage.prototype.off=function(){
 }
 TimestampProviderPage.prototype.on=function(){
+}
+TimestampProviderPage.prototype.set=function(value){
+    this._node.option[this._current].textContent='radio_button_unchecked'
+    this._current=value
+    this._node.option[this._current].textContent='radio_button_checked'
 }
 Object.defineProperty(TimestampProviderPage.prototype,'size',{set(v){
     this._size=v
