@@ -1,27 +1,7 @@
 import doe from             'doe'
 import style from           './Stopwatch/style.mjs'
 import Clock from           './Stopwatch/Clock.mjs'
-function createButton(){
-    let node=doe.div()
-    return{
-        node,
-        effect(){
-            doe(node.style,{
-                animation:'none',
-            })
-            node.offsetLeft
-            doe(node.style,{
-                animation:'click 500ms linear',
-                animationFillMode:'forwards',
-            })
-        },
-        off(){
-            doe(node.style,{
-                animation:'none',
-            })
-        },
-    }
-}
+import createButton from    './Stopwatch/createButton.mjs'
 function Stopwatch(){
     this._timestampProvider='ecmascriptEpoch'
     this._layout={composition:'a',zoom:1}
@@ -38,8 +18,7 @@ function Stopwatch(){
             this._reset()
         }
     this._clock=new Clock
-    let
-        {div}=doe
+    let {div}=doe
     this._node.startOrPauseButton=createButton()
     this._node.resetButton=createButton()
     this.ui=div(
@@ -62,7 +41,13 @@ function Stopwatch(){
                         startPauseResume(e)
                     },
                 },
-                'Start (space)',
+                this._node.startOrPauseButtonText=doe.span(
+                    'Start'
+                ),
+                doe.span(
+                    {className:'a'},
+                    ' (space)'
+                ),
             ),
             doe(
                 this._node.resetButton.node,
@@ -79,7 +64,13 @@ function Stopwatch(){
                         reset(e)
                     },
                 },
-                'Reset (R)',
+                this._node.startOrPauseButtonText=doe.span(
+                    'Reset'
+                ),
+                doe.span(
+                    {className:'a'},
+                    ' (R)'
+                ),
             ),
         ),
     )
@@ -92,7 +83,7 @@ Stopwatch.prototype._now=function(){
 }
 Stopwatch.prototype._pause=function(){
     let now=this._now()
-    this._node.startOrPauseButton.node.textContent='Resume (space)'
+    this._node.startOrPauseButtonText.textContent='Resume'
     cancelAnimationFrame(this._requestId)
     this._isRunning=0
     this._stopTime=now
@@ -104,13 +95,13 @@ Stopwatch.prototype._reset=function(){
     this._currentTiming=undefined
     this._startTime=undefined
     this._clock.time=0
-    this._node.startOrPauseButton.node.textContent='Start (space)'
+    this._node.startOrPauseButtonText.textContent='Start'
 }
 Stopwatch.prototype._setClock=function(now){
     this._clock.time=now-this._startTime
 }
 Stopwatch.prototype._start=function(){
-    if(!this._startTime)
+    if(!this._currentTiming)
         this._currentTiming={
             timestampProvider:this._timestampProvider,
         }
@@ -119,7 +110,7 @@ Stopwatch.prototype._start=function(){
         now-(this._stopTime-this._startTime)
     :
         now
-    this._node.startOrPauseButton.node.textContent='Pause (space)'
+    this._node.startOrPauseButtonText.textContent='Pause'
     this._isRunning=1
     let frame=()=>{
         let now=this._now()

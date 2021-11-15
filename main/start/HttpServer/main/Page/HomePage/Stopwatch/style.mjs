@@ -46,4 +46,7 @@ export default`
     .stopwatch.b>.control>.button+.button{
         margin-top:calc(8px * var(--zoom));
     }
+    .stopwatch.a>.control>.button>.a{
+        color:#bfbfbf;
+    }
 `

@@ -69,6 +69,7 @@ export default`
     }
     .timestampProviderPage>*>.b>.a>*{
         font-size:calc(1px * .8 / 24 * var(--zoom));
+        color:#dfdfdf;
     }
     .timestampProviderPage>*>.b>.b{
         padding-right:calc(1px / 24 * var(--zoom));
