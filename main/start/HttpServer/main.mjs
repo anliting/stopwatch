@@ -23,7 +23,10 @@ doe.head(doe.style(`
         font-family:'Material Icons';
         font-style:normal;
         font-weight:400;
-        src:url(/mi.ttf) format('truetype');
+        src:
+            url(/mi.woff2) format('woff2'),
+            url(/mi.ttf) format('truetype')
+        ;
     }
     .material-icons{
         font-family:'Material Icons';
