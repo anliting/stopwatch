@@ -23,6 +23,9 @@ export default`
     .stopwatch>.control>.button:hover{
         background-color:#4f4f4f;
     }
+    .stopwatch>.control>.button>.a{
+        color:#bfbfbf;
+    }
     .stopwatch.a>.control{
         position:relative;
         margin:0 auto;
@@ -45,8 +48,5 @@ export default`
     }
     .stopwatch.b>.control>.button+.button{
         margin-top:calc(8px * var(--zoom));
-    }
-    .stopwatch.a>.control>.button>.a{
-        color:#bfbfbf;
     }
 `
