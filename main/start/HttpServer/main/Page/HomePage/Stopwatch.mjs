@@ -64,7 +64,7 @@ function Stopwatch(){
                         reset(e)
                     },
                 },
-                this._node.startOrPauseButtonText=doe.span(
+                doe.span(
                     'Reset'
                 ),
                 doe.span(
