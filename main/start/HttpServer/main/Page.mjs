@@ -13,7 +13,7 @@ function setPage(page){
 }
 function Page(){
     let settings={
-        timestampProvider:'ecmascriptEpoch',
+        timestampProvider:'highResolutionTime',
     }
     this._homePage=new HomePage
     this._homePage.onMenu=()=>{

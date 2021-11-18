@@ -56,19 +56,16 @@ function TimestampProviderPage(){
                 {
                     className:'b clickable',
                     onclick:e=>
-                        this.onSet('ecmascriptEpoch')
+                        this.onSet('highResolutionTime')
                 },
                 doe.div(
                     {className:'c'},
-                    this._node.option.ecmascriptEpoch,
+                    this._node.option.highResolutionTime,
                 ),
                 doe.div(
                     {className:'a'},
-                    'ECMAScript epoch',
-                    doe.div('It is not subject to computer suspension but system clock skew or adjustments.')
-                ),
-                doe.div(
-                    {className:'b'},
+                    'Monotonic clock',
+                    doe.div('It is not subject to system clock skew or adjustments but computer suspension.')
                 ),
                 /*doe.div(
                     {className:'b'},
@@ -81,16 +78,19 @@ function TimestampProviderPage(){
                 {
                     className:'b clickable',
                     onclick:e=>
-                        this.onSet('highResolutionTime')
+                        this.onSet('ecmascriptEpoch')
                 },
                 doe.div(
                     {className:'c'},
-                    this._node.option.highResolutionTime,
+                    this._node.option.ecmascriptEpoch,
                 ),
                 doe.div(
                     {className:'a'},
-                    'High resolution time',
-                    doe.div('It is not subject to system clock skew or adjustments but computer suspension.')
+                    'System clock',
+                    doe.div('It is not subject to computer suspension but system clock skew or adjustments.')
+                ),
+                doe.div(
+                    {className:'b'},
                 ),
                 /*doe.div(
                     {className:'b'},
