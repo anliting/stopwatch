@@ -4,28 +4,14 @@ onactivate=e=>e.waitUntil((async()=>
         k==version||caches.delete(k)
     ))
 )())
-onfetch=e=>e.respondWith((async()=>{
-    let cache=caches.open(version),c=(async()=>{
-        cache=await cache
-        return cache.match(e.request)
-    })()
-    let res
-    try{
-        res=await fetch(e.request.clone())
-    }catch(e){
-        return c
-    }
-    ;(async()=>{
-        cache=await cache
-        cache.put(e.request,res)
-    })()
-    return res.clone()
-})())
+onfetch=e=>e.respondWith((async()=>
+    (await caches.open(version)).match(e.request)
+)())
 oninstall=e=>e.waitUntil((async()=>
     (await caches.open(version)).addAll([
         '.',
         'icon',
-        'mainifest',
+        'manifest',
         'mi.woff2',
     ])
 )())
