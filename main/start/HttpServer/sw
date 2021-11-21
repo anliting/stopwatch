@@ -1,7 +1,9 @@
 let version='0'
-onactivate=async e=>e.waitUntil(Promise.all((await caches.keys()).map(k=>
-    k==version||caches.delete(k)
-)))
+onactivate=e=>e.waitUntil((async()=>
+    Promise.all((await caches.keys()).map(k=>
+        k==version||caches.delete(k)
+    ))
+)())
 onfetch=e=>e.respondWith((async()=>{
     let cache=caches.open(version),c=(async()=>{
         cache=await cache
@@ -19,9 +21,11 @@ onfetch=e=>e.respondWith((async()=>{
     })()
     return res.clone()
 })())
-oninstall=async e=>e.waitUntil((await caches.open(version)).addAll([
-    '.',
-    'icon',
-    'mainifest',
-    'mi.woff2',
-]))
+oninstall=e=>e.waitUntil((async()=>
+    (await caches.open(version)).addAll([
+        '.',
+        'icon',
+        'mainifest',
+        'mi.woff2',
+    ])
+)())
