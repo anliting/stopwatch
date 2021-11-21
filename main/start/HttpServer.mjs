@@ -8,20 +8,23 @@ function calcSw(mainDir){
     return fs.promises.readFile(`${mainDir}/start/HttpServer/sw`)
 }
 async function calcRootContent(mainDir){
-    let main=(async()=>minify(`${
-        await link(`${mainDir}/start/HttpServer/main.mjs`)
-    };navigator.serviceWorker.register('%23sw')`))()
-    return htmlMinifier.minify((
-        ''+await fs.promises.readFile(
-            `${mainDir}/start/HttpServer/main.html`
-        )
-    ).replace(
-        '<script type=module src=main.mjs></script>',
-        `<script type=module>${await main}</script>`
-    ),{
-            collapseWhitespace:true,
-            removeAttributeQuotes:true,
-            removeOptionalTags:true,
+    return htmlMinifier.minify(`
+        <!doctype html>
+        <meta name=theme-color content=#7f7f7f>
+        <meta name=viewport content='initial-scale=1,width=device-width'>
+        <link rel=icon href=icon>
+        <link rel=manifest href=manifest>
+        <title>Stopwatch</title>
+        <body>
+        <script type=module>${
+            await minify(`${
+                await link(`${mainDir}/start/HttpServer/main.mjs`)
+            };navigator.serviceWorker.register('%23sw')`)
+        }</script>
+    `,{
+        collapseWhitespace:true,
+        removeAttributeQuotes:true,
+        removeOptionalTags:true,
     })
 }
 function HttpServer(mainDir,tls){
