@@ -33,9 +33,11 @@ onactivate=e=>e.waitUntil((async()=>
         )
     ])
 )())
-onfetch=e=>e.respondWith((async()=>
-    (await caches.open(version)).match(e.request)
-)())
+onfetch=e=>e.respondWith((async()=>{
+    let reqForCache=e.request.clone()
+    return await(await caches.open(version)).match(reqForCache)||
+        fetch(e.request)
+})())
 oninstall=e=>e.waitUntil((async()=>
     (await caches.open(version)).addAll([
         '.',
