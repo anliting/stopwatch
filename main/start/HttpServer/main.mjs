@@ -1,6 +1,15 @@
 import doe from         'doe'
 import Page from        './main/Page.mjs'
-let page=new Page
+let
+    page=new Page,
+    setting={
+        timestampProvider:'highResolutionTime',
+    }
+page.setTimestampProvider(setting.timestampProvider)
+page.onSetTimestampProvider=v=>{
+    setting.timestampProvider=v
+    page.setTimestampProvider(setting.timestampProvider)
+}
 doe.head(doe.style(`
     html{
         height:100%;
@@ -88,4 +97,20 @@ onkeydown=page.keyDown.bind(page)
 ;(onresize=()=>{
     let bcr=document.body.getBoundingClientRect()
     page.size=[bcr.width,bcr.height]
+})()
+;(async()=>{
+    let sw=await(async()=>{
+        let reg=await navigator.serviceWorker.register('%23sw')
+        await new Promise(rs=>{
+            if(reg.active)
+                return rs()
+            reg.onupdatefound=e=>
+                reg.installing.onstatechange=e=>{
+                    if(reg.active)
+                        rs()
+                }
+        })
+        return reg.active
+    })()
+    sw.postMessage(['getSetting'])
 })()

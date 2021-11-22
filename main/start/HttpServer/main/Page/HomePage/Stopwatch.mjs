@@ -3,7 +3,6 @@ import style from           './Stopwatch/style.mjs'
 import Clock from           './Stopwatch/Clock.mjs'
 import createButton from    './Stopwatch/createButton.mjs'
 function Stopwatch(){
-    this._timestampProvider='ecmascriptEpoch'
     this._layout={composition:'a',zoom:1}
     this._node={}
     let

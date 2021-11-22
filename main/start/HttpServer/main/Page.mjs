@@ -12,9 +12,6 @@ function setPage(page){
     doe(this.node,this._currentPage.node)
 }
 function Page(){
-    let settings={
-        timestampProvider:'highResolutionTime',
-    }
     this._homePage=new HomePage
     this._homePage.onMenu=()=>{
         setPage.call(this,this._menuPage)
@@ -34,12 +31,8 @@ function Page(){
     this._timestampProviderPage=new TimestampProviderPage
     this._timestampProviderPage.onBack=()=>
         setPage.call(this,this._settingsPage)
-    this._timestampProviderPage.onSet=v=>{
-        settings.timestampProvider=v
-        this._homePage.setTimestampProvider(v)
-        this._timestampProviderPage.set(v)
-    }
-    this._timestampProviderPage.set(settings.timestampProvider)
+    this._timestampProviderPage.onSet=v=>
+        this.onSetTimestampProvider(v)
     this._currentPage=this._homePage
     this._homePage.on()
     this.node=doe.div(
@@ -62,6 +55,10 @@ Page.prototype.hideInstall=function(){
 Page.prototype.keyDown=function(e){
     if(this._currentPage==this._homePage)
         this._homePage.keyDown(e)
+}
+Page.prototype.setTimestampProvider=function(timestampProvider){
+    this._homePage.setTimestampProvider(timestampProvider)
+    this._timestampProviderPage.set(timestampProvider)
 }
 Page.prototype.showInstall=function(){
     this._menuPage.showInstall()

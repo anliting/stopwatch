@@ -17,9 +17,9 @@ async function calcRootContent(mainDir){
         <title>Stopwatch</title>
         <body>
         <script type=module>${
-            await minify(`${
+            await minify(
                 await link(`${mainDir}/start/HttpServer/main.mjs`)
-            };navigator.serviceWorker.register('%23sw')`)
+            )
         }</script>
     `,{
         collapseWhitespace:true,
