@@ -80,14 +80,6 @@ function HttpServer(mainDir,tls){
             fs.createReadStream(`${mainDir}/start/HttpServer/manifest`).pipe(stream)
             return
         }
-        if(header[':method']=='GET'&&url.pathname=='/mi.ttf'){
-            stream.respond({
-                ':status':200,
-                'content-type':'font/ttf'
-            })
-            fs.createReadStream(`${mainDir}/start/HttpServer/mi.ttf`).pipe(stream)
-            return
-        }
         if(header[':method']=='GET'&&url.pathname=='/mi.woff2'){
             stream.respond({
                 ':status':200,

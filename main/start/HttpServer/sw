@@ -43,7 +43,7 @@ oninstall=e=>e.waitUntil((async()=>
         '.',
         'icon',
         'manifest',
-        'mi.ttf',
+        'mi.woff2',
     ])
 )())
 onmessage=e=>{
