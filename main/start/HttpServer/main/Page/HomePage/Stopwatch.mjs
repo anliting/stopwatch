@@ -17,13 +17,12 @@ function Stopwatch(){
             this._reset()
         }
     this._clock=new Clock
-    let {div}=doe
     this._node.startOrPauseButton=createButton()
     this._node.resetButton=createButton()
-    this.ui=div(
+    this.ui=doe.div(
         {className:'stopwatch a'},
         this._clock.ui,
-        div(
+        doe.div(
             {className:'control'},
             doe(
                 this._node.startOrPauseButton.node,
