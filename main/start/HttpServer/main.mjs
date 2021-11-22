@@ -1,14 +1,33 @@
 import doe from         'doe'
 import Page from        './main/Page.mjs'
+let preloadIconDiv
+doe.body(preloadIconDiv=doe.div(
+    n=>{n.style.opacity=0},
+    [
+        'arrow_back_ios',
+        'arrow_forward_ios',
+        'article',
+        'get_app',
+        //'help_outline',
+        'menu',
+        'open_in_new',
+        'person',
+        'radio_button_checked',
+        'radio_button_unchecked',
+        'schedule',
+        'settings',
+    ].map(a=>
+        doe.span({className:'material-icons'},a),
+    )
+))
 let
     page=new Page,
-    setting={
-        timestampProvider:'highResolutionTime',
-    }
-page.setTimestampProvider(setting.timestampProvider)
+    setting,
+    sw
 page.onSetTimestampProvider=v=>{
-    setting.timestampProvider=v
-    page.setTimestampProvider(setting.timestampProvider)
+    let newSetting=JSON.parse(JSON.stringify(setting))
+    newSetting.timestampProvider=v
+    sw.postMessage(['setSetting',newSetting])
 }
 doe.head(doe.style(`
     html{
@@ -57,30 +76,6 @@ doe.head(doe.style(`
     }
     ${Page.style}
 `))
-let preloadIconDiv
-doe.body(preloadIconDiv=doe.div(
-    n=>{n.style.opacity=0},
-    [
-        'arrow_back_ios',
-        'arrow_forward_ios',
-        'article',
-        'get_app',
-        //'help_outline',
-        'menu',
-        'open_in_new',
-        'person',
-        'radio_button_checked',
-        'radio_button_unchecked',
-        'schedule',
-        'settings',
-    ].map(a=>
-        doe.span({className:'material-icons'},a),
-    )
-))
-;(async()=>{
-    await document.fonts.ready
-    doe.body(1,preloadIconDiv,0,page.node)
-})()
 if('onbeforeinstallprompt'in window){
     let beforeinstallprompt
     onbeforeinstallprompt=e=>{
@@ -99,7 +94,7 @@ onkeydown=page.keyDown.bind(page)
     page.size=[bcr.width,bcr.height]
 })()
 ;(async()=>{
-    let sw=await(async()=>{
+    sw=await(async()=>{
         let reg=await navigator.serviceWorker.register('%23sw')
         await new Promise(rs=>{
             if(reg.active)
@@ -113,4 +108,22 @@ onkeydown=page.keyDown.bind(page)
         return reg.active
     })()
     sw.postMessage(['getSetting'])
+    navigator.serviceWorker.onmessage=e=>{
+        if(e.data[0]=='setSetting'){
+            if(e.data[1]){
+                let a=setting
+                setting=e.data[1]
+                page.setTimestampProvider(setting.timestampProvider)
+                if(!a)
+                    (async()=>{
+                        await document.fonts.ready
+                        doe.body(1,preloadIconDiv,0,page.node)
+                    })()
+            }else{
+                sw.postMessage(['setSetting',{
+                    timestampProvider:'highResolutionTime',
+                }])
+            }
+        }
+    }
 })()

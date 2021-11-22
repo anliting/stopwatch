@@ -1,8 +1,37 @@
-let version='0'
+let
+    version='0',
+    db=new Promise(rs=>{
+        let openReq=indexedDB.open('')
+        openReq.onsuccess=e=>{
+            rs(openReq.result)
+        }
+        openReq.onupgradeneeded=e=>{
+            openReq.result.createObjectStore('setting')
+        }
+    }),settingFlow=(async()=>{
+        db=await db
+    })()
+function getSetting(){
+    return new Promise(rs=>{
+        let transaction=db.transaction('setting','readwrite')
+        let r=transaction.objectStore('setting').get(0)
+        transaction.oncomplete=e=>rs(r.result&&r.result)
+    })
+}
+function setSetting(setting){
+    return new Promise(rs=>{
+        let transaction=db.transaction('setting','readwrite')
+        transaction.objectStore('setting').put(setting,0)
+        transaction.oncomplete=rs
+    })
+}
 onactivate=e=>e.waitUntil((async()=>
-    Promise.all((await caches.keys()).map(k=>
-        k==version||caches.delete(k)
-    ))
+    Promise.all([
+        self.clients.claim(),
+        ...(await caches.keys()).map(k=>
+            k==version||caches.delete(k)
+        )
+    ])
 )())
 onfetch=e=>e.respondWith((async()=>
     (await caches.open(version)).match(e.request)
@@ -15,3 +44,27 @@ oninstall=e=>e.waitUntil((async()=>
         'mi.woff2',
     ])
 )())
+onmessage=e=>{
+    switch(e.data[0]){
+        case'getSetting':
+            e.waitUntil(settingFlow=(async()=>{
+                await settingFlow
+                e.source.postMessage(['setSetting',await getSetting()])
+            })())
+        break
+        case'setSetting':
+            e.waitUntil(settingFlow=(async()=>{
+                await settingFlow
+                await Promise.all([
+                    setSetting(e.data[1]),
+                    (async()=>{
+                        let client=await clients.matchAll()
+                        client.map(c=>{
+                            c.postMessage(e.data)
+                        })
+                    })(),
+                ])
+            })())
+        break
+    }
+}
