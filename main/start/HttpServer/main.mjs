@@ -52,7 +52,7 @@ doe.head(doe.style(`
         font-style:normal;
         font-weight:400;
         src:
-            url(/mi.woff2) format('woff2'),
+            /*url(/mi.woff2) format('woff2'),*/
             url(/mi.ttf) format('truetype')
         ;
     }
