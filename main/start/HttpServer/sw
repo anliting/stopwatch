@@ -1,5 +1,5 @@
 let
-    version='0',
+    version='1',
     db=new Promise(rs=>{
         let openReq=indexedDB.open('')
         openReq.onsuccess=e=>{
