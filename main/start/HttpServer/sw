@@ -38,14 +38,17 @@ onfetch=e=>e.respondWith((async()=>{
     return await(await caches.open(cacheVersion)).match(reqForCache)||
         fetch(e.request)
 })())
-oninstall=e=>e.waitUntil((async()=>
-    (await caches.open(cacheVersion)).addAll([
-        '.',
-        'icon',
-        'manifest',
-        'mi.woff2',
-    ])
-)())
+oninstall=e=>{
+    skipWaiting()
+    e.waitUntil((async()=>
+        (await caches.open(cacheVersion)).addAll([
+            '.',
+            'icon',
+            'manifest',
+            'mi.woff2',
+        ])
+    )())
+}
 onmessage=e=>{
     switch(e.data[0]){
         case'getSetting':

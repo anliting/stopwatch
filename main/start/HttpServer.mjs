@@ -4,8 +4,10 @@ import urlModule from       'url'
 import link from            './HttpServer/link.mjs'
 import minify from          './HttpServer/minify.mjs'
 import htmlMinifier from    'html-minifier'
-function calcSw(mainDir){
-    return fs.promises.readFile(`${mainDir}/start/HttpServer/sw`)
+async function calcSw(mainDir){
+    return minify(
+        ''+await fs.promises.readFile(`${mainDir}/start/HttpServer/sw`)
+    )
 }
 async function calcRootContent(mainDir){
     return htmlMinifier.minify(`
