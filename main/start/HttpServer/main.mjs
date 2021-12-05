@@ -11,11 +11,14 @@ doe.body(preloadIconDiv=doe.div(
         //'help_outline',
         'menu',
         'open_in_new',
+        'pause',
         'person',
+        'play_arrow',
         'radio_button_checked',
         'radio_button_unchecked',
         'schedule',
         'settings',
+        'stop',
     ].map(a=>
         doe.span({className:'material-icons'},a),
     )

@@ -17,6 +17,45 @@ function Stopwatch(){
             this._reset()
         }
     this._clock=new Clock
+    this._node.startButtonContent=doe.span(
+        doe.span(
+            {className:'b material-icons'},
+            'play_arrow'
+        ),
+        doe.span(
+            'Start'
+        ),
+        doe.span(
+            {className:'a'},
+            ' (space)'
+        ),
+    )
+    this._node.pauseButtonContent=doe.span(
+        doe.span(
+            {className:'b material-icons'},
+            'pause'
+        ),
+        doe.span(
+            'Pause'
+        ),
+        doe.span(
+            {className:'a'},
+            ' (space)'
+        ),
+    )
+    this._node.resumeButtonContent=doe.span(
+        doe.span(
+            {className:'b material-icons'},
+            'play_arrow'
+        ),
+        doe.span(
+            'Resume'
+        ),
+        doe.span(
+            {className:'a'},
+            ' (space)'
+        ),
+    )
     this._node.startOrPauseButton=createButton()
     this._node.resetButton=createButton()
     this.ui=doe.div(
@@ -40,12 +79,9 @@ function Stopwatch(){
                     },
                 },
                 this._node.startOrPauseButtonText=doe.span(
-                    'Start'
+                    {className:'b'},
                 ),
-                doe.span(
-                    {className:'a'},
-                    ' (space)'
-                ),
+                this._node.startButtonContent,
             ),
             doe(
                 this._node.resetButton.node,
@@ -63,12 +99,18 @@ function Stopwatch(){
                     },
                 },
                 doe.span(
-                    'Reset'
-                ),
-                doe.span(
-                    {className:'a'},
-                    ' (R)'
-                ),
+                    doe.span(
+                        {className:'b material-icons'},
+                        'stop'
+                    ),
+                    doe.span(
+                        'Reset'
+                    ),
+                    doe.span(
+                        {className:'a'},
+                        ' (R)'
+                    ),
+                )
             ),
         ),
     )
@@ -81,7 +123,10 @@ Stopwatch.prototype._now=function(){
 }
 Stopwatch.prototype._pause=function(){
     let now=this._now()
-    this._node.startOrPauseButtonText.textContent='Resume'
+    doe(this._node.startOrPauseButton.node,
+        {textContent:''},
+        this._node.resumeButtonContent
+    )
     cancelAnimationFrame(this._requestId)
     this._isRunning=0
     this._stopTime=now
@@ -93,7 +138,10 @@ Stopwatch.prototype._reset=function(){
     this._currentTiming=undefined
     this._startTime=undefined
     this._clock.time=0
-    this._node.startOrPauseButtonText.textContent='Start'
+    doe(this._node.startOrPauseButton.node,
+        {textContent:''},
+        this._node.startButtonContent
+    )
 }
 Stopwatch.prototype._setClock=function(now){
     this._clock.time=now-this._startTime
@@ -108,7 +156,10 @@ Stopwatch.prototype._start=function(){
         now-(this._stopTime-this._startTime)
     :
         now
-    this._node.startOrPauseButtonText.textContent='Pause'
+    doe(this._node.startOrPauseButton.node,
+        {textContent:''},
+        this._node.pauseButtonContent
+    )
     this._isRunning=1
     let frame=()=>{
         let now=this._now()

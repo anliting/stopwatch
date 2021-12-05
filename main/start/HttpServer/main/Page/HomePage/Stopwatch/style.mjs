@@ -5,7 +5,7 @@ export default`
     }
     .stopwatch>.control>.button{
         background-color:#3f3f3f;
-        font-size:calc(32px * var(--zoom));
+        font-size:calc(30px * var(--zoom));
         height:calc(64px * var(--zoom));
         color:white;
         text-shadow:
@@ -23,7 +23,13 @@ export default`
     .stopwatch>.control>.button:hover{
         background-color:#4f4f4f;
     }
-    .stopwatch>.control>.button>.a{
+    .stopwatch>.control>.button>*>*{
+        vertical-align:middle;
+    }
+    .stopwatch>.control>.button>*>.b{
+        font-size:calc(45px * var(--zoom));
+    }
+    .stopwatch>.control>.button>*>.a{
         color:#bfbfbf;
     }
     .stopwatch.a>.control{
