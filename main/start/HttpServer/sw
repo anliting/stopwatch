@@ -26,29 +26,23 @@ function setSetting(setting){
     })
 }
 onactivate=e=>e.waitUntil((async()=>
-    Promise.all([
-        self.clients.claim(),
-        ...(await caches.keys()).map(k=>
-            k==cacheVersion||caches.delete(k)
-        )
-    ])
+    Promise.all((await caches.keys()).map(k=>
+        k==cacheVersion||caches.delete(k)
+    ))
 )())
 onfetch=e=>e.respondWith((async()=>{
     let reqForCache=e.request.clone()
     return await(await caches.open(cacheVersion)).match(reqForCache)||
         fetch(e.request)
 })())
-oninstall=e=>{
-    skipWaiting()
-    e.waitUntil((async()=>
-        (await caches.open(cacheVersion)).addAll([
-            '.',
-            'icon',
-            'manifest',
-            'mi.woff2',
-        ])
-    )())
-}
+oninstall=e=>e.waitUntil((async()=>
+    (await caches.open(cacheVersion)).addAll([
+        '.',
+        'icon',
+        'manifest',
+        'mi.woff2',
+    ])
+)())
 onmessage=e=>{
     switch(e.data[0]){
         case'getSetting':
