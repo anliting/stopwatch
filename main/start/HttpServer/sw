@@ -56,12 +56,13 @@ onmessage=e=>{
                 await settingFlow
                 await Promise.all([
                     setSetting(e.data[1]),
-                    (async()=>{
-                        let client=await clients.matchAll()
-                        client.map(c=>{
+                    (async()=>
+                        (await clients.matchAll({
+                            includeUncontrolled:true
+                        })).map(c=>
                             c.postMessage(e.data)
-                        })
-                    })(),
+                        )
+                    )(),
                 ])
             })())
         break
