@@ -66,7 +66,7 @@ function HttpServer(mainDir,tls){
             })
             return stream.end(await this._swPromise)
         }
-        if(header[':method']=='GET'&&url.pathname=='/icon'){
+        if(header[':method']=='GET'&&url.pathname=='/%23icon'){
             stream.respond({
                 ':status':200,
                 'content-type':'image/png'
@@ -74,7 +74,7 @@ function HttpServer(mainDir,tls){
             fs.createReadStream(`${mainDir}/start/HttpServer/icon/main.png`).pipe(stream)
             return
         }
-        if(header[':method']=='GET'&&url.pathname=='/manifest'){
+        if(header[':method']=='GET'&&url.pathname=='/%23manifest'){
             stream.respond({
                 ':status':200,
                 'content-type':'application/manifest+json'
@@ -82,7 +82,7 @@ function HttpServer(mainDir,tls){
             fs.createReadStream(`${mainDir}/start/HttpServer/manifest`).pipe(stream)
             return
         }
-        if(header[':method']=='GET'&&url.pathname=='/mi.woff2'){
+        if(header[':method']=='GET'&&url.pathname=='/%23mi.woff2'){
             stream.respond({
                 ':status':200,
                 'content-type':'font/woff2'

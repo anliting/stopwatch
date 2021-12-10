@@ -38,9 +38,9 @@ onfetch=e=>e.respondWith((async()=>{
 oninstall=e=>e.waitUntil((async()=>
     (await caches.open(cacheVersion)).addAll([
         '.',
-        'icon',
-        'manifest',
-        'mi.woff2',
+        '%23icon',
+        '%23manifest',
+        '%23mi.woff2',
     ])
 )())
 onmessage=e=>{
