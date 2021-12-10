@@ -1,5 +1,5 @@
 let
-    cacheVersion='4',
+    cacheVersion='5',
     db=new Promise(rs=>{
         let openReq=indexedDB.open('')
         openReq.onsuccess=e=>{

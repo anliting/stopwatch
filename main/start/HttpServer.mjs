@@ -71,7 +71,7 @@ function HttpServer(mainDir,tls){
                 ':status':200,
                 'content-type':'image/png'
             })
-            fs.createReadStream(`${mainDir}/start/HttpServer/icon/main.png`).pipe(stream)
+            fs.createReadStream(`${mainDir}/start/HttpServer/icon/main512.png`).pipe(stream)
             return
         }
         if(header[':method']=='GET'&&url.pathname=='/%23manifest'){

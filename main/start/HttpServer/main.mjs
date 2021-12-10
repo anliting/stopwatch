@@ -1,28 +1,5 @@
 import doe from         'doe'
 import Page from        './main/Page.mjs'
-let preloadIconDiv
-doe.body(preloadIconDiv=doe.div(
-    n=>{n.style.opacity=0},
-    [
-        'arrow_back_ios',
-        'arrow_forward_ios',
-        'article',
-        'get_app',
-        //'help_outline',
-        'menu',
-        'open_in_new',
-        'pause',
-        'person',
-        'play_arrow',
-        'radio_button_checked',
-        'radio_button_unchecked',
-        'schedule',
-        'settings',
-        'stop',
-    ].map(a=>
-        doe.span({className:'material-icons'},a),
-    )
-))
 let
     page=new Page,
     setting,
@@ -116,8 +93,8 @@ onkeydown=page.keyDown.bind(page)
                 page.setTimestampProvider(setting.timestampProvider)
                 if(!a)
                     (async()=>{
-                        await document.fonts.ready
-                        doe.body(1,preloadIconDiv,0,page.node)
+                        await document.fonts.load("16px 'Material Icons'")
+                        doe.body(page.node)
                     })()
             }else{
                 sw.postMessage(['setSetting',{

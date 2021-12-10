@@ -4,7 +4,7 @@
     "icons":[
         {
             "purpose":"any maskable",
-            "sizes":"256x256",
+            "sizes":"512x512",
             "src":"%23icon",
             "type":"image/png"
         }
