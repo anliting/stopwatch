@@ -5,7 +5,7 @@
         {
             "purpose":"any maskable",
             "sizes":"256x256",
-            "src":"icon",
+            "src":"%23icon",
             "type":"image/png"
         }
     ],

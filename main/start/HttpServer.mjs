@@ -14,8 +14,8 @@ async function calcRootContent(mainDir){
         <!doctype html>
         <meta name=theme-color content=#7f7f7f>
         <meta name=viewport content='initial-scale=1,width=device-width'>
-        <link rel=icon href=icon>
-        <link rel=manifest href=manifest>
+        <link rel=icon href=%23icon>
+        <link rel=manifest href=%23manifest>
         <title>Stopwatch</title>
         <body>
         <script type=module>${
