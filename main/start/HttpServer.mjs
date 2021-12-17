@@ -71,7 +71,9 @@ function HttpServer(mainDir,tls){
                 ':status':200,
                 'content-type':'image/png'
             })
-            fs.createReadStream(`${mainDir}/start/HttpServer/icon/main512.png`).pipe(stream)
+            fs.createReadStream(
+                `${mainDir}/start/HttpServer/icon/main512.png`
+            ).pipe(stream)
             return
         }
         if(header[':method']=='GET'&&url.pathname=='/%23manifest'){
@@ -79,7 +81,9 @@ function HttpServer(mainDir,tls){
                 ':status':200,
                 'content-type':'application/manifest+json'
             })
-            fs.createReadStream(`${mainDir}/start/HttpServer/manifest`).pipe(stream)
+            fs.createReadStream(
+                `${mainDir}/start/HttpServer/manifest`
+            ).pipe(stream)
             return
         }
         if(header[':method']=='GET'&&url.pathname=='/%23mi.woff2'){
@@ -87,7 +91,9 @@ function HttpServer(mainDir,tls){
                 ':status':200,
                 'content-type':'font/woff2'
             })
-            fs.createReadStream(`${mainDir}/start/HttpServer/mi.woff2`).pipe(stream)
+            fs.createReadStream(
+                `${mainDir}/start/HttpServer/mi.woff2`
+            ).pipe(stream)
             return
         }
         stream.respond({
