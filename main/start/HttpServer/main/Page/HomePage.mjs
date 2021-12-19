@@ -64,19 +64,6 @@ HomePage.style=`
         vertical-align:middle;
         font-size:calc(24px * var(--zoom));
     }
-    .homePage>.bottomA{
-        position:absolute;
-        left:0;
-        bottom:0;
-    }
-    .homePage>.bottomB{
-        position:absolute;
-        right:0;
-        bottom:0;
-        font-size:calc(8px * var(--zoom));
-        font-family:serif;
-        font-style:italic;
-    }
     ${Stopwatch.style}
 `
 HomePage.prototype.keyDown=function(e){
