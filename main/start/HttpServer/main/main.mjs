@@ -1,5 +1,5 @@
 import doe from         'doe'
-import Page from        './main/Page.mjs'
+import Page from        './Page/main.mjs'
 let
     page=new Page,
     setting,

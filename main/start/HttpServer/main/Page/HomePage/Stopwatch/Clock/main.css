@@ -1,3 +1,7 @@
+/*
+    left: (600-64*1.2/2*12)/2=69.6
+    left: (302-40*1.2/2*12)/2=7
+*/
 .stopwatch>.clock{
     text-align:center;
     font-family:monospace;

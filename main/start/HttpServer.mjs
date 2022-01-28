@@ -20,7 +20,7 @@ async function calcRootContent(mainDir){
         <body>
         <script type=module>${
             await minifyJs(
-                await linkJs(`${mainDir}/start/HttpServer/main.mjs`)
+                await linkJs(`${mainDir}/start/HttpServer/main/main.mjs`)
             )
         }</script>
     `)

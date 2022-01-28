@@ -1,6 +1,6 @@
 import doe from             'doe'
-import createButton from    './createUi/createButton.mjs'
-function createUi(){
+import createButton from    './createButton/main.mjs'
+export default function(){
     this._layout={composition:'a',zoom:1}
     this._node={}
     let
@@ -112,4 +112,3 @@ function createUi(){
         ),
     )
 }
-export default createUi

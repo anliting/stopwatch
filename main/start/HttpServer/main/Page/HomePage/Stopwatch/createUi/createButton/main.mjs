@@ -1,5 +1,5 @@
 import doe from             'doe'
-function createButton(){
+export default function(){
     let node=doe.div()
     return{
         node,
@@ -20,4 +20,3 @@ function createButton(){
         },
     }
 }
-export default createButton
