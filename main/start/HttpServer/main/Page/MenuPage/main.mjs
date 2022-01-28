@@ -5,9 +5,10 @@ export default class{
         this.node=doe.div(
             {className:'menuPage'},
             doe.div(
+                {className:'menu'},
                 doe.div(
                     {
-                        className:'b',
+                        className:'item clickable',
                         onclick:e=>
                             this.onBack()
                     },
@@ -27,7 +28,7 @@ export default class{
                 ),
                 doe.div(
                     {
-                        className:'b',
+                        className:'item clickable',
                         onclick:e=>
                             this.onSettings()
                     },
@@ -50,7 +51,7 @@ export default class{
                 ),
                 this._node.install=doe.div(
                     {
-                        className:'b',
+                        className:'item clickable',
                         onclick:e=>
                             this.onInstall()
                     },
@@ -73,7 +74,7 @@ export default class{
                 ),
                 doe.a(
                     {
-                        className:'b',
+                        className:'item clickable',
                         href:'https://althea.anliting.com/stopwatch',
                         target:'_blank',
                     },
@@ -96,7 +97,7 @@ export default class{
                 ),
                 doe.a(
                     {
-                        className:'b',
+                        className:'item clickable',
                         href:'https://anliting.com/',
                         target:'_blank',
                     },

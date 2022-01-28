@@ -5,9 +5,10 @@ export default class{
         this.node=doe.div(
             {className:'settingsPage'},
             doe.div(
+                {className:'menu'},
                 doe.div(
                     {
-                        className:'b',
+                        className:'item clickable',
                         onclick:e=>
                             this.onBack()
                     },
@@ -27,7 +28,7 @@ export default class{
                 ),
                 doe.div(
                     {
-                        className:'b',
+                        className:'item clickable',
                         onclick:e=>
                             this.onTimestampProvider()
                     },

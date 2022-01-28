@@ -15,9 +15,10 @@ export default class{
         this.node=doe.div(
             {className:'timestampProviderPage'},
             doe.div(
+                {className:'menu'},
                 doe.div(
                     {
-                        className:'b clickable',
+                        className:'item clickable',
                         onclick:e=>
                             this.onBack()
                     },
@@ -37,7 +38,7 @@ export default class{
                 ),
                 doe.div(
                     {
-                        className:'b',
+                        className:'item',
                     },
                     doe.div(
                         {className:'c'},
@@ -45,6 +46,7 @@ export default class{
                     doe.div(
                         {className:'a'},
                         doe.div(
+                            {className:'description'},
                             'New settings here will only affect new timing tasks; which means ongoing timing tasks will not be affected.',
                         ),
                     ),
@@ -54,7 +56,7 @@ export default class{
                 ),
                 doe.div(
                     {
-                        className:'b clickable',
+                        className:'item clickable',
                         onclick:e=>
                             this.onSet('highResolutionTime')
                     },
@@ -64,8 +66,14 @@ export default class{
                     ),
                     doe.div(
                         {className:'a'},
-                        'Monotonic clock',
-                        doe.div('It is not subject to system clock skew or adjustments but computer suspension.')
+                        doe.div(
+                            {className:'title'},
+                            'Monotonic clock',
+                        ),
+                        doe.div(
+                            {className:'description'},
+                            'It is not subject to system clock skew or adjustments but computer suspension.',
+                        ),
                     ),
                     /*doe.div(
                         {className:'b'},
@@ -76,7 +84,7 @@ export default class{
                 ),
                 doe.div(
                     {
-                        className:'b clickable',
+                        className:'item clickable',
                         onclick:e=>
                             this.onSet('ecmascriptEpoch')
                     },
@@ -86,8 +94,14 @@ export default class{
                     ),
                     doe.div(
                         {className:'a'},
-                        'System clock',
-                        doe.div('It is not subject to computer suspension but system clock skew or adjustments.')
+                        doe.div(
+                            {className:'title'},
+                            'System clock',
+                        ),
+                        doe.div(
+                            {className:'description'},
+                            'It is not subject to computer suspension but system clock skew or adjustments.',
+                        ),
                     ),
                     doe.div(
                         {className:'b'},
