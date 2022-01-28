@@ -1,5 +1,4 @@
 import doe from         'doe'
-import style from       './TimestampProviderPage/style.mjs'
 function TimestampProviderPage(){
     this._current='ecmascriptEpoch'
     this._node={
@@ -102,7 +101,6 @@ function TimestampProviderPage(){
         )
     )
 }
-TimestampProviderPage.style=style
 TimestampProviderPage.prototype.off=function(){
 }
 TimestampProviderPage.prototype.on=function(){

@@ -40,15 +40,6 @@ function Page(){
         this._homePage.node
     )
 }
-Page.style=`
-    .page{
-        height:100%;
-    }
-    ${HomePage.style}
-    ${MenuPage.style}
-    ${SettingsPage.style}
-    ${TimestampProviderPage.style}
-`
 Page.prototype.hideInstall=function(){
     this._menuPage.hideInstall()
 }

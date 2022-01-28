@@ -1,5 +1,4 @@
 import doe from             'doe'
-import style from           './Stopwatch/style.mjs'
 import Clock from           './Stopwatch/Clock.mjs'
 import createUi from        './Stopwatch/createUi.mjs'
 function Stopwatch(){
@@ -84,5 +83,4 @@ Stopwatch.prototype.on=function(){
 Stopwatch.prototype.setTimestampProvider=function(v){
     this._timestampProvider=v
 }
-Stopwatch.style=style+Clock.style
 export default Stopwatch

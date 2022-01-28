@@ -1,33 +1,34 @@
 import http2 from           'http2'
 import fs from              'fs'
 import urlModule from       'url'
-import link from            './HttpServer/link.mjs'
-import minify from          './HttpServer/minify.mjs'
-import htmlMinifier from    'html-minifier'
-async function calcSw(mainDir){
-    return minify(
-        ''+await fs.promises.readFile(`${mainDir}/start/HttpServer/sw`)
-    )
-}
+import linkCss from         './HttpServer/linkCss/main.mjs'
+import linkJs from          './HttpServer/linkJs/main.mjs'
+import minifyCss from       './HttpServer/minifyCss/main.mjs'
+import minifyHtml from      './HttpServer/minifyHtml/main.mjs'
+import minifyJs from        './HttpServer/minifyJs/main.mjs'
 async function calcRootContent(mainDir){
-    return htmlMinifier.minify(`
+    return minifyHtml(`
         <!doctype html>
         <meta name=theme-color content=#7f7f7f>
         <meta name=viewport content='initial-scale=1,width=device-width'>
         <link rel=icon href=%23icon>
         <link rel=manifest href=%23manifest>
         <title>Stopwatch</title>
+        <style>${await minifyCss(await linkCss(
+            `${mainDir}/start/HttpServer/main/main.css`
+        ))}</style>
         <body>
         <script type=module>${
-            await minify(
-                await link(`${mainDir}/start/HttpServer/main.mjs`)
+            await minifyJs(
+                await linkJs(`${mainDir}/start/HttpServer/main.mjs`)
             )
         }</script>
-    `,{
-        collapseWhitespace:true,
-        removeAttributeQuotes:true,
-        removeOptionalTags:true,
-    })
+    `)
+}
+async function calcSw(mainDir){
+    return minifyJs(
+        ''+await fs.promises.readFile(`${mainDir}/start/HttpServer/sw`)
+    )
 }
 function HttpServer(mainDir,tls){
     this._mainDir=mainDir

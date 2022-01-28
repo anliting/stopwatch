@@ -1,5 +1,4 @@
 import doe from         'doe'
-import style from       './MenuPage/style.mjs'
 function MenuPage(){
     this._node={}
     this.node=doe.div(
@@ -120,7 +119,6 @@ function MenuPage(){
         )
     )
 }
-MenuPage.style=style
 MenuPage.prototype.hideInstall=function(){
     this._node.install.style.display='none'
 }

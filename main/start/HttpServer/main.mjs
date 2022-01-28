@@ -9,50 +9,6 @@ page.onSetTimestampProvider=v=>{
     newSetting.timestampProvider=v
     sw.postMessage(['setSetting',newSetting])
 }
-doe.head(doe.style(`
-    html{
-        height:100%;
-    }
-    body{
-        margin:0;
-        overflow:hidden;
-        background-color:#7f7f7f;
-        font-family:sans-serif;
-        font-size:16px;
-        line-height:1.2;
-        height:100%;
-        touch-action:none;
-    }
-    a{
-        color:unset;
-        text-decoration:unset;
-    }
-    @font-face{
-        font-family:'Material Icons';
-        font-style:normal;
-        font-weight:400;
-        src:url(/%23mi.woff2) format('woff2');
-    }
-    .material-icons{
-        font-family:'Material Icons';
-        font-weight:normal;
-        font-style:normal;
-        display:inline-block;
-        line-height:1;
-        text-transform:none;
-        letter-spacing:normal;
-        word-wrap:normal;
-        white-space:nowrap;
-        direction:ltr;
-        /* Support for all WebKit browsers. */
-        -webkit-font-smoothing: antialiased;
-        /* Support for Safari and Chrome. */
-        text-rendering:optimizeLegibility;
-        /* Support for Firefox. */
-        -moz-osx-font-smoothing:grayscale;
-    }
-    ${Page.style}
-`))
 if('onbeforeinstallprompt'in window){
     let beforeinstallprompt
     onbeforeinstallprompt=e=>{

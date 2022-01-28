@@ -1,7 +1,10 @@
 {
     "dependencies":{
+        "clean-css":"",
         "html-minifier":"",
         "rollup":"",
+        "postcss":"",
+        "postcss-import":"",
         "terser":"",
         "@anliting/core":"anliting/core"
     }

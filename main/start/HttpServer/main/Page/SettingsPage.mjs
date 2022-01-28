@@ -1,5 +1,4 @@
 import doe from         'doe'
-import style from       './SettingsPage/style.mjs'
 function SettingsPage(){
     this._node={}
     this.node=doe.div(
@@ -51,7 +50,6 @@ function SettingsPage(){
         )
     )
 }
-SettingsPage.style=style
 SettingsPage.prototype.off=function(){
 }
 SettingsPage.prototype.on=function(){

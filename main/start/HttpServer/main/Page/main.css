@@ -1,0 +1,7 @@
+@import 'HomePage/main.css';
+@import 'MenuPage/main.css';
+@import 'SettingsPage/main.css';
+@import 'TimestampProviderPage/main.css';
+.page{
+    height:100%;
+}

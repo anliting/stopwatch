@@ -15,57 +15,6 @@ function HomePage(){
         ),
     )
 }
-HomePage.style=`
-    .homePage{
-        position:relative;
-        margin:calc(8px *  var(--zoom));
-        width:calc(100% - 16px * var(--zoom));
-        height:calc(100% - 16px * var(--zoom));
-        color:white;
-        text-shadow:
-            0 0 .05em rgba(0,0,0,.4),
-            .05em .05em .05em rgba(0,0,0,.2);
-        font-size:calc(16px * var(--zoom));
-        text-align:center;
-    }
-    .homePage::after{
-        content:'';
-        display:inline-block;
-        height:100%;
-        vertical-align:middle;
-    }
-    .homePage>.stopwatch{
-        display:inline-block;
-        vertical-align:middle;
-    }
-    .homePage>.top{
-        position:absolute;
-        right:calc(-8px *  var(--zoom));
-        top:calc(-8px *  var(--zoom));
-        user-select:none;
-        font-size:calc(24px * var(--zoom));
-        width:calc(36px * 1.2 * var(--zoom));
-        height:calc(36px * 1.2 * var(--zoom));
-        line-height:0;
-    }
-    .homePage>.top:hover{
-        background-color:#8f8f8f;
-    }
-    .homePage>.top:active{
-        background-color:#5f5f5f;
-    }
-    .homePage>.top::after{
-        content:'';
-        display:inline-block;
-        height:100%;
-        vertical-align:middle;
-    }
-    .homePage>.top>*{
-        vertical-align:middle;
-        font-size:calc(24px * var(--zoom));
-    }
-    ${Stopwatch.style}
-`
 HomePage.prototype.keyDown=function(e){
     this._stopwatch.keyDown(e)
 }
