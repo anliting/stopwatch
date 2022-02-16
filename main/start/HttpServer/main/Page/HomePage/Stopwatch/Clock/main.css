@@ -8,6 +8,9 @@
     margin:calc(16px * var(--zoom)) 0;
     position:relative;
     font-size:calc(var(--baseFontSize) * var(--zoom));
+    text-shadow:
+        0 0 .0625em rgba(0,0,0,.4),
+        .0625em .0625em .0625em rgba(0,0,0,.2);
     height:calc(var(--baseFontSize) * var(--zoom) * 1.2);
 }
 .stopwatch>.clock>*{

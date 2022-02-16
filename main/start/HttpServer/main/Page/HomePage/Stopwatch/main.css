@@ -6,11 +6,11 @@
 .stopwatch>.control>.button{
     background-color:#3f3f3f;
     font-size:calc(30px * var(--zoom));
+    text-shadow:
+        0 0 .0625em rgba(0,0,0,.4),
+        .0625em .0625em .0625em rgba(0,0,0,.2);
     height:calc(64px * var(--zoom));
     color:white;
-    text-shadow:
-        0 0 .05em rgba(0,0,0,.4),
-        .05em .05em .05em rgba(0,0,0,.2);
     user-select:none;
     text-align:center;
     line-height:calc(64px * var(--zoom));
@@ -28,6 +28,9 @@
 }
 .stopwatch>.control>.button>*>.b{
     font-size:calc(45px * var(--zoom));
+    text-shadow:
+        0 0 .0625em rgba(0,0,0,.4),
+        .0625em .0625em .0625em rgba(0,0,0,.2);
 }
 .stopwatch>.control>.button>*>.a{
     color:#bfbfbf;
