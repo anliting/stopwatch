@@ -13,17 +13,17 @@ export default class{
                             this.onBack()
                     },
                     doe.div(
-                        {className:'c'},
+                        {className:'a'},
                         doe.span(
-                            {className:'a material-icons'},'arrow_back_ios'
+                            {className:'material-icons'},'arrow_back_ios'
                         )
                     ),
                     doe.div(
-                        {className:'a'},
+                        {className:'b'},
                         'Menu',
                     ),
                     doe.div(
-                        {className:'b'},
+                        {className:'c'},
                     ),
                 ),
                 doe.div(
@@ -33,19 +33,19 @@ export default class{
                             this.onSettings()
                     },
                     doe.div(
-                        {className:'c'},
+                        {className:'a'},
                         doe.span(
-                            {className:'a material-icons'},'settings'
+                            {className:'material-icons'},'settings'
                         )
                     ),
                     doe.div(
-                        {className:'a'},
+                        {className:'b'},
                         'Settings',
                     ),
                     doe.div(
-                        {className:'b'},
+                        {className:'c'},
                         doe.span(
-                            {className:'a material-icons'},'arrow_forward_ios'
+                            {className:'material-icons'},'arrow_forward_ios'
                         )
                     ),
                 ),
@@ -59,17 +59,17 @@ export default class{
                         display:'none',
                     })},
                     doe.div(
-                        {className:'c'},
+                        {className:'a'},
                         doe.span(
-                            {className:'a material-icons'},'get_app'
+                            {className:'material-icons'},'get_app'
                         )
                     ),
                     doe.div(
-                        {className:'a'},
+                        {className:'b'},
                         'Install',
                     ),
                     doe.div(
-                        {className:'b'},
+                        {className:'c'},
                     ),
                 ),
                 doe.a(
@@ -79,19 +79,19 @@ export default class{
                         target:'_blank',
                     },
                     doe.div(
-                        {className:'c'},
+                        {className:'a'},
                         doe.span(
-                            {className:'a material-icons'},'article'
+                            {className:'material-icons'},'article'
                         )
                     ),
                     doe.div(
-                        {className:'a'},
+                        {className:'b'},
                         'Readme',
                     ),
                     doe.div(
-                        {className:'b'},
+                        {className:'c'},
                         doe.span(
-                            {className:'a material-icons'},'open_in_new'
+                            {className:'material-icons'},'open_in_new'
                         )
                     ),
                 ),
@@ -102,19 +102,19 @@ export default class{
                         target:'_blank',
                     },
                     doe.div(
-                        {className:'c'},
+                        {className:'a'},
                         doe.span(
-                            {className:'a material-icons'},'person'
+                            {className:'material-icons'},'person'
                         )
                     ),
                     doe.div(
-                        {className:'a'},
+                        {className:'b'},
                         'Author: An-Li Ting',
                     ),
                     doe.div(
-                        {className:'b'},
+                        {className:'c'},
                         doe.span(
-                            {className:'a material-icons'},'open_in_new'
+                            {className:'material-icons'},'open_in_new'
                         )
                     ),
                 ),

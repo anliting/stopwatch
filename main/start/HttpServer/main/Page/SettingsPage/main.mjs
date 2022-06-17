@@ -13,17 +13,17 @@ export default class{
                             this.onBack()
                     },
                     doe.div(
-                        {className:'c'},
+                        {className:'a'},
                         doe.span(
-                            {className:'a material-icons'},'arrow_back_ios'
+                            {className:'material-icons'},'arrow_back_ios'
                         )
                     ),
                     doe.div(
-                        {className:'a'},
+                        {className:'b'},
                         'Settings',
                     ),
                     doe.div(
-                        {className:'b'},
+                        {className:'c'},
                     ),
                 ),
                 doe.div(
@@ -33,19 +33,19 @@ export default class{
                             this.onTimestampProvider()
                     },
                     doe.div(
-                        {className:'c'},
+                        {className:'a'},
                         doe.span(
-                            {className:'a material-icons'},'schedule'
+                            {className:'material-icons'},'schedule'
                         )
                     ),
                     doe.div(
-                        {className:'a'},
+                        {className:'b'},
                         'Timestamp provider',
                     ),
                     doe.div(
-                        {className:'b'},
+                        {className:'c'},
                         doe.span(
-                            {className:'a material-icons'},'arrow_forward_ios'
+                            {className:'material-icons'},'arrow_forward_ios'
                         )
                     ),
                 ),

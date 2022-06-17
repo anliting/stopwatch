@@ -5,10 +5,10 @@ export default class{
         this._node={
             option:{
                 ecmascriptEpoch:doe.span(
-                    {className:'a material-icons'},'radio_button_unchecked'
+                    {className:'material-icons'},'radio_button_unchecked'
                 ),
                 highResolutionTime:doe.span(
-                    {className:'a material-icons'},'radio_button_unchecked'
+                    {className:'material-icons'},'radio_button_unchecked'
                 ),
             }
         }
@@ -23,17 +23,17 @@ export default class{
                             this.onBack()
                     },
                     doe.div(
-                        {className:'c'},
+                        {className:'a'},
                         doe.span(
-                            {className:'a material-icons'},'arrow_back_ios'
+                            {className:'material-icons'},'arrow_back_ios'
                         )
                     ),
                     doe.div(
-                        {className:'a'},
+                        {className:'b'},
                         'Timestamp Provider',
                     ),
                     doe.div(
-                        {className:'b'},
+                        {className:'c'},
                     ),
                 ),
                 doe.div(
@@ -41,17 +41,17 @@ export default class{
                         className:'item',
                     },
                     doe.div(
-                        {className:'c'},
+                        {className:'a'},
                     ),
                     doe.div(
-                        {className:'a'},
+                        {className:'b'},
                         doe.div(
                             {className:'description'},
                             'New settings here will only affect new timing tasks; which means ongoing timing tasks will not be affected.',
                         ),
                     ),
                     doe.div(
-                        {className:'b'},
+                        {className:'c'},
                     ),
                 ),
                 doe.div(
@@ -61,11 +61,11 @@ export default class{
                             this.onSet('highResolutionTime')
                     },
                     doe.div(
-                        {className:'c'},
+                        {className:'a'},
                         this._node.option.highResolutionTime,
                     ),
                     doe.div(
-                        {className:'a'},
+                        {className:'b'},
                         doe.div(
                             {className:'title'},
                             'Monotonic clock',
@@ -76,9 +76,9 @@ export default class{
                         ),
                     ),
                     /*doe.div(
-                        {className:'b'},
+                        {className:'c'},
                         doe.span(
-                            {className:'a material-icons'},'help_outline'
+                            {className:'material-icons'},'help_outline'
                         )
                     ),*/
                 ),
@@ -89,11 +89,11 @@ export default class{
                             this.onSet('ecmascriptEpoch')
                     },
                     doe.div(
-                        {className:'c'},
+                        {className:'a'},
                         this._node.option.ecmascriptEpoch,
                     ),
                     doe.div(
-                        {className:'a'},
+                        {className:'b'},
                         doe.div(
                             {className:'title'},
                             'System clock',
@@ -104,12 +104,12 @@ export default class{
                         ),
                     ),
                     doe.div(
-                        {className:'b'},
+                        {className:'c'},
                     ),
                     /*doe.div(
-                        {className:'b'},
+                        {className:'c'},
                         doe.span(
-                            {className:'a material-icons'},'help_outline'
+                            {className:'material-icons'},'help_outline'
                         )
                     ),*/
                 ),
