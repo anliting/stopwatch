@@ -1,0 +1,1 @@
+(cd stopwatch;docker build -f main/Dockerfile -t stopwatch .)
