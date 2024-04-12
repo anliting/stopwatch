@@ -1,11 +1,11 @@
 @import 'Stopwatch/main.css';
 .homePage{
     position:relative;
-    margin:calc(8px *  var(--zoom));
-    width:calc(100% - 16px * var(--zoom));
-    height:calc(100% - 16px * var(--zoom));
+    margin:calc(8px* var(--zoom));
+    width:calc(100% - 16px*var(--zoom));
+    height:calc(100% - 16px*var(--zoom));
     color:white;
-    font-size:calc(16px * var(--zoom));
+    font-size:calc(16px*var(--zoom));
     text-shadow:
         0 0 .0625em rgba(0,0,0,.4),
         .0625em .0625em .0625em rgba(0,0,0,.2);
@@ -23,15 +23,15 @@
 }
 .homePage>.top{
     position:absolute;
-    right:calc(-8px *  var(--zoom));
-    top:calc(-8px *  var(--zoom));
+    right:calc(-8px* var(--zoom));
+    top:calc(-8px* var(--zoom));
     user-select:none;
-    font-size:calc(24px * var(--zoom));
+    font-size:calc(24px*var(--zoom));
     text-shadow:
         0 0 .0625em rgba(0,0,0,.4),
         .0625em .0625em .0625em rgba(0,0,0,.2);
-    width:calc(36px * 1.2 * var(--zoom));
-    height:calc(36px * 1.2 * var(--zoom));
+    width:calc(36px*1.2*var(--zoom));
+    height:calc(36px*1.2*var(--zoom));
     line-height:0;
 }
 .homePage>.top:hover{
@@ -48,7 +48,7 @@
 }
 .homePage>.top>*{
     vertical-align:middle;
-    font-size:calc(24px * var(--zoom));
+    font-size:calc(24px*var(--zoom));
     text-shadow:
         0 0 .0625em rgba(0,0,0,.4),
         .0625em .0625em .0625em rgba(0,0,0,.2);

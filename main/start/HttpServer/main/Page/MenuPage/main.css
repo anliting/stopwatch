@@ -3,7 +3,7 @@
     text-align:center;
 }
 .menuPage>*{
-    width:calc(24 / 24 * var(--zoom) * 1px);
+    width:calc(24/24*var(--zoom)*1px);
     height:100%;
     text-align:left;
 }

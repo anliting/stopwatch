@@ -5,22 +5,22 @@
 .stopwatch>.clock{
     text-align:center;
     font-family:monospace;
-    margin:calc(16px * var(--zoom)) 0;
+    margin:calc(16px*var(--zoom)) 0;
     position:relative;
-    font-size:calc(var(--baseFontSize) * var(--zoom));
+    font-size:calc(var(--baseFontSize)*var(--zoom));
     text-shadow:
         0 0 .0625em rgba(0,0,0,.4),
         .0625em .0625em .0625em rgba(0,0,0,.2);
-    height:calc(var(--baseFontSize) * var(--zoom) * 1.2);
+    height:calc(var(--baseFontSize)*var(--zoom)*1.2);
 }
 .stopwatch>.clock>*{
     position:absolute;
 }
 .stopwatch.a>.clock{
     --baseFontSize:64px;
-    left:calc(69.6px * var(--zoom));
+    left:calc(69.6px*var(--zoom));
 }
 .stopwatch.b>.clock{
     --baseFontSize:40px;
-    left:calc(7px * var(--zoom));
+    left:calc(7px*var(--zoom));
 }

@@ -1,0 +1,8 @@
+a=(
+    -it
+    -p 1100:1100
+    -v stopwatch:/root/stopwatch
+    -v crt:/root/work/tls/crt
+    -v key:/root/work/tls/key
+)
+docker run "${a[@]}" stopwatch

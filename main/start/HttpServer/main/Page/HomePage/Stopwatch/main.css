@@ -5,15 +5,15 @@
 }
 .stopwatch>.control>.button{
     background-color:#3f3f3f;
-    font-size:calc(30px * var(--zoom));
+    font-size:calc(30px*var(--zoom));
     text-shadow:
         0 0 .0625em rgba(0,0,0,.4),
         .0625em .0625em .0625em rgba(0,0,0,.2);
-    height:calc(64px * var(--zoom));
+    height:calc(64px*var(--zoom));
     color:white;
     user-select:none;
     text-align:center;
-    line-height:calc(64px * var(--zoom));
+    line-height:calc(64px*var(--zoom));
 }
 @keyframes click{
     from{
@@ -27,7 +27,7 @@
     vertical-align:middle;
 }
 .stopwatch>.control>.button>*>.b{
-    font-size:calc(45px * var(--zoom));
+    font-size:calc(45px*var(--zoom));
     text-shadow:
         0 0 .0625em rgba(0,0,0,.4),
         .0625em .0625em .0625em rgba(0,0,0,.2);
@@ -38,8 +38,8 @@
 .stopwatch.a>.control{
     position:relative;
     margin:0 auto;
-    width:calc(600px * var(--zoom));
-    height:calc(64px * var(--zoom));
+    width:calc(600px*var(--zoom));
+    height:calc(64px*var(--zoom));
 }
 .stopwatch.a>.control>.button{
     position:absolute;
@@ -52,9 +52,9 @@
     right:1%;
 }
 .stopwatch.b>.control>.button{
-    width:calc(302px * var(--zoom));
+    width:calc(302px*var(--zoom));
     margin:0 auto;
 }
 .stopwatch.b>.control>.button+.button{
-    margin-top:calc(8px * var(--zoom));
+    margin-top:calc(8px*var(--zoom));
 }
