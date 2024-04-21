@@ -4,5 +4,5 @@ services:
             - 1100:1100
         volumes:
             - ./stopwatch:/app/stopwatch
-            - ~/.anliting/testTls/1.crt:/app/tls/crt
-            - ~/.anliting/testTls/1.key:/app/tls/key
+            - ./crt:/app/tls/crt
+            - ./key:/app/tls/key
