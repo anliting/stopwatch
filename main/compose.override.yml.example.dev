@@ -1,7 +1,11 @@
 services:
     stopwatch:
+        build:
+            context: stopwatch
+            dockerfile: main/Dockerfile
+        image: stopwatch
         ports:
-            - 1100:1100
+            - "443:80"
         volumes:
             - ./stopwatch:/app/stopwatch
             - ./crt:/app/tls/crt

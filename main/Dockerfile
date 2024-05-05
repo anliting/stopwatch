@@ -8,5 +8,5 @@ RUN apk add --no-cache nodejs
 WORKDIR /app
 COPY --from=0 /app/node_modules node_modules
 COPY . stopwatch
-RUN printf 1100 >httpListen
+RUN printf 80 >httpListen
 CMD node stopwatch/main/start.mjs

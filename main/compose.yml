@@ -1,6 +1,0 @@
-services:
-    stopwatch:
-        build:
-            context: stopwatch
-            dockerfile: main/Dockerfile
-        image: stopwatch
