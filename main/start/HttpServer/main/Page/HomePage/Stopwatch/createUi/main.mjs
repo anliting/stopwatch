@@ -1,5 +1,6 @@
 import doe from             'doe'
 import createButton from    './createButton/main.mjs'
+let{div,span}=doe
 export default function(){
     this._layout={composition:'a',zoom:1}
     this._node={}
@@ -14,51 +15,51 @@ export default function(){
             e.stopPropagation()
             this._reset()
         }
-    this._node.startButtonContent=doe.span(
-        doe.span(
+    this._node.startButtonContent=span(
+        span(
             {className:'b material-icons'},
             'play_arrow'
         ),
-        doe.span(
+        span(
             'Start'
         ),
-        doe.span(
+        span(
             {className:'a'},
             ' (space)'
         ),
     )
-    this._node.pauseButtonContent=doe.span(
-        doe.span(
+    this._node.pauseButtonContent=span(
+        span(
             {className:'b material-icons'},
             'pause'
         ),
-        doe.span(
+        span(
             'Pause'
         ),
-        doe.span(
+        span(
             {className:'a'},
             ' (space)'
         ),
     )
-    this._node.resumeButtonContent=doe.span(
-        doe.span(
+    this._node.resumeButtonContent=span(
+        span(
             {className:'b material-icons'},
             'play_arrow'
         ),
-        doe.span(
+        span(
             'Resume'
         ),
-        doe.span(
+        span(
             {className:'a'},
             ' (space)'
         ),
     )
     this._node.startOrPauseButton=createButton()
     this._node.resetButton=createButton()
-    this.ui=doe.div(
+    this.ui=div(
         {className:'stopwatch a'},
         this._clock.ui,
-        doe.div(
+        div(
             {className:'control'},
             doe(
                 this._node.startOrPauseButton.node,
@@ -75,7 +76,7 @@ export default function(){
                         startPauseResume(e)
                     },
                 },
-                this._node.startOrPauseButtonText=doe.span(
+                this._node.startOrPauseButtonText=span(
                     {className:'b'},
                 ),
                 this._node.startButtonContent,
@@ -95,15 +96,15 @@ export default function(){
                         reset(e)
                     },
                 },
-                doe.span(
-                    doe.span(
+                span(
+                    span(
                         {className:'b material-icons'},
                         'stop'
                     ),
-                    doe.span(
+                    span(
                         'Reset'
                     ),
-                    doe.span(
+                    span(
                         {className:'a'},
                         ' (R)'
                     ),
