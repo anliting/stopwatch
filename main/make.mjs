@@ -15,18 +15,18 @@ let mainDir=core.importMetaToDir(import.meta)
         <link rel=manifest href=%23manifest>
         <title>Stopwatch</title>
         <style>${await minifyCss(await linkCss(
-            `${mainDir}/start/HttpServer/main/main.css`
+            `${mainDir}/server/HttpServer/main/main.css`
         ))}</style>
         <body>
         <script type=module>${
             await minifyJs(
-                await linkJs(`${mainDir}/start/HttpServer/main/main.mjs`)
+                await linkJs(`${mainDir}/server/HttpServer/main/main.mjs`)
             )
         }</script>
     `))
 })()
 ;(async()=>{
     fs.promises.writeFile('build/sw',await minifyJs(
-        ''+await fs.promises.readFile(`${mainDir}/start/HttpServer/sw`)
+        ''+await fs.promises.readFile(`${mainDir}/server/HttpServer/sw`)
     ))
 })()

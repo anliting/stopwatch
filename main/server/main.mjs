@@ -1,7 +1,8 @@
-import core from    '@anliting/core'
-import Server from  './start/Server.mjs'
+import core from        '@anliting/core'
+import HttpServer from  './HttpServer/main.mjs'
 let server
 core.onceSigintOrSigterm(()=>
     server.end()
 )
-server=new Server(core.importMetaToDir(import.meta))
+server=new HttpServer(core.importMetaToDir(import.meta))
+server.listen()
