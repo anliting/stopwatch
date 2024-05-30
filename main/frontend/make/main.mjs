@@ -1,10 +1,10 @@
 import fs from              'fs'
 import core from            '@anliting/core'
-import linkCss from         './server/HttpServer/linkCss/main.mjs'
-import linkJs from          './server/HttpServer/linkJs/main.mjs'
-import minifyCss from       './server/HttpServer/minifyCss/main.mjs'
-import minifyHtml from      './server/HttpServer/minifyHtml/main.mjs'
-import minifyJs from        './server/HttpServer/minifyJs/main.mjs'
+import linkCss from         './linkCss/main.mjs'
+import linkJs from          './linkJs/main.mjs'
+import minifyCss from       './minifyCss/main.mjs'
+import minifyHtml from      './minifyHtml/main.mjs'
+import minifyJs from        './minifyJs/main.mjs'
 let mainDir=core.importMetaToDir(import.meta)
 ;(async()=>{
     fs.promises.writeFile('build/root',await minifyHtml(`
@@ -15,18 +15,18 @@ let mainDir=core.importMetaToDir(import.meta)
         <link rel=manifest href=%23manifest>
         <title>Stopwatch</title>
         <style>${await minifyCss(await linkCss(
-            `${mainDir}/server/HttpServer/main/main.css`
+            `${mainDir}/../main/main.css`
         ))}</style>
         <body>
         <script type=module>${
             await minifyJs(
-                await linkJs(`${mainDir}/server/HttpServer/main/main.mjs`)
+                await linkJs(`${mainDir}/../main/main.mjs`)
             )
         }</script>
     `))
 })()
 ;(async()=>{
     fs.promises.writeFile('build/sw',await minifyJs(
-        ''+await fs.promises.readFile(`${mainDir}/server/HttpServer/sw`)
+        ''+await fs.promises.readFile(`${mainDir}/../sw`)
     ))
 })()
