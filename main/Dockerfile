@@ -3,10 +3,10 @@ RUN apk add --no-cache git nodejs npm
 WORKDIR /app0
 RUN npm i anliting/core
 WORKDIR /app1
-COPY . stopwatch
 RUN npm i clean-css html-minifier rollup postcss postcss-import terser\
-        anliting/core&&\
-    node stopwatch/main/make.mjs
+        anliting/core
+COPY . stopwatch
+RUN node stopwatch/main/make.mjs
 FROM alpine
 RUN apk add --no-cache nodejs
 WORKDIR /app
