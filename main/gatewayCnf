@@ -1,0 +1,10 @@
+server{
+    listen 80;
+    listen              443 ssl;
+    ssl_certificate     /etc/ssl/certs/server.crt;
+    ssl_certificate_key /etc/ssl/certs/server.key;
+    location /{
+        proxy_http_version 1.1;
+        proxy_pass http://app;
+    }
+}
