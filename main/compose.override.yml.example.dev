@@ -8,6 +8,6 @@ services:
         ports:
             - '[::1]:443:443'
         volumes:
-            - ./gatewayCnf:/etc/nginx/conf.d/default.conf
+            - ./stopwatch/main/gatewayCnf:/etc/nginx/conf.d/default.conf
             - ./crt:/etc/ssl/certs/server.crt
             - ./key:/etc/ssl/certs/server.key

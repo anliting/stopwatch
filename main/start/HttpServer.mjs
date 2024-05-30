@@ -9,11 +9,11 @@ function HttpServer(mainDir){
         if(rq.method=='GET')switch(url.pathname){
             case'/':
                 rs.writeHead(200,{'content-type':'text/html;charset=utf-8'})
-                fs.createReadStream('root').pipe(rs)
+                fs.createReadStream('build/root').pipe(rs)
             return
             case'/%23sw':
                 rs.writeHead(200,{'content-type':'application/javascript'})
-                fs.createReadStream('sw').pipe(rs)
+                fs.createReadStream('build/sw').pipe(rs)
             return
             case'/%23icon':
                 rs.writeHead(200,{'content-type':'image/png'})

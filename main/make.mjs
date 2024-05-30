@@ -5,8 +5,9 @@ import linkJs from          './start/HttpServer/linkJs/main.mjs'
 import minifyCss from       './start/HttpServer/minifyCss/main.mjs'
 import minifyHtml from      './start/HttpServer/minifyHtml/main.mjs'
 import minifyJs from        './start/HttpServer/minifyJs/main.mjs'
-async function calcRootContent(mainDir){
-    return minifyHtml(`
+let mainDir=core.importMetaToDir(import.meta)
+;(async()=>{
+    fs.promises.writeFile('build/root',await minifyHtml(`
         <!doctype html>
         <meta name=theme-color content=#7f7f7f>
         <meta name=viewport content='initial-scale=1,width=device-width'>
@@ -22,17 +23,10 @@ async function calcRootContent(mainDir){
                 await linkJs(`${mainDir}/start/HttpServer/main/main.mjs`)
             )
         }</script>
-    `)
-}
-async function calcSw(mainDir){
-    return minifyJs(
-        ''+await fs.promises.readFile(`${mainDir}/start/HttpServer/sw`)
-    )
-}
-let mainDir=core.importMetaToDir(import.meta)
-;(async()=>{
-    fs.promises.writeFile('root',await calcRootContent(mainDir))
+    `))
 })()
 ;(async()=>{
-    fs.promises.writeFile('sw',await calcSw(mainDir))
+    fs.promises.writeFile('build/sw',await minifyJs(
+        ''+await fs.promises.readFile(`${mainDir}/start/HttpServer/sw`)
+    ))
 })()
