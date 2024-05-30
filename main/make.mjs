@@ -1,10 +1,10 @@
 import fs from              'fs'
 import core from            '@anliting/core'
-import linkCss from         './start/HttpServer/linkCss/main.mjs'
-import linkJs from          './start/HttpServer/linkJs/main.mjs'
-import minifyCss from       './start/HttpServer/minifyCss/main.mjs'
-import minifyHtml from      './start/HttpServer/minifyHtml/main.mjs'
-import minifyJs from        './start/HttpServer/minifyJs/main.mjs'
+import linkCss from         './server/HttpServer/linkCss/main.mjs'
+import linkJs from          './server/HttpServer/linkJs/main.mjs'
+import minifyCss from       './server/HttpServer/minifyCss/main.mjs'
+import minifyHtml from      './server/HttpServer/minifyHtml/main.mjs'
+import minifyJs from        './server/HttpServer/minifyJs/main.mjs'
 let mainDir=core.importMetaToDir(import.meta)
 ;(async()=>{
     fs.promises.writeFile('build/root',await minifyHtml(`

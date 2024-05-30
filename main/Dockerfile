@@ -14,4 +14,4 @@ WORKDIR /app
 COPY --from=0 /app0/node_modules node_modules
 COPY --from=0 /app1/build build
 COPY . commit
-CMD node commit/main/start.mjs
+CMD node commit/main/server/main.mjs
